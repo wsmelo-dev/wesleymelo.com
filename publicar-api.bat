@@ -8,20 +8,9 @@ echo   PUBLICAR O SITE - VIA API DO GITHUB
 echo   Pasta: %CD%
 echo ============================================
 echo.
-
-if not exist "%USERPROFILE%\.github-token" (
-  if "%GITHUB_TOKEN%"=="" (
-    echo [ATENCAO] Token nao encontrado.
-    echo.
-    echo 1. Crie um token em https://github.com/settings/tokens
-    echo    (Fine-grained - Contents: Read and write - so no repositorio
-    echo     wsmelo-dev/wesleymeloPJ.com)
-    echo 2. Salve o token em  %USERPROFILE%\.github-token
-    echo.
-    pause
-    exit /b 1
-  )
-)
+echo Se o token nao estiver em %USERPROFILE%\.github-token,
+echo ele sera pedido aqui (nao fica gravado em disco).
+echo.
 
 set /p "msg=Descreva a mudanca (ou aperte Enter): "
 if "%msg%"=="" set "msg=Atualiza o site"
