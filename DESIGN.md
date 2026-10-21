@@ -43,16 +43,20 @@ Outros: `--max 1180px` · `--nav-h 60px` · `--ease cubic-bezier(.16,1,.3,1)` ·
 
 ## Estrutura
 - Nav fixa (60px), marca `WM` em quadrado, links com sublinhado que cresce no hover, alternador de tema e menu hambúrguer no mobile.
-- Hero: kicker com ponto de status, nome em duas linhas (a segunda em `--ink-3`), função, lede, dois botões; à direita a "Ficha" (dados reais) e abaixo a faixa de palavras em movimento.
-- Seções numeradas `01` a `04` com grade `132px 1fr` (coluna do número em `--paper-3`).
-- Projetos: índice editorial em linhas, com prévia real da interface e link para o estudo de caso.
-- Contato: três colunas clicáveis (copiar e-mail, GitHub, LinkedIn), com feedback por toast.
-- Estudo de caso: fluxo de 7 etapas navegável por teclado, demonstração de mensagem, desafios em acordeão, grade de tecnologias, aprendizados.
+- **Home, na ordem em que o visitante encontra:** Hero (nome, função, uma frase, dois botões e o painel "Resumo" com o relógio) → **Projetos** (a seção de destaque, logo depois da hero) → Sobre mim → Habilidades → Contato.
+- Hero: kicker com ponto de status, nome em duas linhas (a segunda em `--ink-3`), função, lede e dois botões; à direita o painel "Resumo" (Foco, Base, Estudando, Interesse + relógio).
+- Seções numeradas com grade `132px 1fr`; o número usa `--ink-3` (contraste AA, não mais marca d'água invisível).
+- Projetos: card único com a **imagem do fluxo** ocupando a largura toda e, embaixo, nome, descrição de duas frases, etiquetas de tecnologia e o link "Ver mais detalhes".
+- Contato: formulário (nome + mensagem, envio por e-mail preenchido) e três ícones soltos (copiar e-mail, GitHub, LinkedIn), com feedback por toast.
+- **Estudo de caso:** Hero enxuto (voltar, título, uma frase, etiquetas) → *Em resumo* (4 fatos: Objetivo, Problema, Solução, Resultado) → *O fluxo na prática* (4 capturas comentadas) → *Como funciona* (7 etapas navegáveis por teclado) → *Demonstração* (a mensagem que chega) → *Desafios técnicos* (acordeão) → *Tecnologias* e *Aprendizados* → CTA final.
+
+## Imagens do projeto
+- As capturas do fluxo ficam em `assets/`, **já higienizadas**: endpoints internos, chaves de API, tokens, e-mails de clientes, nome da empresa, ids internos, telefone e nomes de certificado foram tarjados ou recortados fora.
+- A página diz isso ao leitor, em nota abaixo da galeria. Nenhuma captura entra no site sem passar por esse processo.
 
 ## Movimento
 - `cubic-bezier(.16,1,.3,1)`, só `transform` e `opacity`.
 - Entrada: revelação por palavra na hero, `Reveal` com `translateY(18px)` nas seções, régua que desenha, barra de progresso no topo via `animation-timeline: scroll()`.
-- Faixa de palavras: rolagem contínua, pausa no hover.
 - `prefers-reduced-motion: reduce` desliga tudo e revela o conteúdo estático.
 
 ## Responsivo
