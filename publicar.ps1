@@ -1,19 +1,19 @@
-<#
-  publicar.ps1 · Publica o site no GitHub Pages sem precisar de Git instalado.
+﻿<#
+  publicar.ps1 Â· Publica o site no GitHub Pages sem precisar de Git instalado.
   Usa a API do GitHub (Contents API) para enviar os arquivos da pasta para o
-  repositório wsmelo-dev/wesleymeloPJ.com, branch main.
+  repositÃ³rio wsmelo-dev/wesleymelo.com, branch main.
 
   Como usar:
     1. Crie um token em https://github.com/settings/tokens (Fine-grained,
-       repositório: apenas wsmelo-dev/wesleymeloPJ.com,
-       permissões: Contents -> Read and write).
+       repositÃ³rio: apenas wsmelo-dev/wesleymelo.com,
+       permissÃµes: Contents -> Read and write).
     2. Salve o token em um arquivo:  %USERPROFILE%\.github-token
        (no Bloco de Notas: "Salvar como" -> tipo "Todos os arquivos", para
-        não ficar .txt)
+        nÃ£o ficar .txt)
     3. Rode:  powershell -ExecutionPolicy Bypass -File publicar.ps1
        (ou clique duas vezes em publicar-api.bat)
 
-  O script mostra o que vai mudar antes de mudar. Com -Force ele não pergunta.
+  O script mostra o que vai mudar antes de mudar. Com -Force ele nÃ£o pergunta.
   O site no ar atualiza em ate 1 minuto.
 #>
 
@@ -28,7 +28,7 @@ param(
 $ErrorActionPreference = "Stop"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$Repo    = "wsmelo-dev/wesleymeloPJ.com"
+$Repo    = "wsmelo-dev/wesleymelo.com"
 $ApiBase = "https://api.github.com/repos/$Repo"
 
 # ---------- credencial ----------
@@ -163,5 +163,5 @@ foreach ($f in $remove) {
 }
 
 Write-Host "----------------------------------------"
-Write-Host "Site: https://wsmelo-dev.github.io/wesleymeloPJ.com/  (atualiza em ate 1 minuto)" -ForegroundColor Cyan
+Write-Host "Site: https://wsmelo-dev.github.io/wesleymelo.com/  (atualiza em ate 1 minuto)" -ForegroundColor Cyan
 Write-Host ""
