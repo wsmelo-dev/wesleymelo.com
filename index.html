@@ -327,92 +327,6 @@
       .progress{display:none}
       .strip-track{animation:none}
     }
-
-    /* ============ ESTUDO DE CASO ============ */
-    .case-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-    .case-lead{display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:start;margin-top:34px}
-    @media(max-width:860px){.case-lead{grid-template-columns:1fr;gap:26px}}
-    .case-panel{border:1px solid var(--line);background:var(--surface);padding:20px 20px 12px}
-    .case-panel > .mono{display:block;padding-bottom:12px;border-bottom:1px solid var(--line-soft)}
-    .case-panel dl{margin:0}
-    .case-panel dl > div{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line-soft)}
-    .case-panel dl > div:last-child{border-bottom:0;padding-bottom:2px}
-    .case-panel dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
-    .case-panel dd{margin:0;font-size:13px;font-weight:500;text-align:right}
-    .case-block{margin-top:56px}
-    .case-block > h3{font-size:1.12rem;font-weight:600;letter-spacing:-.02em;display:flex;align-items:baseline;gap:12px}
-    .case-block > h3 .mono{font-size:10.5px}
-    .case-block > p{margin-top:12px}
-
-    /* fluxo interativo */
-    .flow{position:relative;margin-top:30px}
-    .flow-rail{position:absolute;left:0;right:0;top:17px;height:1px;background:var(--line)}
-    .flow-pulse{position:absolute;top:-2.5px;left:0;width:6px;height:6px;border-radius:50%;background:var(--ink);transition:left .5s var(--ease)}
-    .flow-nodes{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;position:relative}
-    .flow-node{background:none;border:0;padding:0;color:inherit;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
-    .flow-node:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
-    .flow-dot{width:34px;height:34px;flex:none;border:1px solid var(--line);background:var(--paper);display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10.5px;color:var(--ink-3);transition:background .28s var(--ease),color .28s,border-color .28s,transform .28s var(--ease)}
-    .flow-node:hover .flow-dot{border-color:var(--ink);color:var(--ink);transform:translateY(-2px)}
-    .flow-node[aria-selected="true"] .flow-dot{background:var(--inv-bg);color:var(--inv-ink);border-color:var(--inv-bg)}
-    .flow-label{font-size:11.5px;color:var(--ink-2);line-height:1.35}
-    .flow-node[aria-selected="true"] .flow-label{color:var(--ink)}
-    @media(max-width:860px){
-      .flow-rail,.flow-pulse{display:none}
-      .flow-nodes{grid-template-columns:1fr;gap:0;border-top:1px solid var(--line);position:relative}
-      .flow-nodes::before{content:"";position:absolute;left:21px;top:24px;bottom:24px;width:1px;background:var(--line)}
-      .flow-node{position:relative;z-index:1;flex-direction:row;align-items:center;gap:14px;text-align:left;padding:12px 4px;border-bottom:1px solid var(--line-soft)}
-      .flow-node[aria-selected="true"]{background:var(--surface)}
-      .flow-label{font-size:14px}
-    }
-    .flow-detail{margin-top:28px;border:1px solid var(--line);background:var(--surface);padding:24px;display:grid;gap:10px}
-    .flow-detail .mono{font-size:10.5px}
-    .flow-detail h3{font-size:1.05rem;font-weight:600}
-    .flow-detail p{font-size:14.5px;color:var(--ink-2);line-height:1.7;max-width:68ch}
-    .flow-detail > *{animation:fdIn .4s var(--ease) both}
-    @keyframes fdIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-    /* demonstração da mensagem */
-    .chat{margin-top:24px;max-width:460px;border:1px solid var(--line);background:var(--surface)}
-    .chat-top{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line-soft)}
-    .chat-av{width:34px;height:34px;flex:none;border:1px solid var(--line-hard);display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10.5px}
-    .chat-top b{display:block;font-size:14px;font-weight:550}
-    .chat-top small{display:block;font-size:11.5px;color:var(--ink-3)}
-    .chat-body{padding:18px;background:var(--paper-2)}
-    .chat-bubble{background:var(--surface);border:1px solid var(--line-soft);padding:16px 16px 12px;font-size:13.5px;line-height:1.6;color:var(--ink-2)}
-    .chat-bubble > b{display:block;font-size:13px;color:var(--ink);margin-bottom:8px}
-    .chat-bubble ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px}
-    .chat-bubble li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line-soft);padding-bottom:8px}
-    .chat-bubble li:last-child{border-bottom:0}
-    .chat-bubble li b{font-weight:600;color:var(--ink)}
-    .chat-bubble li span{color:var(--ink-3);font-family:var(--mono);font-size:11px;white-space:nowrap}
-    .chat-foot{margin-top:14px;font-size:11.5px;color:var(--ink-3)}
-
-    /* tecnologias */
-    .tech-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:24px}
-    @media(max-width:900px){.tech-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:440px){.tech-grid{grid-template-columns:1fr}}
-    .tech{border:1px solid var(--line);background:var(--surface);padding:18px;display:grid;gap:12px;transition:transform .3s var(--ease),border-color .3s,box-shadow .3s}
-    .tech:hover{transform:translateY(-3px);border-color:var(--line-hard);box-shadow:0 12px 30px rgba(12,12,13,.08)}
-    [data-theme="dark"] .tech:hover{box-shadow:0 12px 30px rgba(0,0,0,.5)}
-    .mono-tile{width:40px;height:40px;border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;transition:background .28s var(--ease),color .28s,border-color .28s}
-    .tech:hover .mono-tile{background:var(--inv-bg);color:var(--inv-ink);border-color:var(--inv-bg)}
-    .tech b{font-size:13.5px;font-weight:550}
-    .tech small{font-size:12px;color:var(--ink-3);line-height:1.5}
-    .tech-note{margin-top:14px;font-size:12.5px;color:var(--ink-3)}
-
-    /* desafios (acordeão) */
-    .challenges{margin-top:24px;border-top:1px solid var(--line)}
-    .challenge{border-bottom:1px solid var(--line-soft)}
-    .challenge > button{width:100%;background:none;border:0;font:inherit;color:inherit;text-align:left;cursor:pointer;display:grid;grid-template-columns:28px 1fr 20px;gap:16px;align-items:start;padding:20px 8px;transition:background .28s var(--ease)}
-    .challenge > button:hover{background:var(--surface)}
-    .challenge > button:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
-    .challenge .ch-n{font-family:var(--mono);font-size:11px;color:var(--ink-3);padding-top:3px}
-    .challenge .ch-t{font-size:15px;font-weight:550}
-    .challenge .ch-x{font-family:var(--mono);font-size:16px;color:var(--ink-3);line-height:1;justify-self:end;transition:transform .3s var(--ease)}
-    .challenge[data-open="true"] .ch-x{transform:rotate(45deg)}
-    .challenge .ch-d{max-height:0;opacity:0;overflow:hidden;transition:max-height .45s var(--ease),opacity .3s var(--ease),padding .3s var(--ease);padding:0 40px 0 52px}
-    .challenge[data-open="true"] .ch-d{max-height:320px;opacity:1;padding-bottom:22px}
-    .challenge .ch-d p{font-size:14px;color:var(--ink-2);line-height:1.7;max-width:66ch}
   </style>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -444,7 +358,7 @@
       { n:"Helpdesk", cat:"Sistemas", state:"Atuação", lvl:4 }
     ];
     const PROJECTS = [
-      { name:"Alerta de vencimento de certificados", kind:"Automação em uso", demo:"", badge:"Em uso", case:"#certificados",
+      { name:"Alerta de vencimento de certificados", kind:"Automação em uso", demo:"certificados.html", badge:"Em uso",
         desc:"Fluxo no n8n que roda todo dia, consulta os certificados digitais, encontra os que vencem em até 7 dias, ignora os vencidos e envia o aviso pelo WhatsApp com um nome fácil de reconhecer.",
         tech:["n8n","HTTP","JavaScript","WhatsApp"], vis:"flow" }
     ];
@@ -453,52 +367,6 @@
       { t:"Regras claras", d:"Definir janela de tempo, fuso horário e exceções antes de disparar qualquer ação." },
       { t:"Pensar em quem recebe", d:"Um aviso tecnicamente correto ainda pode ser inútil. O texto final precisa ser fácil de agir." },
       { t:"Erro como pista", d:"Quando a automação falha, olhar o que entra em cada etapa costuma resolver sem refazer tudo." }
-    ];
-
-    /* ---- Estudo de caso: Automação de Certificados Pix ---- */
-    const CASE_TAGS = ["n8n","JavaScript","HTTP / REST","Evolution API","WhatsApp"];
-    const CASE_PANEL = [
-      { k:"Ambiente", v:"n8n" },
-      { k:"Gatilho", v:"agendamento diário" },
-      { k:"Fonte dos dados", v:"API REST" },
-      { k:"Janela de aviso", v:"até 7 dias" },
-      { k:"Saída", v:"WhatsApp (Evolution API)" },
-      { k:"Dados da demo", v:"fictícios" }
-    ];
-    const FLOW = [
-      { s:"Agendamento", t:"1. Agendamento da execução", d:"O fluxo é disparado automaticamente todos os dias, sem depender de alguém lembrar de rodar." },
-      { s:"Consulta", t:"2. Consulta dos certificados", d:"Uma chamada HTTP busca a lista de certificados na fonte de dados e devolve a resposta em JSON." },
-      { s:"Tratamento", t:"3. Tratamento e organização", d:"A resposta traz os registros dentro de um campo data. O fluxo percorre essa lista e organiza cada certificado." },
-      { s:"Datas", t:"4. Verificação das datas", d:"Cada certificado tem uma data de validade. O fluxo converte e compara essas datas com a data atual." },
-      { s:"Janela", t:"5. Seleção pela janela de aviso", d:"Ficam apenas os certificados que vencem nos próximos 7 dias. Os já vencidos são descartados." },
-      { s:"Mensagem", t:"6. Montagem da mensagem", d:"O texto é gerado dinamicamente, trocando nomes técnicos de arquivo por identificações compreensíveis." },
-      { s:"Envio", t:"7. Envio pelo WhatsApp", d:"A mensagem sai pelo WhatsApp através da Evolution API, pronta para quem precisa agir." }
-    ];
-    const CHALLENGES = [
-      { t:"Uma lista escondida dentro de data", d:"A consulta devolvia um único item com a lista de certificados dentro de um campo data. O fluxo procurava os registros no nível errado e não encontrava nada para processar. A correção começou por entender o formato real da resposta e percorrer a lista no lugar certo." },
-      { t:"Datas e janela de vencimento", d:"Comparar datas não bastava. Foi preciso considerar fuso horário, trabalhar com uma janela de até 7 dias e garantir que a comparação funcionasse independentemente do horário em que o fluxo rodasse." },
-      { t:"Vencidos x a vencer", d:"Separar o que já venceu do que ainda está dentro do período de alerta evitou dois problemas de uma vez: avisos inúteis sobre certificados passados e a ausência de aviso para os que realmente importavam." },
-      { t:"Nomes que a pessoa entende", d:"O retorno trazia nomes técnicos de arquivo. Na mensagem, eles foram trocados por identificações mais fáceis de reconhecer. Uma informação pode estar tecnicamente correta e ainda assim ser pouco útil para quem precisa agir." },
-      { t:"Mensagem dinâmica e integração", d:"A mensagem é montada conforme a quantidade e a urgência dos certificados, e o envio depende da integração com o serviço de WhatsApp por meio da Evolution API." }
-    ];
-    const TECHS = [
-      { m:"n8n", n:"n8n", d:"Orquestração do fluxo, agendamento e tratamento dos dados." },
-      { m:"JS", n:"JavaScript", d:"Funções para ler, filtrar e montar a mensagem." },
-      { m:"{ }", n:"HTTP / REST", d:"Consulta dos certificados por requisição HTTP." },
-      { m:"EV", n:"Evolution API", d:"Camada de integração para o envio das mensagens." },
-      { m:"WA", n:"WhatsApp", d:"Canal onde o aviso chega, de forma automatizada." }
-    ];
-    const LEARNINGS = [
-      "Estruturação de dados: entender o formato real da resposta antes de tratá-la.",
-      "Lógica condicional: comparar datas, definir a janela e separar o que vence do que já venceu.",
-      "Integração entre serviços: ligar a consulta dos dados ao envio da mensagem.",
-      "Tratamento de exceções: lidar com registros vencidos, datas inválidas e listas vazias.",
-      "Comunicação útil: escrever o aviso pensando em quem vai agir a partir dele."
-    ];
-    const ALERTS = [
-      { id:"Certificado A-1024", when:"vence em 2 dias" },
-      { id:"Certificado B-2048", when:"vence em 5 dias" },
-      { id:"Certificado C-3072", when:"vence em 7 dias" }
     ];
 
     /* ================= ÍCONES ================= */
@@ -618,8 +486,6 @@
       const [copied,setCopied] = useState(false);
       const [toast,setToast] = useState("");
       const [now,setNow] = useState(()=>new Date());
-      const [step,setStep] = useState(0);
-      const [openCh,setOpenCh] = useState(0);
       const menuBtnRef = useRef(null);
 
       useEffect(()=>{ document.documentElement.dataset.theme = theme; try{ localStorage.setItem("wsm.theme", theme); }catch(e){} },[theme]);
@@ -684,7 +550,6 @@
                   <li><a href="#sobre">Sobre</a></li>
                   <li><a href="#skills">Habilidades</a></li>
                   <li><a href="#projetos">Projetos</a></li>
-                  <li><a href="#certificados">Certificados</a></li>
                   <li><a href="#contato">Contato</a></li>
                 </ul>
               </nav>
@@ -703,7 +568,7 @@
 
           <div id="menu-mobile" className={"m-panel"+(menuOpen?" open":"")} hidden={!menuOpen}>
             <nav aria-label="Navegação móvel">
-              {[["sobre","Sobre","01"],["skills","Habilidades","02"],["projetos","Projetos","03"],["certificados","Certificados","04"],["contato","Contato","05"]].map(([id,l,n])=>(
+              {[["sobre","Sobre","01"],["skills","Habilidades","02"],["projetos","Projetos","03"],["contato","Contato","04"]].map(([id,l,n])=>(
                 <a key={id} href={"#"+id} onClick={()=>setMenuOpen(false)}>{l}<span>{n}</span></a>
               ))}
             </nav>
@@ -846,12 +711,10 @@
                               {p.tech.map(t=>(<span className="tag" key={t}>{t}</span>))}
                             </div>
                             {p.demo
-                              ? <a className="p-link" href={p.demo} aria-label={"Abrir demonstração de "+p.name}>
-                                  Abrir demonstração <span aria-hidden="true">↗</span>
+                              ? <a className="p-link" href={p.demo} aria-label={"Ver mais detalhes de "+p.name}>
+                                  Ver mais detalhes <span aria-hidden="true">→</span>
                                 </a>
-                              : p.case
-                                ? <a className="p-link" href={p.case}>Ver estudo de caso <span aria-hidden="true">↓</span></a>
-                                : <p className="p-desc" style={{marginTop:"16px",color:"var(--ink-3)",fontSize:"13.5px"}}>Fluxo de uso interno, sem demonstração pública.</p>}
+                              : <p className="p-desc" style={{marginTop:"16px",color:"var(--ink-3)",fontSize:"13.5px"}}>Fluxo de uso interno, sem demonstração pública.</p>}
                           </div>
                           <div className="p-vis"><Preview type={p.vis}/></div>
                         </Reveal>
@@ -867,146 +730,11 @@
               </div>
             </section>
 
-            {/* ===== ESTUDO DE CASO: AUTOMAÇÃO DE CERTIFICADOS ===== */}
-            <section id="certificados" aria-labelledby="case-title">
-              <div className="wrap">
-                <div className="sec">
-                  <div className="sec-num" aria-hidden="true">04</div>
-                  <div>
-                    <div className="sec-head">
-                      <MaskTitle text="Automação de Certificados Pix" id="case-title"/>
-                      <p className="lede">Uma automação em uso real: do primeiro erro de dados até um aviso que chega no celular de quem precisa agir. Tudo descrito sem nomes de empresas, sistemas ou dados reais.</p>
-                      <div className="case-tags" style={{marginTop:"18px"}}>
-                        {CASE_TAGS.map(t=>(<span className="tag" key={t}>{t}</span>))}
-                      </div>
-                    </div>
-
-                    {/* Visão geral */}
-                    <div className="case-block" style={{marginTop:"0"}}>
-                      <h3>Visão geral</h3>
-                      <div className="case-lead">
-                        <div>
-                          <p className="lede">Acompanhar o vencimento de certificados digitais ligados ao Pix era uma tarefa manual: alguém precisava consultar a lista e lembrar de avisar antes do prazo. Quando o aviso não saía, o risco não era só perder a data, era perder a janela para agir.</p>
-                          <p className="lede" style={{marginTop:"16px"}}>A proposta foi transformar esse acompanhamento em um fluxo automático que roda todos os dias, consulta a fonte de dados, verifica quais certificados estão próximos do vencimento e envia o aviso pelo WhatsApp com antecedência de até 7 dias.</p>
-                        </div>
-                        <aside className="case-panel" aria-label="Ficha técnica do projeto">
-                          <span className="mono">Ficha técnica</span>
-                          <dl>
-                            {CASE_PANEL.map(r=>(<div key={r.k}><dt>{r.k}</dt><dd>{r.v}</dd></div>))}
-                          </dl>
-                        </aside>
-                      </div>
-                    </div>
-
-                    {/* Como funciona */}
-                    <div className="case-block">
-                      <h3>Como funciona <span className="mono">07 etapas</span></h3>
-                      <p className="lede">Da execução agendada até a mensagem enviada. Selecione uma etapa para ver o detalhe.</p>
-                      <div className="flow">
-                        <div className="flow-rail" aria-hidden="true"><span className="flow-pulse" style={{left:"calc("+(((step+0.5)/FLOW.length)*100).toFixed(3)+"% - 3px)"}}/></div>
-                        <div className="flow-nodes" role="tablist" aria-label="Etapas da automação"
-                          onKeyDown={(e)=>{
-                            if(e.key==="ArrowRight"){ e.preventDefault(); setStep(s=>Math.min(FLOW.length-1,s+1)); }
-                            if(e.key==="ArrowLeft"){ e.preventDefault(); setStep(s=>Math.max(0,s-1)); }
-                          }}>
-                          {FLOW.map((f,i)=>(
-                            <button key={f.s} type="button" role="tab" className="flow-node"
-                              aria-selected={step===i} aria-controls="flow-detail" id={"flow-tab-"+i}
-                              tabIndex={step===i?0:-1} onClick={()=>setStep(i)}>
-                              <span className="flow-dot">{String(i+1).padStart(2,"0")}</span>
-                              <span className="flow-label">{f.s}</span>
-                            </button>
-                          ))}
-                        </div>
-                        <div className="flow-detail" id="flow-detail" role="tabpanel" aria-live="polite" aria-labelledby={"flow-tab-"+step}>
-                          <React.Fragment key={step}>
-                            <span className="mono">Etapa {String(step+1).padStart(2,"0")} de 07</span>
-                            <h3>{FLOW[step].t}</h3>
-                            <p>{FLOW[step].d}</p>
-                          </React.Fragment>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Demonstração */}
-                    <div className="case-block">
-                      <h3>Demonstração <span className="mono">visual</span></h3>
-                      <p className="lede">Exemplo de como o alerta chega. Dados totalmente fictícios: nada é enviado e nenhuma credencial aparece nesta página.</p>
-                      <div className="chat">
-                        <div className="chat-top">
-                          <span className="chat-av" aria-hidden="true">WA</span>
-                          <div><b>Alertas de certificados</b><small>mensagem automática · exemplo</small></div>
-                        </div>
-                        <div className="chat-body">
-                          <div className="chat-bubble">
-                            <b>Alerta de vencimento</b>
-                            {ALERTS.length} certificados vencem nos próximos 7 dias:
-                            <ul>
-                              {ALERTS.map(a=>(<li key={a.id}><b>{a.id}</b><span>{a.when}</span></li>))}
-                            </ul>
-                            <p className="chat-foot">Mensagem gerada automaticamente. Exemplo com dados fictícios.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Desafios técnicos */}
-                    <div className="case-block">
-                      <h3>Desafios técnicos <span className="mono">05 itens</span></h3>
-                      <p className="lede">Os problemas que apareceram durante o desenvolvimento e o que cada um exigiu. Selecione para abrir.</p>
-                      <div className="challenges">
-                        {CHALLENGES.map((c,i)=>(
-                          <div className="challenge" key={c.t} data-open={openCh===i}>
-                            <button type="button" aria-expanded={openCh===i} aria-controls={"ch-d-"+i} onClick={()=>setOpenCh(openCh===i?-1:i)}>
-                              <span className="ch-n">{String(i+1).padStart(2,"0")}</span>
-                              <span className="ch-t">{c.t}</span>
-                              <span className="ch-x" aria-hidden="true">+</span>
-                            </button>
-                            <div className="ch-d" id={"ch-d-"+i} role="region">
-                              <p>{c.d}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Tecnologias */}
-                    <div className="case-block">
-                      <h3>Tecnologias utilizadas <span className="mono">05</span></h3>
-                      <div className="tech-grid">
-                        {TECHS.map(t=>(
-                          <div className="tech" key={t.n}>
-                            <span className="mono-tile" aria-hidden="true">{t.m}</span>
-                            <b>{t.n}</b>
-                            <small>{t.d}</small>
-                          </div>
-                        ))}
-                      </div>
-                      <p className="tech-note">As marcas aparecem apenas como ferramentas. Nenhum logo oficial é usado sem autorização e nenhum dado real do ambiente é exposto.</p>
-                    </div>
-
-                    {/* Aprendizados */}
-                    <div className="case-block">
-                      <h3>Aprendizados <span className="mono">05</span></h3>
-                      <ol className="principles">
-                        {LEARNINGS.map((l,i)=>(
-                          <Reveal as="li" key={i} delay={i*70}>
-                            <b>0{i+1}</b>
-                            <div><p style={{fontSize:"14.5px"}}>{l}</p></div>
-                          </Reveal>
-                        ))}
-                      </ol>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
             {/* ===== CONTATO ===== */}
             <section id="contato" aria-labelledby="contato-title">
               <div className="wrap">
                 <div className="sec">
-                  <div className="sec-num" aria-hidden="true">05</div>
+                  <div className="sec-num" aria-hidden="true">04</div>
                   <div>
                     <div className="sec-head">
                       <MaskTitle text="Entre em contato" id="contato-title"/>
