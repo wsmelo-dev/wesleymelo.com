@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Automação de Certificados Pix · Wesley Melo</title>
-  <meta name="description" content="Estudo de caso: automação em n8n que acompanha o vencimento de certificados digitais do Pix e envia alertas automáticos pelo WhatsApp.">
+  <meta name="description" content="Estudo de caso: automação em n8n que acompanha o vencimento de certificados digitais do Pix e envia alertas automáticos pelo CRM.">
   <meta name="author" content="Wesley Melo">
   <meta name="theme-color" content="#0B0B0D">
   <meta property="og:type" content="article">
@@ -361,7 +361,7 @@
               <div class="facts" id="facts"></div>
               <div class="case-lead" style="margin-top:44px">
                 <div>
-                  <p class="lede" data-i18n="visaoLede2">A proposta foi transformar esse acompanhamento em um fluxo automático que roda todos os dias, consulta a fonte de dados, verifica quais certificados estão próximos do vencimento e envia o aviso pelo WhatsApp com antecedência de até 7 dias.</p>
+                  <p class="lede" data-i18n="visaoLede2">A proposta foi transformar esse acompanhamento em um fluxo automático que roda todos os dias, consulta a fonte de dados, verifica quais certificados estão próximos do vencimento e envia o aviso pelo CRM com antecedência de até 7 dias.</p>
                 </div>
                 <aside class="case-panel" aria-label="Ficha técnica do projeto" data-i18n-aria="panelAria">
                   <span class="mono" data-i18n="fichaLabel">Ficha técnica</span>
@@ -423,7 +423,7 @@
               <div class="demo-grid">
                 <div class="chat">
                   <div class="chat-top">
-                    <span class="chat-av" aria-hidden="true">WA</span>
+                    <span class="chat-av" aria-hidden="true">CRM</span>
                     <div><b data-i18n="chatName">Alertas de certificados</b><small data-i18n="chatSub">mensagem automática · exemplo</small></div>
                   </div>
                   <div class="chat-body">
@@ -518,13 +518,13 @@
   <script>
     /* ---------- DADOS (mesmos do portfólio, dados fictícios) ---------- */
     /* ---------- DADOS (fictícios) EM DOIS IDIOMAS ---------- */
-    var CASE_TAGS = ["n8n","JavaScript","HTTP / REST","Evolution API","WhatsApp"];
+    var CASE_TAGS = ["n8n","JavaScript","HTTP / REST","CRM"];
 
     var COPY = {
       pt: {
         lang:"pt-BR", locale:"pt_BR",
         title:"Automação de Certificados Pix · Wesley Melo",
-        desc:"Estudo de caso: automação em n8n que acompanha o vencimento de certificados digitais do Pix e envia alertas automáticos pelo WhatsApp.",
+        desc:"Estudo de caso: automação em n8n que acompanha o vencimento de certificados digitais do Pix e envia alertas automáticos pelo CRM.",
         ogDesc:"Do primeiro erro de dados até um aviso que chega no celular. Estudo de caso de automação com n8n.",
         skip:"Pular para o conteúdo",
         navVisao:"Resumo", navCapturas:"O fluxo", navFunciona:"Como funciona", navDemo:"Demonstração",
@@ -535,11 +535,11 @@
         visaoTitle:"Em resumo",
         facts:[
           {k:"Objetivo", t:"Avisar todo dia o que vence em até 7 dias",
-           d:"Um aviso que chega no WhatsApp com o nome legível do certificado, a data e quantos dias faltam."},
+           d:"Um aviso que chega no CRM com o nome legível do certificado, a data e quantos dias faltam."},
           {k:"Problema", t:"A checagem era manual",
            d:"Alguém consultava a lista de certificados e precisava lembrar de avisar antes do prazo. Quando o aviso não saía, perdia-se a janela para renovar."},
           {k:"Solução", t:"Um fluxo no n8n, todo dia",
-           d:"Agendamento diário, consulta por HTTP, filtro por JavaScript e envio por WhatsApp. O aviso sai pronto, sem depender de alguém lembrar."},
+           d:"Agendamento diário, consulta por HTTP, filtro por JavaScript e envio pelo CRM. O aviso sai pronto, sem depender de alguém lembrar."},
           {k:"Resultado", t:"O aviso passou a sair sozinho",
            d:"Todo dia, no mesmo horário, com o nome de quem precisa agir. Quanto tempo isso economiza só dá para medir no uso real, então não invento número."}
         ],
@@ -549,21 +549,21 @@
         shots:[
           {src:"assets/fluxo-n8n.png", wide:true,
            cap:"O fluxo inteiro em quatro etapas: agendamento, consulta HTTP, tratamento em JavaScript e envio.",
-           alt:"Fluxo de automação no n8n com quatro etapas: agendamento, requisição HTTP, código em JavaScript e envio por WhatsApp"},
+           alt:"Fluxo de automação no n8n com quatro etapas: agendamento, requisição HTTP, código em JavaScript e envio pelo CRM"},
           {src:"assets/passo-consulta-http.png",
            cap:"A consulta da lista de certificados por requisição HTTP, com autenticação.",
            alt:"Nó de requisição HTTP do n8n com método GET e autenticação configurada"},
           {src:"assets/passo-javascript.png",
            cap:"O código que separa o que vence em 7 dias e monta a mensagem.",
            alt:"Código JavaScript no n8n filtrando certificados e montando a mensagem de alerta"},
-          {src:"assets/passo-envio-whatsapp.png",
-           cap:"O envio pelo WhatsApp, com o cabeçalho de autenticação da API.",
+          {src:"assets/passo-envio-crm.png",
+           cap:"O envio pelo CRM, com o cabeçalho de autenticação da API.",
            alt:"Nó de requisição HTTP do n8n com método POST e cabeçalho de API para envio de mensagem"}
         ],
         backPortfolio:"← Portfólio", backTop:"← Voltar ao portfólio", footBack:"← Voltar ao portfólio",
         heroTitle1:"Automação de", heroTitle2:"Certificados Pix",
         heroLede:"Do primeiro erro de dados até um aviso que chega no celular de quem precisa agir. Tudo descrito sem nomes de empresas, sistemas ou dados reais.",
-        visaoLede2:"A proposta foi transformar esse acompanhamento em um fluxo automático que roda todos os dias, consulta a fonte de dados, verifica quais certificados estão próximos do vencimento e envia o aviso pelo WhatsApp com antecedência de até 7 dias.",
+        visaoLede2:"A proposta foi transformar esse acompanhamento em um fluxo automático que roda todos os dias, consulta a fonte de dados, verifica quais certificados estão próximos do vencimento e envia o aviso pelo CRM com antecedência de até 7 dias.",
         fichaLabel:"Ficha técnica",
         funcionaTitle:"Como funciona",
         funcionaLede:"Da execução agendada até a mensagem enviada, em 7 etapas. Selecione uma etapa para ver o detalhe.",
@@ -588,13 +588,13 @@
         footText:"Volte ao portfólio para ver o resto do meu trabalho ou fale comigo sobre uma automação.",
         btnContato:"Entrar em contato", btnProjetos:"Ver projetos",
         footerStatus:"● helpdesk · automação",
-        meta:[["Tipo","Automação em uso"],["Ambiente","n8n"],["Janela de aviso","até 7 dias"],["Saída","WhatsApp"]],
+        meta:[["Tipo","Automação em uso"],["Ambiente","n8n"],["Janela de aviso","até 7 dias"],["Saída","CRM"]],
         panel:[
           { k:"Ambiente", v:"n8n" },
           { k:"Gatilho", v:"agendamento diário" },
           { k:"Fonte dos dados", v:"API REST" },
           { k:"Janela de aviso", v:"até 7 dias" },
-          { k:"Saída", v:"WhatsApp (Evolution API)" },
+          { k:"Saída", v:"CRM" },
           { k:"Dados do exemplo", v:"fictícios" }
         ],
         flow:[
@@ -604,21 +604,21 @@
           { s:"Datas", t:"4. Verificação das datas", d:"Cada certificado tem uma data de validade. O fluxo converte e compara essas datas com a data atual." },
           { s:"Janela", t:"5. Seleção pela janela de aviso", d:"Ficam apenas os certificados que vencem nos próximos 7 dias. Os já vencidos são descartados." },
           { s:"Mensagem", t:"6. Montagem da mensagem", d:"O texto é gerado dinamicamente, trocando nomes técnicos de arquivo por identificações compreensíveis." },
-          { s:"Envio", t:"7. Envio pelo WhatsApp", d:"A mensagem sai pelo WhatsApp através da Evolution API, pronta para quem precisa agir." }
+          { s:"Envio", t:"7. Envio pelo CRM", d:"A mensagem sai pelo CRM através da API de integração, pronta para quem precisa agir." }
         ],
         challenges:[
           { t:"Uma lista escondida dentro de um campo", d:"A consulta devolvia um único item com a lista de certificados dentro de um campo data. O fluxo procurava os registros no nível errado e não encontrava nada para processar. A correção começou por entender o formato real da resposta e percorrer a lista no lugar certo." },
           { t:"Datas e janela de vencimento", d:"Comparar datas não bastava. Foi preciso considerar fuso horário, trabalhar com uma janela de até 7 dias e garantir que a comparação funcionasse independentemente do horário em que o fluxo rodasse." },
           { t:"Vencidos x a vencer", d:"Separar o que já venceu do que ainda está dentro do período de alerta evitou dois problemas de uma vez: avisos inúteis sobre certificados passados e a ausência de aviso para os que realmente importavam." },
           { t:"Nomes que a pessoa entende", d:"O retorno trazia nomes técnicos de arquivo. Na mensagem, eles foram trocados por identificações mais fáceis de reconhecer. Uma informação pode estar tecnicamente correta e ainda assim ser pouco útil para quem precisa agir." },
-          { t:"Mensagem dinâmica e integração", d:"A mensagem é montada conforme a quantidade e a urgência dos certificados, e o envio depende da integração com o serviço de WhatsApp por meio da Evolution API." }
+          { t:"Mensagem dinâmica e integração", d:"A mensagem é montada conforme a quantidade e a urgência dos certificados, e o envio depende da integração com o CRM por meio da API de integração." }
         ],
         techs:[
           { m:"n8n", n:"n8n", d:"Orquestração do fluxo, agendamento e tratamento dos dados." },
           { m:"JS", n:"JavaScript", d:"Funções para ler, filtrar e montar a mensagem." },
           { m:"{ }", n:"HTTP / REST", d:"Consulta dos certificados por requisição HTTP." },
-          { m:"EV", n:"Evolution API", d:"Camada de integração para o envio das mensagens." },
-          { m:"WA", n:"WhatsApp", d:"Canal onde o aviso chega, de forma automatizada." }
+          { m:"API", n:"API do CRM", d:"Camada de integração para o envio das mensagens ao CRM." },
+          { m:"CRM", n:"CRM", d:"Canal onde o aviso chega, de forma automatizada." }
         ],
         learnings:[
           "Estruturação de dados: entender o formato real da resposta antes de tratá-la.",
@@ -636,7 +636,7 @@
       en: {
         lang:"en", locale:"en_US",
         title:"Pix Certificate Automation · Wesley Melo",
-        desc:"Case study: an n8n automation that tracks the expiry of Pix digital certificates and sends automatic alerts over WhatsApp.",
+        desc:"Case study: an n8n automation that tracks the expiry of Pix digital certificates and sends automatic alerts over CRM.",
         ogDesc:"From the first data error to an alert that reaches the phone. An n8n automation case study.",
         skip:"Skip to content",
         navVisao:"In short", navCapturas:"The flow", navFunciona:"How it works", navDemo:"Demo",
@@ -647,11 +647,11 @@
         visaoTitle:"In short",
         facts:[
           {k:"Objective", t:"Flag every day what expires within 7 days",
-           d:"An alert that lands on WhatsApp with the readable certificate name, the date and the days left."},
+           d:"An alert that lands on CRM with the readable certificate name, the date and the days left."},
           {k:"Problem", t:"The check was manual",
            d:"Someone had to look up the certificate list and remember to warn before the deadline. When the alert did not go out, the window to renew was lost."},
           {k:"Solution", t:"An n8n flow, every day",
-           d:"Daily schedule, HTTP query, JavaScript filter and WhatsApp delivery. The alert goes out ready, with nobody having to remember."},
+           d:"Daily schedule, HTTP query, JavaScript filter and CRM delivery. The alert goes out ready, with nobody having to remember."},
           {k:"Result", t:"The alert now goes out on its own",
            d:"Every day, at the same time, naming whoever has to act. How much time that saves can only be measured in real use, so I am not inventing a number."}
         ],
@@ -661,21 +661,21 @@
         shots:[
           {src:"assets/fluxo-n8n.png", wide:true,
            cap:"The whole flow in four steps: schedule, HTTP query, JavaScript processing and delivery.",
-           alt:"Automation flow in n8n with four steps: schedule, HTTP request, JavaScript code and WhatsApp delivery"},
+           alt:"Automation flow in n8n with four steps: schedule, HTTP request, JavaScript code and CRM delivery"},
           {src:"assets/passo-consulta-http.png",
            cap:"The certificate list is queried over HTTP, with authentication.",
            alt:"n8n HTTP request node with GET method and authentication configured"},
           {src:"assets/passo-javascript.png",
            cap:"The code that separates what expires within 7 days and builds the message.",
            alt:"JavaScript code in n8n filtering certificates and building the alert message"},
-          {src:"assets/passo-envio-whatsapp.png",
-           cap:"Delivery through WhatsApp, with the API authentication header.",
+          {src:"assets/passo-envio-crm.png",
+           cap:"Delivery through CRM, with the API authentication header.",
            alt:"n8n HTTP request node with POST method and API header for message delivery"}
         ],
         backPortfolio:"← Portfolio", backTop:"← Back to the portfolio", footBack:"← Back to the portfolio",
         heroTitle1:"Automation of", heroTitle2:"Pix Certificates",
         heroLede:"From the first data error to an alert that reaches the phone of whoever has to act. Everything described without company, system or real data names.",
-        visaoLede2:"The proposal was to turn that tracking into an automatic flow that runs every day, queries the data source, checks which certificates are close to expiring and sends the alert over WhatsApp up to 7 days in advance.",
+        visaoLede2:"The proposal was to turn that tracking into an automatic flow that runs every day, queries the data source, checks which certificates are close to expiring and sends the alert over CRM up to 7 days in advance.",
         fichaLabel:"Technical sheet",
         funcionaTitle:"How it works",
         funcionaLede:"From the scheduled run to the message being sent, in 7 steps. Select a step to see the detail.",
@@ -700,13 +700,13 @@
         footText:"Go back to the portfolio to see the rest of my work, or talk to me about an automation.",
         btnContato:"Get in touch", btnProjetos:"See projects",
         footerStatus:"● helpdesk · automation",
-        meta:[["Type","Automation in use"],["Environment","n8n"],["Alert window","up to 7 days"],["Output","WhatsApp"]],
+        meta:[["Type","Automation in use"],["Environment","n8n"],["Alert window","up to 7 days"],["Output","CRM"]],
         panel:[
           { k:"Environment", v:"n8n" },
           { k:"Trigger", v:"daily schedule" },
           { k:"Data source", v:"REST API" },
           { k:"Alert window", v:"up to 7 days" },
-          { k:"Output", v:"WhatsApp (Evolution API)" },
+          { k:"Output", v:"CRM" },
           { k:"Example data", v:"fictional" }
         ],
         flow:[
@@ -716,21 +716,21 @@
           { s:"Dates", t:"4. Checking the dates", d:"Each certificate has an expiry date. The flow converts and compares those dates with the current date." },
           { s:"Window", t:"5. Selecting by the alert window", d:"Only the certificates expiring in the next 7 days stay. The ones already expired are discarded." },
           { s:"Message", t:"6. Building the message", d:"The text is generated dynamically, replacing technical file names with identifiers people can understand." },
-          { s:"Delivery", t:"7. Sending over WhatsApp", d:"The message leaves through WhatsApp via the Evolution API, ready for whoever has to act." }
+          { s:"Delivery", t:"7. Sending over CRM", d:"The message leaves through CRM via the integration API, ready for whoever has to act." }
         ],
         challenges:[
           { t:"A list hidden inside a field", d:"The query returned a single item with the list of certificates inside a data field. The flow looked for the records at the wrong level and found nothing to process. The fix started by understanding the real shape of the response and walking the list in the right place." },
           { t:"Dates and the expiry window", d:"Comparing dates was not enough. It required handling the time zone, working with a window of up to 7 days and making sure the comparison worked regardless of the time the flow ran." },
           { t:"Expired vs expiring", d:"Separating what had already expired from what was still inside the alert period avoided two problems at once: useless alerts about past certificates and no alert at all for the ones that really mattered." },
           { t:"Names people understand", d:"The response carried technical file names. In the message they were replaced with identifiers that are easier to recognise. Information can be technically correct and still be of little use to whoever has to act on it." },
-          { t:"Dynamic message and integration", d:"The message is built according to the number and urgency of the certificates, and the delivery depends on the integration with the WhatsApp service through the Evolution API." }
+          { t:"Dynamic message and integration", d:"The message is built according to the number and urgency of the certificates, and the delivery depends on the integration with the CRM service through the integration API." }
         ],
         techs:[
           { m:"n8n", n:"n8n", d:"Flow orchestration, scheduling and data processing." },
           { m:"JS", n:"JavaScript", d:"Functions to read, filter and build the message." },
           { m:"{ }", n:"HTTP / REST", d:"Querying the certificates through an HTTP request." },
-          { m:"EV", n:"Evolution API", d:"Integration layer for sending the messages." },
-          { m:"WA", n:"WhatsApp", d:"Channel where the alert arrives, automated." }
+          { m:"API", n:"CRM API", d:"Integration layer for sending the messages to the CRM." },
+          { m:"CRM", n:"CRM", d:"Channel where the alert arrives, automated." }
         ],
         learnings:[
           "Data structuring: understanding the real shape of the response before processing it.",
