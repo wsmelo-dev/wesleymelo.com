@@ -235,11 +235,29 @@
       color:var(--ink-3);padding:0}
     .tag.concept{background:var(--badge-bg);color:var(--badge-fg);padding:5px 10px;border-radius:2px}
     .proj-cta{display:inline-flex;align-items:center;gap:9px;margin-top:22px;font-size:14px;font-weight:550;
-      color:var(--ink);text-decoration:none;padding-bottom:3px;border-bottom:1px solid var(--line);
+      color:var(--ink);text-decoration:none;padding:0 0 3px;border:0;border-bottom:1px solid var(--line);background:none;
+      font-family:inherit;cursor:pointer;
       transition:gap .2s var(--ease),border-color .2s}
     .proj-cta:hover{gap:13px;border-color:var(--ink)}
     .proj-cta .arw{transition:transform .2s var(--ease)}
     .proj-cta:hover .arw{transform:translateX(3px)}
+    .proj-cta[aria-expanded="true" .arw]{transform:rotate(180deg)}
+
+    /* detalhes do projeto (revelados no lugar) */
+    .proj-details{margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
+    .proj-details h4{font-size:1.05rem;font-weight:600;letter-spacing:-.02em;margin-bottom:6px}
+    .proj-details .lede{font-size:14px;color:var(--ink-2)}
+    .proj-details-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px;align-items:start}
+    @media(max-width:900px){.proj-details-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:620px){.proj-details-grid{grid-template-columns:1fr}}
+    .proj-details-grid figure{margin:0}
+    .proj-details-grid img{display:block;width:100%;height:auto}
+    .proj-details-grid .wide{grid-column:1/-1}
+    .proj-details-grid figcaption{margin-top:10px;font-size:12.5px;color:var(--ink-2);line-height:1.5}
+    .proj-case{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:13.5px;font-weight:550;
+      color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:3px;
+      transition:gap .2s var(--ease),border-color .2s}
+    .proj-case:hover{gap:12px;border-color:var(--ink)}
 
     /* ============ CONTATO (formulário + ícones soltos) ============ */
     .contact-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:start}
@@ -350,6 +368,24 @@
           lede:"Uma automação que está em uso no dia a dia, criada para resolver um problema real e tirar uma tarefa manual do caminho.",
           more:"Ver mais detalhes",openDemo:"Ver mais detalhes de",demo:"Demonstrativo",
           noDemo:"Fluxo de uso interno, sem demonstração pública.",
+          details:"Ver detalhes", hideDetails:"Ocultar detalhes",
+          caseLink:"Ver o estudo de caso completo",
+          shotsTitle:"O fluxo na prática",
+          shotsLede:"As quatro etapas do fluxo, como estão configuradas no n8n.",
+          shots:[
+            {src:"assets/fluxo-n8n.png?v=6", wide:true,
+             cap:"O fluxo inteiro em quatro etapas: agendamento, consulta HTTP, tratamento em JavaScript e envio.",
+             alt:"Fluxo de automação no n8n com quatro etapas: agendamento, requisição HTTP, código em JavaScript e envio pelo CRM"},
+            {src:"assets/passo-consulta-http.png?v=6",
+             cap:"A consulta da lista de certificados por requisição HTTP, com autenticação.",
+             alt:"Nó de requisição HTTP do n8n com método GET e autenticação configurada"},
+            {src:"assets/passo-javascript.png?v=6",
+             cap:"O código que separa o que vence em 7 dias e monta a mensagem.",
+             alt:"Código JavaScript no n8n filtrando certificados e montando a mensagem de alerta"},
+            {src:"assets/passo-envio-crm.png?v=6",
+             cap:"O envio pelo CRM, com o cabeçalho de autenticação da API.",
+             alt:"Nó de requisição HTTP do n8n com método POST e cabeçalho de API para envio de mensagem"}
+          ],
           foot:"Novos projetos entram por aqui conforme avanço. Mais trabalhos ficam no meu perfil do GitHub."},
         contact:{title:"Entre em contato",
           lede:"Escreva seu nome e sua mensagem, ou use os ícones ao lado: o de e-mail copia o endereço, o GitHub e o LinkedIn abrem direto.",
@@ -399,6 +435,24 @@
           lede:"One automation that is in daily use, built to solve a real problem and take a manual task off the table.",
           more:"See the details",openDemo:"See the details of",demo:"Demonstrative",
           noDemo:"Internal workflow, no public demo.",
+          details:"See the details", hideDetails:"Hide the details",
+          caseLink:"See the full case study",
+          shotsTitle:"The flow in practice",
+          shotsLede:"The four steps of the flow, as they are configured in n8n.",
+          shots:[
+            {src:"assets/fluxo-n8n.png?v=6", wide:true,
+             cap:"The whole flow in four steps: schedule, HTTP query, JavaScript processing and delivery.",
+             alt:"Automation flow in n8n with four steps: schedule, HTTP request, JavaScript code and delivery to the CRM"},
+            {src:"assets/passo-consulta-http.png?v=6",
+             cap:"The certificate list is queried over HTTP, with authentication.",
+             alt:"n8n HTTP request node with GET method and authentication configured"},
+            {src:"assets/passo-javascript.png?v=6",
+             cap:"The code that separates what expires within 7 days and builds the message.",
+             alt:"JavaScript code in n8n filtering certificates and building the alert message"},
+            {src:"assets/passo-envio-crm.png?v=6",
+             cap:"Delivery through the CRM, with the API authentication header.",
+             alt:"n8n HTTP request node with POST method and API header for message delivery"}
+          ],
           foot:"New projects land here as I progress. More work is on my GitHub profile."},
         contact:{title:"Get in touch",
           lede:"Write your name and your message, or use the icons next to it: the email icon copies the address, GitHub and LinkedIn open straight away.",
@@ -438,7 +492,7 @@
       en:{praticando:"Practicing",estudando:"Studying",base:"Solid base",atuacao:"Daily use"}
     };
     const PROJECTS = [
-      { key:"certificados", demo:"certificados.html", shot:"assets/fluxo-n8n.png?v=5",
+      { key:"certificados", demo:"certificados.html", shot:"assets/fluxo-n8n.png?v=6",
         tech:["n8n","HTTP","JavaScript","CRM"] }
     ];
     const PROJECT_COPY = {
@@ -513,6 +567,7 @@
       const [scrolled,setScrolled] = useState(false);
       const [menuOpen,setMenuOpen] = useState(false);
       const [filter,setFilter] = useState("todos");
+      const [openProject,setOpenProject] = useState(null);
       const [copied,setCopied] = useState(false);
       const [toast,setToast] = useState("");
       const [now,setNow] = useState(()=>new Date());
@@ -686,6 +741,7 @@
                     <div className="proj">
                       {PROJECTS.map((p,i)=>{
                         const pc = (PROJECT_COPY[lang] || PROJECT_COPY.pt)[p.key];
+                        const aberto = openProject === p.key;
                         return (
                         <Reveal key={p.key} delay={i*60}>
                           <article className="proj-card">
@@ -702,12 +758,33 @@
                                   <span className="tag concept">{pc.badge || t.projects.demo}</span>
                                   {p.tech.map(x=>(<span className="tag" key={x}>{x}</span>))}
                                 </div>
-                                <a className="proj-cta" href={p.demo} aria-label={t.projects.openDemo+" "+pc.name}>
-                                  {t.projects.more} <span className="arw" aria-hidden="true">→</span>
-                                </a>
+                                <button type="button" className="proj-cta"
+                                  onClick={()=>setOpenProject(aberto ? null : p.key)}
+                                  aria-expanded={aberto}
+                                  aria-controls={"proj-detalhes-"+p.key}>
+                                  {aberto ? t.projects.hideDetails : t.projects.details} <span className="arw" aria-hidden="true">↓</span>
+                                </button>
                               </div>
                             </div>
                           </article>
+
+                          {aberto && (
+                            <div className="proj-details" id={"proj-detalhes-"+p.key}>
+                              <h4>{t.projects.shotsTitle}</h4>
+                              <p className="lede">{t.projects.shotsLede}</p>
+                              <div className="proj-details-grid">
+                                {t.projects.shots.map(s=>(
+                                  <figure key={s.src} className={s.wide ? "wide" : ""}>
+                                    <img src={s.src} alt={s.alt} loading="lazy" decoding="async"/>
+                                    <figcaption>{s.cap}</figcaption>
+                                  </figure>
+                                ))}
+                              </div>
+                              <a className="proj-case" href={p.demo}>
+                                {t.projects.caseLink} <span aria-hidden="true">→</span>
+                              </a>
+                            </div>
+                          )}
                         </Reveal>
                         );
                       })}
