@@ -94,7 +94,7 @@ Vermelho saturado, glow neon, cursor customizado, cards com sombra e raio grande
 - No hover, o título vai para `--ink` e a prévia sobe 3px.
 
 ## Publicação
-Site estático no branch `main` do repositório `wsmelo-dev/wesleymeloPJ.com`, servido no GitHub Pages. O dono edita direto pelo GitHub (editor do repositório), então:
+Site estático no branch `main` do repositório `wsmelo-dev/wesleymelo.com`, servido no GitHub Pages em `https://wsmelo-dev.github.io/wesleymelo.com/`. O dono edita direto pelo GitHub (editor do repositório), então:
 - Depois de qualquer alteração feita por agente, **sincronizar de volta**: o repositório é a fonte da verdade e a pasta local é espelho.
 - Antes de aplicar uma nova alteração, **baixar a versão atual do repositório** e editar em cima dela. Assim nenhuma edição manual é perdida.
 - `publicar.bat` (Git + gh CLI) e `publicar-api.bat` (API do GitHub) existem para publicar sem mexer na mão, mas sobrescrevem o repositório com a cópia local: só usar logo depois de uma alteração do agente.
