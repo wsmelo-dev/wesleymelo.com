@@ -5,20 +5,24 @@
 
   Como usar:
     1. Crie um token em https://github.com/settings/tokens (Fine-grained,
-       permissões: Contents -> Read and write, apenas no repositório
-       wsmelo-dev/wesleymeloPJ.com).
+       repositório: apenas wsmelo-dev/wesleymeloPJ.com,
+       permissões: Contents -> Read and write).
     2. Salve o token em um arquivo:  %USERPROFILE%\.github-token
-       (ou defina a variavel de ambiente GITHUB_TOKEN)
+       (no Bloco de Notas: "Salvar como" -> tipo "Todos os arquivos", para
+        não ficar .txt)
     3. Rode:  powershell -ExecutionPolicy Bypass -File publicar.ps1
        (ou clique duas vezes em publicar-api.bat)
 
+  O script mostra o que vai mudar antes de mudar. Com -Force ele não pergunta.
   O site no ar atualiza em ate 1 minuto.
 #>
 
 [CmdletBinding()]
 param(
   [string]$Message = "Atualiza o site",
-  [string]$Branch  = "main"
+  [string]$Branch  = "main",
+  [string]$TokenFile = "",
+  [switch]$Force
 )
 
 $ErrorActionPreference = "Stop"
@@ -28,16 +32,30 @@ $Repo    = "wsmelo-dev/wesleymeloPJ.com"
 $ApiBase = "https://api.github.com/repos/$Repo"
 
 # ---------- credencial ----------
+# 1) variavel de ambiente GITHUB_TOKEN
+# 2) arquivo apontado por -TokenFile
+# 3) arquivo padrao %USERPROFILE%\.github-token
+# 4) perguntando no console (o token nao fica gravado em disco)
 function Get-Token {
   $t = $env:GITHUB_TOKEN
+  if (-not $t -and $TokenFile) {
+    if (Test-Path $TokenFile) { $t = (Get-Content $TokenFile -Raw).Trim() }
+  }
   if (-not $t) {
     $f = Join-Path $env:USERPROFILE ".github-token"
     if (Test-Path $f) { $t = (Get-Content $f -Raw).Trim() }
   }
   if (-not $t) {
     Write-Host ""
-    Write-Host "Token nao encontrado." -ForegroundColor Yellow
-    Write-Host "Salve o token em %USERPROFILE%\.github-token ou defina GITHUB_TOKEN." -ForegroundColor Yellow
+    Write-Host "Cole o token do GitHub (nao sera gravado em disco)." -ForegroundColor Yellow
+    $sec = Read-Host "Token" -AsSecureString
+    $ptr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($sec)
+    $t = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($ptr)
+    [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr)
+    $t = $t.Trim()
+  }
+  if (-not $t) {
+    Write-Host "Token nao encontrado." -ForegroundColor Red
     Write-Host "https://github.com/settings/tokens" -ForegroundColor DarkGray
     exit 1
   }
@@ -52,7 +70,7 @@ $headers = @{
   "X-GitHub-Api-Version" = "2022-11-28"
 }
 
-# ---------- arquivos a publicar ----------
+# ---------- o que entra e o que sai ----------
 $publish = @(
   "index.html",
   "certificados.html",
@@ -62,75 +80,88 @@ $publish = @(
   "publicar.ps1",
   "publicar-api.bat"
 )
+$remove = @("foto.jpg", "style.css", "script.js")
 
-# ---------- arquivos a remover do repositorio ----------
-$remove = @(
-  "foto.jpg",
-  "style.css",
-  "script.js"
-)
-
-function Get-RemoteSha([string]$path) {
+function Get-Remote([string]$path) {
   try {
     $r = Invoke-RestMethod -Uri "$ApiBase/contents/$path" -Headers $headers -Method Get
-    return $r.sha
+    return [pscustomobject]@{ sha = $r.sha; bytes = [Convert]::FromBase64String(($r.content -replace "\s","")) }
   } catch {
     return $null
   }
 }
 
-$changed = 0
-$skipped = 0
+function Compare-Bytes($a, $b) {
+  if ($a.Length -ne $b.Length) { return $true }
+  for ($i = 0; $i -lt $a.Length; $i++) { if ($a[$i] -ne $b[$i]) { return $true } }
+  return $false
+}
 
+# ---------- 1. Conference ----------
 Write-Host ""
-Write-Host "PUBLICANDO $Repo ($Branch)" -ForegroundColor Cyan
+Write-Host "CONFERINDO $Repo ($Branch)" -ForegroundColor Cyan
 Write-Host "----------------------------------------"
 
+$plano = @()
 foreach ($f in $publish) {
   $local = Join-Path $PSScriptRoot $f
   if (-not (Test-Path $local)) { Write-Host "  [local ausente] $f" -ForegroundColor DarkGray; continue }
-
-  $bytes  = [IO.File]::ReadAllBytes($local)
-  $sha    = Get-RemoteSha $f
-  $remote = $null
-  if ($sha) {
-    try {
-      $r = Invoke-RestMethod -Uri "$ApiBase/contents/$f" -Headers $headers -Method Get
-      $remote = $r.content -replace "\s", ""
-    } catch {}
+  $lb = [IO.File]::ReadAllBytes($local)
+  $rem = Get-Remote $f
+  if ($rem -and -not (Compare-Bytes $lb $rem.bytes)) {
+    Write-Host ("  [igual]      {0}" -f $f) -ForegroundColor DarkGray
+  } else {
+    Write-Host ("  [ATUALIZAR]  {0}" -f $f) -ForegroundColor Yellow
+    $plano += @{ arquivo = $f; bytes = $lb; sha = $(if ($rem) { $rem.sha } else { $null }) }
   }
-  $localB64 = [Convert]::ToBase64String($bytes)
-  if ($remote -and $remote -eq $localB64) {
-    Write-Host "  [ok, sem mudanca] $f" -ForegroundColor DarkGray
-    $skipped++
-    continue
-  }
+}
+foreach ($f in $remove) {
+  $rem = Get-Remote $f
+  if ($rem) { Write-Host ("  [REMOVER]    {0}" -f $f) -ForegroundColor Yellow }
+}
 
-  $body = @{ message = "$Message : $f"; content = $localB64; branch = $Branch }
-  if ($sha) { $body.sha = $sha }
+if ($plano.Count -eq 0) {
+  Write-Host "----------------------------------------"
+  Write-Host "Nada a fazer: o repositorio ja esta igual a esta pasta." -ForegroundColor Green
+  Write-Host ""
+  exit 0
+}
+
+if (-not $Force) {
+  Write-Host ""
+  $ok = Read-Host "Publicar assim? (s/N)"
+  if ($ok -ne "s" -and $ok -ne "S") { Write-Host "Cancelado." -ForegroundColor Yellow; exit 0 }
+}
+
+# ---------- 2. Envio ----------
+Write-Host ""
+Write-Host "PUBLICANDO" -ForegroundColor Cyan
+Write-Host "----------------------------------------"
+
+foreach ($p in $plano) {
+  $b64 = [Convert]::ToBase64String($p.bytes)
+  $body = @{ message = "$Message : $($p.arquivo)"; content = $b64; branch = $Branch }
+  if ($p.sha) { $body.sha = $p.sha }
   try {
-    Invoke-RestMethod -Uri "$ApiBase/contents/$f" -Headers $headers -Method Put -Body ($body | ConvertTo-Json -Depth 5) | Out-Null
-    Write-Host "  [enviado] $f" -ForegroundColor Green
-    $changed++
+    Invoke-RestMethod -Uri "$ApiBase/contents/$($p.arquivo)" -Headers $headers -Method Put -Body ($body | ConvertTo-Json -Depth 5) | Out-Null
+    Write-Host ("  [enviado]  {0}" -f $p.arquivo) -ForegroundColor Green
   } catch {
-    Write-Host "  [ERRO] $f :: $($_.Exception.Message)" -ForegroundColor Red
+    Write-Host ("  [ERRO] {0} :: {1}" -f $p.arquivo, $_.Exception.Message) -ForegroundColor Red
   }
 }
 
 foreach ($f in $remove) {
-  $sha = Get-RemoteSha $f
-  if (-not $sha) { Write-Host "  [nao existe no repo] $f" -ForegroundColor DarkGray; continue }
-  $body = @{ message = "$Message : remove $f"; sha = $sha; branch = $Branch }
+  $rem = Get-Remote $f
+  if (-not $rem) { continue }
+  $body = @{ message = "$Message : remove $f"; sha = $rem.sha; branch = $Branch }
   try {
     Invoke-RestMethod -Uri "$ApiBase/contents/$f" -Headers $headers -Method Delete -Body ($body | ConvertTo-Json -Depth 5) | Out-Null
-    Write-Host "  [removido] $f" -ForegroundColor Yellow
-    $changed++
+    Write-Host ("  [removido] {0}" -f $f) -ForegroundColor Green
   } catch {
-    Write-Host "  [ERRO ao remover] $f :: $($_.Exception.Message)" -ForegroundColor Red
+    Write-Host ("  [ERRO ao remover] {0} :: {1}" -f $f, $_.Exception.Message) -ForegroundColor Red
   }
 }
 
 Write-Host "----------------------------------------"
-Write-Host "Enviados: $changed | sem mudanca: $skipped"
 Write-Host "Site: https://wsmelo-dev.github.io/wesleymeloPJ.com/  (atualiza em ate 1 minuto)" -ForegroundColor Cyan
 Write-Host ""
