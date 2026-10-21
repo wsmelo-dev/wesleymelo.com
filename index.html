@@ -59,7 +59,7 @@
       margin:0;font-family:var(--font);background:var(--paper);color:var(--ink);
       -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.5;
       transition:background-color .4s var(--ease),color .4s var(--ease);
-      animation:fade .35s var(--ease) both;overflow-x:clip;
+      animation:fade .35s var(--ease) both;
     }
     @keyframes fade{from{opacity:0}to{opacity:1}}
     ::selection{background:var(--ink);color:var(--paper)}
@@ -172,25 +172,15 @@
     .panel dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
     .panel dd{margin:0;font-size:13.5px;font-weight:500;text-align:right}
     .clock{font-family:var(--mono);font-size:13px;letter-spacing:.06em;font-variant-numeric:tabular-nums}
-    .strip{margin-top:64px;padding:13px 0;overflow:hidden}
-    .strip-track{display:flex;gap:44px;width:max-content;animation:slide 46s linear infinite}
-    .strip:hover .strip-track{animation-play-state:paused}
-    .strip span{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
-    .strip span::before{content:"- ";color:var(--line-hard)}
-    @keyframes slide{to{transform:translateX(-50%)}}
-    @media (prefers-reduced-motion:no-preference){
-      .strip-track{-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
-        mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-    }
 
     /* ============ ESTRUTURA DE SEÇÃO ============ */
     section{padding:104px 0;position:relative}
     @media(max-width:768px){section{padding:68px 0}}
     .sec{display:grid;grid-template-columns:132px 1fr;gap:40px;align-items:start}
     @media(max-width:860px){.sec{grid-template-columns:1fr;gap:22px}}
-    .sec-num{font-family:var(--mono);font-size:44px;line-height:1;color:var(--paper-3);
+    .sec-num{font-family:var(--mono);font-size:44px;line-height:1;color:var(--ink-3);
       letter-spacing:-.04em;user-select:none}
-    [data-theme="dark"] .sec-num{color:#070709}
+    [data-theme="dark"] .sec-num{color:var(--ink-3)}
     .sec h2{font-size:clamp(1.9rem,4vw,3rem);font-weight:600;letter-spacing:-.04em}
     .sec-head{margin-bottom:44px}
     .sec-head .lede{margin-top:16px}
@@ -230,55 +220,25 @@
       white-space:nowrap}
     .skill.hidden{display:none}
 
-    /* ============ PROJETOS (índice editorial) ============ */
-    .proj{}
-    .proj-row{display:grid;grid-template-columns:64px 1fr 300px;gap:34px;align-items:start;
-      padding:38px 12px;position:relative}
-    .proj-row:hover .p-title{color:var(--ink)}
-    @media(max-width:980px){.proj-row{grid-template-columns:48px 1fr;gap:6px 20px;padding:30px 4px}
-      .proj-row .p-vis{grid-column:2;margin-top:20px;max-width:420px}}
-    .p-idx{font-family:var(--mono);font-size:11px;color:var(--ink-3);padding-top:5px}
-    .p-name{font-size:1.45rem;font-weight:600;letter-spacing:-.03em;display:flex;align-items:center;gap:12px}
-    .p-name .arrow{opacity:0;transform:translateX(-6px);transition:opacity .25s var(--ease),transform .25s var(--ease)}
-    .proj-row:hover .p-name .arrow{opacity:1;transform:none}
-    /* link esticado: a linha inteira do projeto leva à demonstração */
-    .p-title{color:inherit;text-decoration:none;outline-offset:6px;display:inline-flex;align-items:center;gap:12px}
-    .p-title::after{content:"";position:absolute;inset:0;z-index:1;cursor:pointer}
-    .p-link{position:relative;z-index:2}
-    .p-desc{margin-top:10px;font-size:14.5px;color:var(--ink-2);line-height:1.65;max-width:56ch}
-    .p-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;align-items:center}
+    /* ============ PROJETOS (card em destaque) ============ */
+    .proj{display:grid;gap:18px}
+    .proj-card{display:grid;gap:26px}
+    .proj-body{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:start}
+    @media(max-width:860px){.proj-body{grid-template-columns:1fr;gap:18px}}
+    .proj-shot{margin:0;background:#0d0d0d;padding:14px;overflow:hidden}
+    .proj-shot img{display:block;width:100%;height:auto}
+    .proj-name{font-size:clamp(1.35rem,2.4vw,1.75rem);font-weight:600;letter-spacing:-.03em;line-height:1.15}
+    .proj-desc{margin-top:12px;font-size:15px;color:var(--ink-2);line-height:1.65;max-width:46ch}
+    .proj-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;align-items:center}
     .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
       color:var(--ink-3);padding:0}
     .tag.concept{background:var(--badge-bg);color:var(--badge-fg);padding:5px 10px;border-radius:2px}
-    .p-link{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:13.5px;font-weight:550;
-      color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:3px;
-      transition:gap .25s var(--ease),border-color .2s}
-    .p-link:hover{gap:12px;border-color:var(--ink)}
-    .p-vis{background:var(--surface);overflow:hidden;transition:transform .4s var(--ease)}
-    .proj-row:hover .p-vis{transform:translateY(-3px)}
-    .vis-bar{display:flex;align-items:center;gap:5px;padding:9px 12px}
-    .vis-bar i{width:7px;height:7px;background:var(--line);display:block}
-    .vis-bar span{margin-left:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ink-3)}
-    .vis-body{padding:16px}
-    .v-row{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12.5px;
-      padding:8px 0;color:var(--ink-2)}
-    .v-row b{font-weight:550;color:var(--ink)}
-    .v-bars{display:flex;align-items:flex-end;gap:5px;height:46px;margin-bottom:12px}
-    .v-bars i{flex:1;background:var(--paper-3);min-height:6px}
-    .v-bars i.on{background:var(--ink)}
-    [data-theme="dark"] .v-bars i{background:#1B1B1E}
-    .v-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .v-col{background:var(--paper-2);padding:8px;min-height:66px}
-    .v-col h5{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
-      margin:0 0 7px;font-weight:400}
-    .v-col span{display:block;height:5px;background:var(--paper-3);margin-bottom:5px}
-    [data-theme="dark"] .v-col span{background:#1B1B1E}
-    .v-col span.on{background:var(--ink)}
-    .v-hero{text-align:center;padding:18px 14px 20px}
-    .v-hero b{display:block;font-size:14px;letter-spacing:-.02em;margin-bottom:6px}
-    .v-hero p{font-size:11.5px;color:var(--ink-3);margin-bottom:12px}
-    .v-hero em{display:inline-block;font-style:normal;font-size:11.5px;font-weight:550;
-      background:var(--inv-bg);color:var(--inv-ink);padding:6px 16px}
+    .proj-cta{display:inline-flex;align-items:center;gap:9px;margin-top:22px;font-size:14px;font-weight:550;
+      color:var(--ink);text-decoration:none;padding-bottom:3px;border-bottom:1px solid var(--line);
+      transition:gap .2s var(--ease),border-color .2s}
+    .proj-cta:hover{gap:13px;border-color:var(--ink)}
+    .proj-cta .arw{transition:transform .2s var(--ease)}
+    .proj-cta:hover .arw{transform:translateX(3px)}
 
     /* ============ CONTATO (formulário + ícones soltos) ============ */
     .contact-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:start}
@@ -370,13 +330,12 @@
           lede:"Trabalho com suporte e sistemas, uso automação com n8n para tirar tarefas repetitivas do caminho e estudo programação para construir soluções cada vez mais completas.",
           cta1:"Ver projetos",cta2:"Entrar em contato"},
         panel:{title:"Resumo",foco:"Foco",focoVal:"Automação com n8n",base:"Base",baseVal:"Helpdesk e sistemas",
-          estuda:"Estudando",estudaVal:"Programação e n8n",projetos:"Projetos",projetosVal:"no portfólio",
+          estuda:"Estudando",estudaVal:"Programação e n8n",
           interesse:"Interesse",interesseVal:"Programação"},
-        ticker:["n8n","Automação","HTTP","JavaScript","HTML","CSS","Git","Helpdesk","WhatsApp","Integrações","Dados","Sistemas"],
         about:{title:"Sobre mim",
           lede:"Sou o Wesley. Gosto de tecnologia, de entender como as coisas funcionam por dentro e de resolver problemas do dia a dia com automação.",
-          p1:"Atuo em helpdesk e sistemas e comecei a automatizar processos repetitivos com n8n: fluxos que consultam dados, aplicam regras e enviam o resultado para quem precisa. Também estudo programação, com HTML, CSS e JavaScript, para entender o que acontece por trás de cada etapa.",
-          p2:"Estou no começo da carreira em tecnologia e prefiro dizer isso com clareza: o que trago é método, curiosidade e vontade de resolver problemas de verdade. Cada automação que construo é também uma chance de aprender algo novo."},
+          p1:"Atuo em helpdesk e sistemas e automatizo processos repetitivos com n8n: fluxos que consultam dados, aplicam regras e avisam quem precisa. Também estudo programação, com HTML, CSS e JavaScript, para entender o que acontece por trás de cada etapa.",
+          p2:"Estou no começo da carreira e prefiro dizer isso com clareza: o que trago é método, curiosidade e vontade de resolver problemas de verdade."},
         principles:[
           {t:"Conhecer os dados antes de automatizar",d:"Entender o formato real da informação é o que evita fluxos que não encontram nada para processar."},
           {t:"Regras claras",d:"Definir janela de tempo, fuso horário e exceções antes de disparar qualquer ação."},
@@ -387,15 +346,9 @@
           lede:"O que já uso no dia a dia e o que estou aprofundando. Os níveis são uma autoavaliação honesta, não um número inventado.",
           all:"Todas",level:"Nível autoavaliado",levelOf:"de 4",
           filterLabel:"Filtrar habilidades por categoria"},
-        preview:{
-          flow:[["1 · Agendamento","diário"],["2 · HTTP","certificados"],["3 · Function","filtra 7 dias"],["4 · WhatsApp","aviso"]],
-          dash:[["Saldo","R$ 12.480"],["Receitas","R$ 6.140"],["Despesas","R$ 3.290"]],
-          board:["Backlog","A fazer","Em curso"],
-          nexa:{title:"Organize o trabalho",sub:"Projeto, documentos e tarefas em um só lugar",cta:"Começar"}
-        },
         projects:{title:"Projetos",
           lede:"Uma automação que está em uso no dia a dia, criada para resolver um problema real e tirar uma tarefa manual do caminho.",
-          more:"Ver mais detalhes",openDemo:"Ver a demonstração de",demo:"Demonstrativo",
+          more:"Ver mais detalhes",openDemo:"Ver mais detalhes de",demo:"Demonstrativo",
           noDemo:"Fluxo de uso interno, sem demonstração pública.",
           foot:"Novos projetos entram por aqui conforme avanço. Mais trabalhos ficam no meu perfil do GitHub."},
         contact:{title:"Entre em contato",
@@ -426,13 +379,12 @@
           lede:"I work with support and systems, use n8n automation to take repetitive work off the table, and study programming to build ever more complete solutions.",
           cta1:"See projects",cta2:"Get in touch"},
         panel:{title:"Summary",foco:"Focus",focoVal:"Automation with n8n",base:"Base",baseVal:"Helpdesk and systems",
-          estuda:"Studying",estudaVal:"Programming and n8n",projetos:"Projects",projetosVal:"in the portfolio",
+          estuda:"Studying",estudaVal:"Programming and n8n",
           interesse:"Interest",interesseVal:"Programming"},
-        ticker:["n8n","Automation","HTTP","JavaScript","HTML","CSS","Git","Helpdesk","WhatsApp","Integrations","Data","Systems"],
         about:{title:"About me",
           lede:"I am Wesley. I like technology, understanding how things work on the inside, and solving day to day problems with automation.",
-          p1:"I work in helpdesk and systems and started automating repetitive processes with n8n: flows that query data, apply rules and deliver the result to whoever needs it. I also study programming, with HTML, CSS and JavaScript, to understand what happens behind every step.",
-          p2:"I am early in my career in technology and I prefer to say that plainly: what I bring is method, curiosity and the will to solve real problems. Every automation I build is also a chance to learn something new."},
+          p1:"I work in helpdesk and systems and automate repetitive processes with n8n: flows that query data, apply rules and warn whoever needs to know. I also study programming, with HTML, CSS and JavaScript, to understand what happens behind every step.",
+          p2:"I am early in my career and I prefer to say that plainly: what I bring is method, curiosity and the will to solve real problems."},
         principles:[
           {t:"Know the data before automating",d:"Understanding the real shape of the information is what keeps flows from finding nothing to process."},
           {t:"Clear rules",d:"Define the time window, the time zone and the exceptions before triggering any action."},
@@ -443,15 +395,9 @@
           lede:"What I use daily and what I am going deeper on. The levels are an honest self assessment, not an invented number.",
           all:"All",level:"Self assessed level",levelOf:"of 4",
           filterLabel:"Filter skills by category"},
-        preview:{
-          flow:[["1 · Schedule","daily"],["2 · HTTP","certificates"],["3 · Function","filters 7 days"],["4 · WhatsApp","alert"]],
-          dash:[["Balance","R$ 12.480"],["Income","R$ 6.140"],["Expenses","R$ 3.290"]],
-          board:["Backlog","To do","In progress"],
-          nexa:{title:"Organise your work",sub:"Projects, documents and tasks in one place",cta:"Get started"}
-        },
         projects:{title:"Projects",
           lede:"One automation that is in daily use, built to solve a real problem and take a manual task off the table.",
-          more:"See the details",openDemo:"Open the demo of",demo:"Demonstrative",
+          more:"See the details",openDemo:"See the details of",demo:"Demonstrative",
           noDemo:"Internal workflow, no public demo.",
           foot:"New projects land here as I progress. More work is on my GitHub profile."},
         contact:{title:"Get in touch",
@@ -492,13 +438,16 @@
       en:{praticando:"Practicing",estudando:"Studying",base:"Solid base",atuacao:"Daily use"}
     };
     const PROJECTS = [
-      { key:"certificados", vis:"flow", demo:"certificados.html", tech:["n8n","HTTP","JavaScript","WhatsApp"] }
+      { key:"certificados", demo:"certificados.html", shot:"assets/fluxo-n8n.png",
+        tech:["n8n","HTTP","JavaScript","WhatsApp"] }
     ];
     const PROJECT_COPY = {
       pt:{certificados:{name:"Alerta de vencimento de certificados",badge:"Em uso",
-        desc:"Fluxo no n8n que roda todo dia, consulta os certificados digitais, encontra os que vencem em até 7 dias, ignora os vencidos e envia o aviso pelo WhatsApp com um nome fácil de reconhecer."}},
+        desc:"Fluxo no n8n que roda todo dia, consulta os certificados digitais, encontra os que vencem em até 7 dias, ignora os vencidos e envia o aviso pelo WhatsApp com um nome fácil de reconhecer.",
+        shotAlt:"Fluxo de automação no n8n com quatro etapas: agendamento, requisição HTTP, código em JavaScript e envio por WhatsApp"}},
       en:{certificados:{name:"Certificate expiry alerts",badge:"In use",
-        desc:"An n8n flow that runs every day, queries the digital certificates, finds the ones expiring within 7 days, skips the ones already expired and sends the alert over WhatsApp with a name that is easy to recognise."}}
+        desc:"An n8n flow that runs every day, queries the digital certificates, finds the ones expiring within 7 days, skips the ones already expired and sends the alert over WhatsApp with a name that is easy to recognise.",
+        shotAlt:"Automation flow in n8n with four steps: schedule, HTTP request, JavaScript code and WhatsApp delivery"}}
     };
 
     /* ================= ÍCONES ================= */
@@ -555,55 +504,6 @@
         io.observe(el); return ()=>io.disconnect();
       },[]);
       return <div className="rule" ref={ref}/>;
-    }
-    /* Prévia real (mini-interface) de cada projeto */
-    function Preview({type, t}){
-      if(type==="flow") return (
-        <div>
-          <div className="vis-bar"><i/><i/><i/><span>n8n</span></div>
-          <div className="vis-body">
-            {t.preview.flow.map(function(r,i){
-              return <div className="v-row" key={i}><span>{r[0]}</span><b>{r[1]}</b></div>;
-            })}
-          </div>
-        </div>
-      );
-      if(type==="dash") return (
-        <div>
-          <div className="vis-bar"><i/><i/><i/><span>finora</span></div>
-          <div className="vis-body">
-            <div className="v-bars" aria-hidden="true">
-              <i style={{height:"40%"}}/><i className="on" style={{height:"62%"}}/><i style={{height:"48%"}}/>
-              <i className="on" style={{height:"84%"}}/><i style={{height:"56%"}}/><i className="on" style={{height:"100%"}}/>
-            </div>
-            {t.preview.dash.map(function(r,i){
-              return <div className="v-row" key={i}><span>{r[0]}</span><b>{r[1]}</b></div>;
-            })}
-          </div>
-        </div>
-      );
-      if(type==="board") return (
-        <div>
-          <div className="vis-bar"><i/><i/><i/><span>taskly</span></div>
-          <div className="vis-body">
-            <div className="v-cols">
-              {t.preview.board.map(function(c,i){
-                return <div className="v-col" key={i}><h5>{c}</h5><span className="on"/><span/></div>;
-              })}
-            </div>
-          </div>
-        </div>
-      );
-      return (
-        <div>
-          <div className="vis-bar"><i/><i/><i/><span>nexa</span></div>
-          <div className="vis-body v-hero">
-            <b>{t.preview.nexa.title}</b>
-            <p>{t.preview.nexa.sub}</p>
-            <em>{t.preview.nexa.cta}</em>
-          </div>
-        </div>
-      );
     }
 
     /* ================= APP ================= */
@@ -765,15 +665,58 @@
                       <div><dt>{t.panel.foco}</dt><dd>{t.panel.focoVal}</dd></div>
                       <div><dt>{t.panel.base}</dt><dd>{t.panel.baseVal}</dd></div>
                       <div><dt>{t.panel.estuda}</dt><dd>{t.panel.estudaVal}</dd></div>
-                      <div><dt>{t.panel.projetos}</dt><dd>{PROJECTS.length} {t.panel.projetosVal}</dd></div>
                       <div><dt>{t.panel.interesse}</dt><dd>{t.panel.interesseVal}</dd></div>
                     </dl>
                   </aside>
                 </div>
 
-                <div className="strip" aria-hidden="true">
-                  <div className="strip-track">
-                    {t.ticker.concat(t.ticker).map((w,i)=>(<span key={i}>{w}</span>))}
+              </div>
+            </section>
+
+            {/* ===== PROJETOS ===== */}
+            <section id="projetos" aria-labelledby="projetos-title">
+              <div className="wrap">
+                <div className="sec">
+                  <div className="sec-num" aria-hidden="true">01</div>
+                  <div>
+                    <div className="sec-head">
+                      <MaskTitle text={t.projects.title} id="projetos-title"/>
+                      <p className="lede">{t.projects.lede}</p>
+                    </div>
+                    <div className="proj">
+                      {PROJECTS.map((p,i)=>{
+                        const pc = (PROJECT_COPY[lang] || PROJECT_COPY.pt)[p.key];
+                        return (
+                        <Reveal key={p.key} delay={i*60}>
+                          <article className="proj-card">
+                            <figure className="proj-shot">
+                              <img src={p.shot} alt={pc.shotAlt} width="940" height="152" loading="lazy" decoding="async"/>
+                            </figure>
+                            <div className="proj-body">
+                              <div>
+                                <h3 className="proj-name">{pc.name}</h3>
+                                <p className="proj-desc">{pc.desc}</p>
+                              </div>
+                              <div>
+                                <div className="proj-meta">
+                                  <span className="tag concept">{pc.badge || t.projects.demo}</span>
+                                  {p.tech.map(x=>(<span className="tag" key={x}>{x}</span>))}
+                                </div>
+                                <a className="proj-cta" href={p.demo} aria-label={t.projects.openDemo+" "+pc.name}>
+                                  {t.projects.more} <span className="arw" aria-hidden="true">→</span>
+                                </a>
+                              </div>
+                            </div>
+                          </article>
+                        </Reveal>
+                        );
+                      })}
+                    </div>
+                    <Reveal delay={80}>
+                      <p className="lede" style={{marginTop:"28px",fontSize:"14px"}}>
+                        {t.projects.foot}
+                      </p>
+                    </Reveal>
                   </div>
                 </div>
               </div>
@@ -783,7 +726,7 @@
             <section id="sobre" aria-labelledby="sobre-title">
               <div className="wrap">
                 <div className="sec">
-                  <div className="sec-num" aria-hidden="true">01</div>
+                  <div className="sec-num" aria-hidden="true">02</div>
                   <div>
                     <div className="sec-head">
                       <MaskTitle text={t.about.title} id="sobre-title"/>
@@ -792,7 +735,7 @@
                     <div className="about">
                       <div>
                         <p className="lede">{t.about.p1}</p>
-                        <p className="lede" style={{marginTop:"16px"}}>{t.about.p2}</p>
+                        <p className="lede" style={{marginTop:"14px"}}>{t.about.p2}</p>
                         <ol className="principles">
                           {t.principles.map((p,i)=>(
                             <Reveal as="li" key={p.t} delay={i*70}>
@@ -812,7 +755,7 @@
             <section id="skills" aria-labelledby="skills-title">
               <div className="wrap">
                 <div className="sec">
-                  <div className="sec-num" aria-hidden="true">02</div>
+                  <div className="sec-num" aria-hidden="true">03</div>
                   <div>
                     <div className="sec-head">
                       <MaskTitle text={t.skills.title} id="skills-title"/>
@@ -841,54 +784,6 @@
                         </Reveal>
                       ))}
                     </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* ===== PROJETOS ===== */}
-            <section id="projetos" aria-labelledby="projetos-title">
-              <div className="wrap">
-                <div className="sec">
-                  <div className="sec-num" aria-hidden="true">03</div>
-                  <div>
-                    <div className="sec-head">
-                      <MaskTitle text={t.projects.title} id="projetos-title"/>
-                      <p className="lede">{t.projects.lede}</p>
-                    </div>
-                    <div className="proj">
-                      {PROJECTS.map((p,i)=>{
-                        const pc = (PROJECT_COPY[lang] || PROJECT_COPY.pt)[p.key];
-                        return (
-                        <Reveal className="proj-row" key={p.key} delay={i*60}>
-                          <span className="p-idx">{String(i+1).padStart(2,"0")}</span>
-                          <div>
-                            <h3 className="p-name">
-                              <a className="p-title" href={p.demo} aria-label={t.projects.openDemo+" "+pc.name}>
-                                {pc.name}<span className="arrow" aria-hidden="true">→</span>
-                              </a>
-                            </h3>
-                            <p className="p-desc">{pc.desc}</p>
-                            <div className="p-meta">
-                              <span className="tag concept">{pc.badge || t.projects.demo}</span>
-                              {p.tech.map(x=>(<span className="tag" key={x}>{x}</span>))}
-                            </div>
-                            {p.demo
-                              ? <a className="p-link" href={p.demo} aria-label={t.projects.openDemo+" "+pc.name}>
-                                  {t.projects.more} <span aria-hidden="true">→</span>
-                                </a>
-                              : <p className="p-desc" style={{marginTop:"16px",color:"var(--ink-3)",fontSize:"13.5px"}}>{t.projects.noDemo}</p>}
-                          </div>
-                          <div className="p-vis"><Preview type={p.vis} t={t}/></div>
-                        </Reveal>
-                        );
-                      })}
-                    </div>
-                    <Reveal delay={80}>
-                      <p className="lede" style={{marginTop:"28px",fontSize:"14px"}}>
-                        {t.projects.foot}
-                      </p>
-                    </Reveal>
                   </div>
                 </div>
               </div>
