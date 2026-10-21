@@ -360,16 +360,7 @@
     const PROJECTS = [
       { name:"Alerta de vencimento de certificados", kind:"Automação em uso", demo:"", badge:"Em uso",
         desc:"Fluxo no n8n que roda todo dia, consulta os certificados digitais, encontra os que vencem em até 7 dias, ignora os vencidos e envia o aviso pelo WhatsApp com um nome fácil de reconhecer.",
-        tech:["n8n","HTTP","JavaScript","WhatsApp"], vis:"flow" },
-      { name:"Finora", kind:"Dashboard financeiro", demo:"portfolio-projects/finora/index.html",
-        desc:"Painel de finanças pessoais com saldo, receitas e despesas, evolução mensal em SVG e um CRUD de transações com busca, filtros e persistência local.",
-        tech:["React","JavaScript","CSS","SVG"], vis:"dash" },
-      { name:"Taskly", kind:"Gestão de tarefas", demo:"portfolio-projects/taskly/index.html",
-        desc:"Quadro Kanban de quatro colunas com arrastar e soltar, alternativa por teclado, filtros, ordenação, atalhos e confirmação de exclusão.",
-        tech:["React","JavaScript","CSS"], vis:"board" },
-      { name:"Nexa", kind:"Landing page de SaaS", demo:"portfolio-projects/nexa/index.html",
-        desc:"Página de marketing de um produto fictício: hero, recursos, vitrine do produto, planos mensal e anual, FAQ e cadastro simulado.",
-        tech:["React","JavaScript","CSS"], vis:"saas" }
+        tech:["n8n","HTTP","JavaScript","WhatsApp"], vis:"flow" }
     ];
     const PRINCIPLES = [
       { t:"Conhecer os dados antes de automatizar", d:"Entender o formato real da informação é o que evita fluxos que não encontram nada para processar." },
@@ -706,7 +697,7 @@
                   <div>
                     <div className="sec-head">
                       <MaskTitle text="Projetos" id="projetos-title"/>
-                      <p className="lede">Uma automação que está em uso no dia a dia e demonstrações que construí para exercitar o que estudo. As demonstrações usam dados fictícios e não têm cliente por trás.</p>
+                      <p className="lede">Uma automação que está em uso no dia a dia, criada para resolver um problema real e tirar uma tarefa manual do caminho.</p>
                     </div>
                     <div className="proj">
                       {PROJECTS.map((p,i)=>(
@@ -731,7 +722,7 @@
                     </div>
                     <Reveal delay={80}>
                       <p className="lede" style={{marginTop:"28px",fontSize:"14px"}}>
-                        Novos projetos entram por aqui conforme avanço. O código de cada demonstração fica disponível no GitHub em breve.
+                        Novos projetos entram por aqui conforme avanço. Mais trabalhos ficam no meu perfil do GitHub.
                       </p>
                     </Reveal>
                   </div>
