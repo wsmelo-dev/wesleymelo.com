@@ -450,7 +450,7 @@
               <p class="tech-note" data-i18n="techNote">As marcas aparecem apenas como ferramentas. Nenhum logo oficial é usado sem autorização e nenhum dado real do ambiente é exposto.</p>
 
               <div class="case-block">
-                <h3><span data-i18n="learnLabel">Aprendizados</span> <span class="mono">05</span></h3>
+                <h3><span data-i18n="learnLabel">Aprendizados</span></h3>
                 <ol class="principles" id="learnings"></ol>
               </div>
             </div>
@@ -527,10 +527,10 @@
         desafiosLede:"Os problemas que apareceram durante o desenvolvimento e o que cada um exigiu. Selecione para abrir.",
         tecTitle:"Tecnologias utilizadas",
         tecLede:"As ferramentas que sustentam o fluxo, da consulta dos dados até o envio da mensagem.",
-        techNote:"As marcas aparecem apenas como ferramentas. Nenhum logo oficial é usado sem autorização e nenhum dado real do ambiente é exposto.",
+        techNote:"As marcas são citadas apenas como ferramentas. Nenhum logotipo oficial é usado sem autorização e nenhum dado real do ambiente aparece nesta página.",
         learnLabel:"Aprendizados",
         footTitle:"Gostou do projeto?",
-        footText:"Volte ao portfólio para ver os outros trabalhos ou fale comigo sobre uma automação.",
+        footText:"Volte ao portfólio para ver o resto do meu trabalho ou fale comigo sobre uma automação.",
         btnContato:"Entrar em contato", btnProjetos:"Ver projetos",
         footerStatus:"● helpdesk · automação",
         meta:[["Tipo","Automação em uso"],["Ambiente","n8n"],["Janela de aviso","até 7 dias"],["Saída","WhatsApp"]],
@@ -540,7 +540,7 @@
           { k:"Fonte dos dados", v:"API REST" },
           { k:"Janela de aviso", v:"até 7 dias" },
           { k:"Saída", v:"WhatsApp (Evolution API)" },
-          { k:"Dados da demo", v:"fictícios" }
+          { k:"Dados do exemplo", v:"fictícios" }
         ],
         flow:[
           { s:"Agendamento", t:"1. Agendamento da execução", d:"O fluxo é disparado automaticamente todos os dias, sem depender de alguém lembrar de rodar." },
@@ -552,7 +552,7 @@
           { s:"Envio", t:"7. Envio pelo WhatsApp", d:"A mensagem sai pelo WhatsApp através da Evolution API, pronta para quem precisa agir." }
         ],
         challenges:[
-          { t:"Uma lista escondida dentro de data", d:"A consulta devolvia um único item com a lista de certificados dentro de um campo data. O fluxo procurava os registros no nível errado e não encontrava nada para processar. A correção começou por entender o formato real da resposta e percorrer a lista no lugar certo." },
+          { t:"Uma lista escondida dentro de um campo", d:"A consulta devolvia um único item com a lista de certificados dentro de um campo data. O fluxo procurava os registros no nível errado e não encontrava nada para processar. A correção começou por entender o formato real da resposta e percorrer a lista no lugar certo." },
           { t:"Datas e janela de vencimento", d:"Comparar datas não bastava. Foi preciso considerar fuso horário, trabalhar com uma janela de até 7 dias e garantir que a comparação funcionasse independentemente do horário em que o fluxo rodasse." },
           { t:"Vencidos x a vencer", d:"Separar o que já venceu do que ainda está dentro do período de alerta evitou dois problemas de uma vez: avisos inúteis sobre certificados passados e a ausência de aviso para os que realmente importavam." },
           { t:"Nomes que a pessoa entende", d:"O retorno trazia nomes técnicos de arquivo. Na mensagem, eles foram trocados por identificações mais fáceis de reconhecer. Uma informação pode estar tecnicamente correta e ainda assim ser pouco útil para quem precisa agir." },
@@ -614,10 +614,10 @@
         desafiosLede:"The problems that showed up during development and what each one demanded. Select to open.",
         tecTitle:"Technologies used",
         tecLede:"The tools that hold the flow up, from the data query to the message delivery.",
-        techNote:"Brands appear only as tools. No official logo is used without permission and no real environment data is exposed.",
+        techNote:"Brands are mentioned only as tools. No official logo is used without permission and no real environment data appears on this page.",
         learnLabel:"What I learned",
         footTitle:"Liked the project?",
-        footText:"Go back to the portfolio to see the other work, or talk to me about an automation.",
+        footText:"Go back to the portfolio to see the rest of my work, or talk to me about an automation.",
         btnContato:"Get in touch", btnProjetos:"See projects",
         footerStatus:"● helpdesk · automation",
         meta:[["Type","Automation in use"],["Environment","n8n"],["Alert window","up to 7 days"],["Output","WhatsApp"]],
@@ -627,7 +627,7 @@
           { k:"Data source", v:"REST API" },
           { k:"Alert window", v:"up to 7 days" },
           { k:"Output", v:"WhatsApp (Evolution API)" },
-          { k:"Demo data", v:"fictional" }
+          { k:"Example data", v:"fictional" }
         ],
         flow:[
           { s:"Schedule", t:"1. Scheduling the run", d:"The flow is triggered automatically every day, with nobody having to remember to run it." },
@@ -639,7 +639,7 @@
           { s:"Delivery", t:"7. Sending over WhatsApp", d:"The message leaves through WhatsApp via the Evolution API, ready for whoever has to act." }
         ],
         challenges:[
-          { t:"A list hidden inside data", d:"The query returned a single item with the list of certificates inside a data field. The flow looked for the records at the wrong level and found nothing to process. The fix started by understanding the real shape of the response and walking the list in the right place." },
+          { t:"A list hidden inside a field", d:"The query returned a single item with the list of certificates inside a data field. The flow looked for the records at the wrong level and found nothing to process. The fix started by understanding the real shape of the response and walking the list in the right place." },
           { t:"Dates and the expiry window", d:"Comparing dates was not enough. It required handling the time zone, working with a window of up to 7 days and making sure the comparison worked regardless of the time the flow ran." },
           { t:"Expired vs expiring", d:"Separating what had already expired from what was still inside the alert period avoided two problems at once: useless alerts about past certificates and no alert at all for the ones that really mattered." },
           { t:"Names people understand", d:"The response carried technical file names. In the message they were replaced with identifiers that are easier to recognise. Information can be technically correct and still be of little use to whoever has to act on it." },
