@@ -15,7 +15,7 @@ Site pessoal de uma página que apresenta a trajetória de Wesley Melo na área 
 | `certificados.html` | Estudo de caso do fluxo n8n: resumo, capturas, etapas, demonstração, desafios, tecnologias |
 
 ## Voz
-Português do Brasil, direto e sem adjectives de sobra. Fala de método antes de falar de resultado. Assume leitor técnico: pode usar nome de ferramenta (n8n, Evolution API) sem explicar o básico.
+Português do Brasil, direto e sem adjetivos de sobra. Fala de método antes de falar de resultado. Assume leitor técnico: pode usar nome de ferramenta (n8n, API do CRM) sem explicar o básico.
 
 ## Idiomas
 Site bilíngue: português (padrão) e inglês. A escolha do visitante fica salva no navegador e vale para as duas páginas. Termos técnicos não são traduzidos.
