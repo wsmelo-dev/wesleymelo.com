@@ -233,9 +233,8 @@
     /* ============ PROJETOS (índice editorial) ============ */
     .proj{}
     .proj-row{display:grid;grid-template-columns:64px 1fr 300px;gap:34px;align-items:start;
-      padding:38px 12px;position:relative;
-      transition:background .3s var(--ease)}
-    .proj-row:hover{background:var(--hover)}
+      padding:38px 12px;position:relative}
+    .proj-row:hover .p-title{color:var(--ink)}
     @media(max-width:980px){.proj-row{grid-template-columns:48px 1fr;gap:6px 20px;padding:30px 4px}
       .proj-row .p-vis{grid-column:2;margin-top:20px;max-width:420px}}
     .p-idx{font-family:var(--mono);font-size:11px;color:var(--ink-3);padding-top:5px}

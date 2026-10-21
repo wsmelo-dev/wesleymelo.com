@@ -81,8 +81,10 @@ Vermelho saturado, glow neon, cursor customizado, cards com sombra e raio grande
 - Termos técnicos (n8n, HTTP, JavaScript, WhatsApp, Evolution API) não são traduzidos.
 
 ## Projetos
-- A linha inteira do projeto é clicável: o título é um link com `::after` esticado (`inset:0`) sobre a linha. Passar o mouse em qualquer ponto (título, descrição ou prévia) leva à demonstração.
+- A linha inteira do projeto é clicável: o título é um link com `::after` esticado (`inset:0`) sobre a linha. Passar o mouse em qualquer ponto (título, descrição ou prévia) leva à demonstração, e o cursor vira pointer.
 - O CTA "Ver mais detalhes" continua visível e fica acima do overlay (`z-index`), com a mesma URL e o mesmo rótulo de acessibilidade.
+- **Sem fundo no hover.** A linha do projeto não ganha bloco ao passar o mouse (nada de "barreira" atrás do texto). O sinal de clicabilidade é o cursor pointer mais a seta que aparece no título.
+- No hover, o título vai para `--ink` e a prévia sobe 3px.
 
 ## Publicação
 Site estático no branch `main` do repositório `wsmelo-dev/wesleymeloPJ.com`, servido no GitHub Pages. Publicar com `publicar.bat` (Git + gh CLI) ou `publicar-api.bat` (API do GitHub, sem Git instalado).
