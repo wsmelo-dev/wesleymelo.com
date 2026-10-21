@@ -280,22 +280,25 @@
     .v-hero em{display:inline-block;font-style:normal;font-size:11.5px;font-weight:550;
       background:var(--inv-bg);color:var(--inv-ink);padding:6px 16px}
 
-    /* ============ CONTATO ============ */
-    .contact-list{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:40px}
-    @media(max-width:720px){.contact-list{grid-template-columns:1fr}}
-    .c-item{padding:26px 22px 26px 0;text-align:left;
-      background:none;border:0;font:inherit;color:inherit;cursor:pointer;width:100%;
-      transition:background .28s var(--ease)}
-    .c-item:hover{background:var(--surface)}
-    .c-item .c-ic{width:34px;height:34px;background:var(--surface);display:inline-flex;align-items:center;
-      justify-content:center;margin-bottom:16px;transition:background .25s,color .25s}
-    .c-item:hover .c-ic{background:var(--inv-bg);color:var(--inv-ink)}
-    .c-item .c-ic svg{width:17px;height:17px}
-    .c-item b{display:block;font-size:15px;font-weight:550;margin-top:2px}
-    .c-item small{display:block;font-size:12.5px;color:var(--ink-3);margin-top:4px;overflow-wrap:break-word;word-break:normal}
-    .c-item[aria-disabled="true"]{cursor:default;color:var(--ink-3)}
-    .c-item[aria-disabled="true"]:hover{background:none}
-    .c-item[aria-disabled="true"] .c-ic{opacity:.4}
+    /* ============ CONTATO (formulário + ícones soltos) ============ */
+    .contact-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:start}
+    @media(max-width:860px){.contact-grid{grid-template-columns:1fr;gap:34px}}
+    .field{margin-bottom:26px}
+    .field label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+    .field input,.field textarea{width:100%;background:transparent;border:0;
+      border-bottom:1px solid var(--line);color:var(--ink);font:inherit;font-size:16px;
+      padding:10px 0;transition:border-color .22s var(--ease)}
+    .field textarea{resize:vertical;min-height:76px;line-height:1.6}
+    .field input:focus,.field textarea:focus{outline:none;border-bottom-color:var(--ink)}
+    .field input::placeholder,.field textarea::placeholder{color:var(--ink-3);opacity:.75}
+    .form-note{margin-top:16px;font-size:12.5px;color:var(--ink-3);max-width:48ch;line-height:1.6}
+    .contact-links{display:flex;gap:8px;align-items:center}
+    .icon-btn{width:46px;height:46px;border:0;background:transparent;color:var(--ink-2);
+      display:inline-flex;align-items:center;justify-content:center;cursor:pointer;
+      transition:color .22s var(--ease),transform .22s var(--ease)}
+    .icon-btn:hover{color:var(--ink);transform:translateY(-2px)}
+    .icon-btn svg{width:20px;height:20px;display:block}
     .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:300;
       background:var(--inv-bg);color:var(--inv-ink);font-size:13.5px;font-weight:500;
       padding:12px 22px;border-radius:2px;box-shadow:0 8px 30px rgba(12,12,13,.2);
@@ -396,11 +399,17 @@
           noDemo:"Fluxo de uso interno, sem demonstração pública.",
           foot:"Novos projetos entram por aqui conforme avanço. Mais trabalhos ficam no meu perfil do GitHub."},
         contact:{title:"Entre em contato",
-          lede:"Se quiser falar sobre automação, sistemas ou um processo que pode ser automatizado, escreva. O clique no ícone do e-mail copia o endereço.",
+          lede:"Escreva seu nome e sua mensagem, ou use os atalhos ao lado: o e-mail copia o endereço, o GitHub e o LinkedIn abrem direto.",
           email:"E-mail",copied:"Copiado",github:"GitHub",linkedin:"LinkedIn",soon:"Perfil em breve",
           copyAria:"Copiar e-mail",selectToast:"Selecione o e-mail e pressione Ctrl+C",
           githubAria:"Abrir o GitHub de Wesley Melo",
-          linkedinAria:"Abrir o LinkedIn de Wesley Melo"},
+          linkedinAria:"Abrir o LinkedIn de Wesley Melo",
+          nameLabel:"Seu nome", namePlaceholder:"Como posso te chamar?",
+          msgLabel:"Mensagem", msgPlaceholder:"Do que você precisa?",
+          send:"Enviar", formNote:"Ao enviar, abrimos seu programa de e-mail com o nome e a mensagem já preenchidos.",
+          mailSubject:"Contato pelo portfólio — {name}",
+          mailBody:"Olá, Wesley.\n\nMeu nome é {name}.\n\n{message}\n\n— Enviado pelo portfólio",
+          sentToast:"Abrindo seu e-mail"},
         footer:{status:"● helpdesk · automação",top:"Voltar ao topo"}
       },
       en: {
@@ -446,11 +455,17 @@
           noDemo:"Internal workflow, no public demo.",
           foot:"New projects land here as I progress. More work is on my GitHub profile."},
         contact:{title:"Get in touch",
-          lede:"If you want to talk about automation, systems or a process that could be automated, write to me. Clicking the email icon copies the address.",
+          lede:"Write your name and your message, or use the shortcuts next to it: email copies the address, GitHub and LinkedIn open straight away.",
           email:"Email",copied:"Copied",github:"GitHub",linkedin:"LinkedIn",soon:"Profile coming soon",
           copyAria:"Copy email",selectToast:"Select the email address and press Ctrl+C",
           githubAria:"Open Wesley Melo's GitHub",
-          linkedinAria:"Open Wesley Melo's LinkedIn"},
+          linkedinAria:"Open Wesley Melo's LinkedIn",
+          nameLabel:"Your name", namePlaceholder:"What should I call you?",
+          msgLabel:"Message", msgPlaceholder:"What do you need?",
+          send:"Send", formNote:"On send, we open your email app with the name and the message already filled in.",
+          mailSubject:"Contact from the portfolio — {name}",
+          mailBody:"Hi Wesley.\n\nMy name is {name}.\n\n{message}\n\n— Sent from the portfolio",
+          sentToast:"Opening your email"},
         footer:{status:"● helpdesk · automation",top:"Back to top"}
       }
     };
@@ -639,6 +654,19 @@
       const clock = useMemo(()=> now.toLocaleTimeString(lang==="pt"?"pt-BR":"en-GB",{hour:"2-digit",minute:"2-digit",second:"2-digit"}),[now, lang]);
       const cats = useMemo(()=>["todos", ...Array.from(new Set(SKILLS.map(s=>s.cat)))],[]);
       const shown = useMemo(()=> filter==="todos" ? SKILLS : SKILLS.filter(s=>s.cat===filter),[filter]);
+
+      const sendMessage = (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const nome = String(fd.get("name") || "").trim();
+        const mensagem = String(fd.get("message") || "").trim();
+        if(!nome) return;
+        const assunto = t.contact.mailSubject.replace("{name}", nome);
+        const corpo = t.contact.mailBody.replace("{name}", nome).replace("{message}", mensagem || "-");
+        window.location.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(assunto) + "&body=" + encodeURIComponent(corpo);
+        setToast(t.contact.sentToast);
+        setTimeout(()=>setToast(""), 3200);
+      };
 
       const copyEmail = async () => {
         const done = () => {
@@ -880,26 +908,33 @@
                       <MaskTitle text={t.contact.title} id="contato-title"/>
                       <p className="lede">{t.contact.lede}</p>
                     </div>
-                    <div className="contact-list">
-                      <button type="button" className="c-item" onClick={copyEmail} aria-label={t.contact.copyAria+": "+EMAIL}>
-                        <span className="c-ic" aria-hidden="true">{copied ? <Icon d={P.check} s={16}/> : <Icon d={P.mail} s={16}/>}</span>
-                        <b>{t.contact.email}</b>
-                        <small>{copied ? t.contact.copied+" ✓" : EMAIL}</small>
-                      </button>
-                      <a className="c-item" href="https://github.com/wsmelo-dev" target="_blank" rel="noopener noreferrer" aria-label={t.contact.githubAria}>
-                        <span className="c-ic" aria-hidden="true">
-                          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                        </span>
-                        <b>{t.contact.github}</b>
-                        <small>github.com/wsmelo-dev</small>
-                      </a>
-                      <a className="c-item" href="https://www.linkedin.com/in/wesley-santos-de-melo-b10681445" target="_blank" rel="noopener noreferrer" aria-label={t.contact.linkedinAria}>
-                        <span className="c-ic" aria-hidden="true">
-                          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
-                        </span>
-                        <b>{t.contact.linkedin}</b>
-                        <small>linkedin.com/in/wesley-santos-de-melo-b10681445</small>
-                      </a>
+                    <div className="contact-grid">
+                      <form className="contact-form" onSubmit={sendMessage}>
+                        <div className="field">
+                          <label htmlFor="ct-name">{t.contact.nameLabel}</label>
+                          <input id="ct-name" name="name" type="text" required
+                            placeholder={t.contact.namePlaceholder} autoComplete="name"/>
+                        </div>
+                        <div className="field">
+                          <label htmlFor="ct-msg">{t.contact.msgLabel}</label>
+                          <textarea id="ct-msg" name="message" rows="3"
+                            placeholder={t.contact.msgPlaceholder}></textarea>
+                        </div>
+                        <button className="btn btn-p" type="submit">{t.contact.send} <span className="arw" aria-hidden="true">→</span></button>
+                        <p className="form-note">{t.contact.formNote}</p>
+                      </form>
+
+                      <div className="contact-links">
+                        <button type="button" className="icon-btn" onClick={copyEmail} aria-label={t.contact.copyAria} title={t.contact.copyAria}>
+                          {copied ? <Icon d={P.check} s={20}/> : <Icon d={P.mail} s={20}/>}
+                        </button>
+                        <a className="icon-btn" href="https://github.com/wsmelo-dev" target="_blank" rel="noopener noreferrer" aria-label={t.contact.githubAria} title={t.contact.githubAria}>
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        </a>
+                        <a className="icon-btn" href="https://www.linkedin.com/in/wesley-santos-de-melo-b10681445" target="_blank" rel="noopener noreferrer" aria-label={t.contact.linkedinAria} title={t.contact.linkedinAria}>
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+                        </a>
+                      </div>
                     </div>
                     <input id="email-fallback" hidden readOnly value={EMAIL}
                       onFocus={(e)=>e.target.select()} aria-label={t.contact.copyAria}/>
