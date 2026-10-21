@@ -209,8 +209,6 @@
     .ticks i{width:16px;height:3px;background:var(--paper-3);display:block}
     [data-theme="dark"] .ticks i{background:#1B1B1E}
     .ticks i.on{background:var(--ink)}
-    .skill .s-state{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
-      white-space:nowrap}
     .skill.hidden{display:none}
 
     /* ============ PROJETOS (card em destaque) ============ */
@@ -360,7 +358,7 @@
           p1:"Atuo em helpdesk e sistemas e automatizo processos repetitivos com n8n: fluxos que consultam dados, aplicam regras e avisam quem precisa. Também estudo programação, com HTML, CSS e JavaScript, para entender o que acontece por trás de cada etapa.",
           p2:"Estou no começo da carreira e prefiro dizer isso com clareza: o que trago é método, curiosidade e vontade de resolver problemas de verdade."},
         skills:{title:"Habilidades",
-          lede:"O que já uso no dia a dia e o que estou aprofundando. Os níveis são uma autoavaliação honesta, não um número inventado.",
+          lede:"O que já uso no dia a dia e o que estou aprofundando. As barras mostram o nível: quanto mais cheias, mais fazem parte da minha rotina.",
           all:"Todas",level:"Nível autoavaliado",levelOf:"de 4",
           filterLabel:"Filtrar habilidades por categoria"},
         projects:{title:"Projetos",
@@ -421,7 +419,7 @@
           p1:"I work in helpdesk and systems and automate repetitive processes with n8n: flows that query data, apply rules and warn whoever needs to know. I also study programming, with HTML, CSS and JavaScript, to understand what happens behind every step.",
           p2:"I am early in my career and I prefer to say that plainly: what I bring is method, curiosity and the will to solve real problems."},
         skills:{title:"Skills",
-          lede:"What I use daily and what I am going deeper on. The levels are an honest self assessment, not an invented number.",
+          lede:"What I use daily and what I am going deeper on. The bars show the level: the fuller, the more part of my routine.",
           all:"All",level:"Self assessed level",levelOf:"of 4",
           filterLabel:"Filter skills by category"},
         projects:{title:"Projects",
@@ -465,24 +463,19 @@
 
     /* Habilidades: nomes técnicos não mudam, rótulos sim */
     const SKILLS = [
-      { n:"n8n", cat:"automacao", state:"praticando", lvl:3 },
-      { n:"HTTP e APIs", nEn:"HTTP & APIs", cat:"automacao", state:"praticando", lvl:3 },
-      { n:"Tratamento de dados", nEn:"Data handling", cat:"automacao", state:"praticando", lvl:3 },
-      { n:"CRM", cat:"automacao", state:"estudando", lvl:2 },
-      { n:"JavaScript", cat:"linguagem", state:"estudando", lvl:2 },
-      { n:"Programação", nEn:"Programming", cat:"linguagem", state:"estudando", lvl:2 },
-      { n:"HTML", cat:"base", state:"base", lvl:4 },
-      { n:"CSS", cat:"base", state:"base", lvl:4 },
-      { n:"Git", cat:"fluxo", state:"praticando", lvl:3 },
-      { n:"Helpdesk", cat:"sistemas", state:"atuacao", lvl:4 }
+      { n:"n8n", cat:"automacao", lvl:3 },
+      { n:"HTTP e APIs", nEn:"HTTP & APIs", cat:"automacao", lvl:3 },
+      { n:"CRM", cat:"automacao", lvl:2 },
+      { n:"JavaScript", cat:"linguagem", lvl:2 },
+      { n:"Programação", nEn:"Programming", cat:"linguagem", lvl:2 },
+      { n:"HTML", cat:"base", lvl:4 },
+      { n:"CSS", cat:"base", lvl:4 },
+      { n:"Git", cat:"fluxo", lvl:3 },
+      { n:"Helpdesk", cat:"sistemas", lvl:4 }
     ];
     const CATS = {
       pt:{automacao:"Automação",linguagem:"Linguagem",base:"Base",fluxo:"Fluxo de trabalho",sistemas:"Sistemas"},
       en:{automacao:"Automation",linguagem:"Language",base:"Base",fluxo:"Workflow",sistemas:"Systems"}
-    };
-    const STATES = {
-      pt:{praticando:"Praticando",estudando:"Estudando",base:"Base sólida",atuacao:"Uso diário"},
-      en:{praticando:"Practicing",estudando:"Studying",base:"Solid base",atuacao:"Daily use"}
     };
     const PROJECTS = [
       { key:"certificados", demo:"certificados.html", shot:"assets/fluxo-n8n.png?v=7",
@@ -567,7 +560,6 @@
 
       const t = COPY[lang] || COPY.pt;
       const tCats = CATS[lang] || CATS.pt;
-      const tStates = STATES[lang] || STATES.pt;
 
       useEffect(()=>{ document.documentElement.dataset.theme = theme; try{ localStorage.setItem("wsm.theme", theme); }catch(e){} },[theme]);
       useEffect(()=>{
@@ -838,7 +830,6 @@
                           <span className="s-name">{lang==="en" && s.nEn ? s.nEn : s.n}</span>
                           <span className="s-cat">{tCats[s.cat]}</span>
                           <span className="s-meter">
-                            <span className="s-state">{tStates[s.state]}</span>
                             <span className="ticks" role="img" aria-label={t.skills.level+": "+s.lvl+" "+t.skills.levelOf}>
                               {[0,1,2,3].map(k=>(<i key={k} className={k<s.lvl?"on":""}/>))}
                             </span>
