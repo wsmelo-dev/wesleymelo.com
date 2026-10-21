@@ -33,7 +33,7 @@
       --ink:#0C0C0D; --ink-2:#43434A; --ink-3:#6B6B73;
       --line:rgba(12,12,13,.16); --line-soft:rgba(12,12,13,.09); --line-hard:rgba(12,12,13,.5);
       --inv-bg:#0C0C0D; --inv-ink:#F2F2F0;
-      --hover:#FAFAF8; --menu:#FAFAF8; --badge-bg:#0C0C0D; --badge-fg:#F2F2F0;
+      --menu:#FAFAF8; --badge-bg:#0C0C0D; --badge-fg:#F2F2F0;
       --status:#2E7D5B;
       --font:"Geist","SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
       --mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
@@ -47,7 +47,7 @@
       --ink:#F1F1EE; --ink-2:#B4B4B8; --ink-3:#82828A;
       --line:rgba(241,241,238,.14); --line-soft:rgba(241,241,238,.08); --line-hard:rgba(241,241,238,.5);
       --inv-bg:#F1F1EE; --inv-ink:#0C0C0D;
-      --hover:#161618; --menu:#141416; --badge-bg:#1F1F22; --badge-fg:#F1F1EE;
+      --menu:#141416; --badge-bg:#1F1F22; --badge-fg:#F1F1EE;
       --status:#5FBE92;
       --shadow:0 1px 2px rgba(0,0,0,.5);
     }
@@ -200,7 +200,7 @@
     .principles{margin-top:34px}
     .principles li{list-style:none;display:grid;grid-template-columns:56px 1fr;gap:20px;padding:20px 0;
       transition:background .3s var(--ease)}
-    .principles li:hover{background:var(--hover)}
+    .principles li:hover{background:var(--surface)}
     .principles b{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-3);padding-top:4px}
     .principles h3{font-size:1.02rem;font-weight:550;margin-bottom:5px}
     .principles p{font-size:14px;color:var(--ink-2);line-height:1.6;max-width:56ch}
@@ -215,7 +215,7 @@
     .skills-list{}
     .skill{display:grid;grid-template-columns:52px 1.1fr 1.4fr 132px;gap:24px;align-items:center;
       padding:18px 12px;transition:background .28s var(--ease)}
-    .skill:hover{background:var(--hover)}
+    .skill:hover{background:var(--surface)}
     @media(max-width:860px){.skill{grid-template-columns:40px 1fr;gap:6px 14px;padding:16px 4px}
       .skill .s-cat{grid-column:2}.skill .s-meter{grid-column:2}}
     .skill .s-idx{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
@@ -286,8 +286,8 @@
     .c-item{padding:26px 22px 26px 0;text-align:left;
       background:none;border:0;font:inherit;color:inherit;cursor:pointer;width:100%;
       transition:background .28s var(--ease)}
-    .c-item:hover{background:var(--hover)}
-    .c-item .c-ic{width:34px;height:34px;background:var(--hover);display:inline-flex;align-items:center;
+    .c-item:hover{background:var(--surface)}
+    .c-item .c-ic{width:34px;height:34px;background:var(--surface);display:inline-flex;align-items:center;
       justify-content:center;margin-bottom:16px;transition:background .25s,color .25s}
     .c-item:hover .c-ic{background:var(--inv-bg);color:var(--inv-ink)}
     .c-item .c-ic svg{width:17px;height:17px}
