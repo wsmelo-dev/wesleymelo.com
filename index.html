@@ -30,9 +30,10 @@
     :root{
       --paper:#F2F2F0; --paper-2:#E9E9E6; --paper-3:#E0E0DC;
       --surface:#FAFAF8;
-      --ink:#0C0C0D; --ink-2:#43434A; --ink-3:#76767E;
+      --ink:#0C0C0D; --ink-2:#43434A; --ink-3:#6B6B73;
       --line:rgba(12,12,13,.16); --line-soft:rgba(12,12,13,.09); --line-hard:rgba(12,12,13,.5);
       --inv-bg:#0C0C0D; --inv-ink:#F2F2F0;
+      --hover:#FAFAF8; --menu:#FAFAF8; --badge-bg:#0C0C0D; --badge-fg:#F2F2F0;
       --status:#2E7D5B;
       --font:"Geist","SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
       --mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
@@ -41,11 +42,12 @@
       --shadow:0 1px 2px rgba(12,12,13,.05);
     }
     [data-theme="dark"]{
-      --paper:#0C0C0D; --paper-2:#151517; --paper-3:#1E1E21;
-      --surface:#131315;
+      --paper:#0B0B0D; --paper-2:#17171A; --paper-3:#212125;
+      --surface:transparent;
       --ink:#F1F1EE; --ink-2:#B4B4B8; --ink-3:#82828A;
-      --line:rgba(241,241,238,.18); --line-soft:rgba(241,241,238,.10); --line-hard:rgba(241,241,238,.6);
+      --line:rgba(241,241,238,.14); --line-soft:rgba(241,241,238,.08); --line-hard:rgba(241,241,238,.5);
       --inv-bg:#F1F1EE; --inv-ink:#0C0C0D;
+      --hover:#161618; --menu:#141416; --badge-bg:#1F1F22; --badge-fg:#F1F1EE;
       --status:#5FBE92;
       --shadow:0 1px 2px rgba(0,0,0,.5);
     }
@@ -83,12 +85,11 @@
 
     /* ============ NAV ============ */
     .nav{position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:100;
-      background:var(--paper);border-bottom:1px solid transparent;transition:border-color .3s var(--ease)}
-    .nav.scrolled{border-bottom-color:var(--line-soft)}
+      background:var(--paper);transition:background .3s var(--ease)}
     .nav-in{max-width:var(--max);margin:0 auto;padding:0 28px;height:var(--nav-h);
       display:flex;align-items:center;gap:20px}
     .brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:600;font-size:14.5px;letter-spacing:-.01em}
-    .brand-mark{width:26px;height:26px;flex:none;border:1px solid var(--line-hard);display:inline-flex;
+    .brand-mark{width:26px;height:26px;flex:none;border:0;display:inline-flex;
       align-items:center;justify-content:center;font-size:10.5px;font-weight:600;letter-spacing:.02em;
       transition:background .25s var(--ease),color .25s}
     .brand:hover .brand-mark{background:var(--inv-bg);color:var(--inv-ink)}
@@ -100,16 +101,28 @@
     .links a:hover{color:var(--ink)}
     .links a:hover::after{transform:scaleX(1)}
     .nav-act{margin-left:auto;display:flex;align-items:center;gap:8px}
-    .tgl{border:1px solid var(--line);background:none;color:var(--ink);width:34px;height:34px;cursor:pointer;
-      display:inline-flex;align-items:center;justify-content:center;transition:background .2s,color .2s,border-color .2s}
-    .tgl:hover{background:var(--inv-bg);color:var(--inv-ink);border-color:var(--inv-bg)}
+    /* controle segmentado: só o ícone/texto, sem fundo e sem quadrado */
+    .seg{display:inline-flex;align-items:center;gap:2px}
+    .seg button{position:relative;display:inline-flex;align-items:center;justify-content:center;
+      min-width:34px;height:34px;padding:0 11px;background:none;border:0;color:var(--ink-3);
+      font-family:var(--mono);font-size:11px;letter-spacing:.14em;cursor:pointer;
+      transition:color .22s var(--ease)}
+    .seg button:hover{color:var(--ink)}
+    .seg button[aria-pressed="true"]{color:var(--ink)}
+    .seg button[aria-pressed="true"]::after{content:"";position:absolute;left:50%;bottom:3px;
+      width:3px;height:3px;border-radius:50%;background:var(--ink);transform:translateX(-50%)}
+    .seg.seg-icon button{padding:0;width:33px}
+    .seg svg{width:15px;height:15px;display:block}
+    .tgl{border:0;background:none;color:var(--ink);width:34px;height:34px;cursor:pointer;
+      display:inline-flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
+    .tgl:hover{background:var(--inv-bg);color:var(--inv-ink)}
     .burger{display:none}
     .m-panel{display:none}
     @media(max-width:720px){
       .links{display:none}
       .burger{display:inline-flex}
       .m-panel{display:block;position:fixed;top:var(--nav-h);left:16px;right:16px;z-index:99;
-        background:var(--surface);border:1px solid var(--line);padding:6px;
+        background:var(--menu);border:0;padding:6px;
         opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .22s var(--ease),transform .22s var(--ease)}
       .m-panel.open{opacity:1;transform:none;pointer-events:auto}
       .m-panel a{display:flex;justify-content:space-between;padding:13px 14px;text-decoration:none;font-size:15px;font-weight:500}
@@ -117,19 +130,19 @@
       .m-panel a span:last-child{color:var(--ink-3);font-family:var(--mono);font-size:11px}
     }
 
-    /* ============ BOTÕES (formato técnico, sem raio) ============ */
-    .btn{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 24px;
-      font-size:14.5px;font-weight:550;text-decoration:none;cursor:pointer;border:1px solid transparent;
-      border-radius:2px;white-space:nowrap;
-      transition:background .22s var(--ease),color .22s,border-color .22s,transform .18s var(--ease)}
+    /* ============ BOTÕES (sem caixa, flutuam no texto) ============ */
+    .btn{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 2px;
+      font-size:14.5px;font-weight:550;text-decoration:none;cursor:pointer;border:0;
+      background:none;white-space:nowrap;
+      transition:color .22s var(--ease),opacity .22s var(--ease),transform .18s var(--ease)}
     .btn:active{transform:translateY(1px)}
-    .btn-p{background:var(--inv-bg);color:var(--inv-ink)}
-    .btn-p:hover{opacity:.86}
-    .btn-g{background:none;color:var(--ink);border-color:var(--line)}
-    .btn-g:hover{border-color:var(--ink)}
+    .btn-p{color:var(--ink)}
+    .btn-p:hover{opacity:.66}
+    .btn-g{color:var(--ink-3)}
+    .btn-g:hover{color:var(--ink)}
     .btn .arw{transition:transform .25s var(--ease)}
     .btn:hover .arw{transform:translateX(3px)}
-    .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
+    .btn-row{display:flex;gap:26px;flex-wrap:wrap;margin-top:32px}
 
     /* ============ HERO (split editorial) ============ */
     .hero{padding:calc(var(--nav-h) + 64px) 0 0;position:relative}
@@ -151,25 +164,15 @@
     .hero h1 .mask + .mask{margin-top:-.06em}
 
     /* painel de leitura (dado real, não enfeite) */
-    .panel{border:1px solid var(--line);background:var(--surface);padding:22px 22px 18px}
-    .panel-h{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:14px;border-bottom:1px solid var(--line-soft)}
+    .panel{background:var(--surface);padding:22px 22px 18px}
+    .panel-h{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:10px}
     .panel dl{margin:0;display:grid;gap:0}
     .panel dl > div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
-      padding:11px 0;border-bottom:1px solid var(--line-soft)}
-    .panel dl > div:last-child{border-bottom:0;padding-bottom:4px}
+      padding:11px 0}
     .panel dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
     .panel dd{margin:0;font-size:13.5px;font-weight:500;text-align:right}
     .clock{font-family:var(--mono);font-size:13px;letter-spacing:.06em;font-variant-numeric:tabular-nums}
-    .orbit{position:absolute;right:-8%;top:6%;width:min(420px,52vw);aspect-ratio:1;pointer-events:none;opacity:.5}
-    .orbit .ring{fill:none;stroke:var(--line);stroke-width:1}
-    .orbit .ring.dash{stroke-dasharray:2 7}
-    .orbit .body{fill:var(--ink)}
-    @media (prefers-reduced-motion:no-preference){
-      .orbit .body{animation:orbit 26s linear infinite;transform-origin:center}
-      @keyframes orbit{to{transform:rotate(360deg)}}
-    }
-    .strip{margin-top:64px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-      overflow:hidden;padding:13px 0}
+    .strip{margin-top:64px;padding:13px 0;overflow:hidden}
     .strip-track{display:flex;gap:44px;width:max-content;animation:slide 46s linear infinite}
     .strip:hover .strip-track{animation-play-state:paused}
     .strip span{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
@@ -187,17 +190,17 @@
     @media(max-width:860px){.sec{grid-template-columns:1fr;gap:22px}}
     .sec-num{font-family:var(--mono);font-size:44px;line-height:1;color:var(--paper-3);
       letter-spacing:-.04em;user-select:none}
-    [data-theme="dark"] .sec-num{color:#1C1C1F}
+    [data-theme="dark"] .sec-num{color:#070709}
     .sec h2{font-size:clamp(1.9rem,4vw,3rem);font-weight:600;letter-spacing:-.04em}
     .sec-head{margin-bottom:44px}
     .sec-head .lede{margin-top:16px}
 
     /* ============ SOBRE ============ */
     .about{display:grid;grid-template-columns:1fr;gap:0}
-    .principles{margin-top:34px;border-top:1px solid var(--line)}
+    .principles{margin-top:34px}
     .principles li{list-style:none;display:grid;grid-template-columns:56px 1fr;gap:20px;padding:20px 0;
-      border-bottom:1px solid var(--line-soft);transition:background .3s var(--ease)}
-    .principles li:hover{background:var(--surface)}
+      transition:background .3s var(--ease)}
+    .principles li:hover{background:var(--hover)}
     .principles b{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-3);padding-top:4px}
     .principles h3{font-size:1.02rem;font-weight:550;margin-bottom:5px}
     .principles p{font-size:14px;color:var(--ink-2);line-height:1.6;max-width:56ch}
@@ -205,14 +208,14 @@
     /* ============ SKILLS (filtro real + níveis honestos) ============ */
     .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
     .fchip{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
-      border:1px solid var(--line);background:none;color:var(--ink-2);padding:8px 14px;border-radius:2px;
-      cursor:pointer;transition:background .2s,color .2s,border-color .2s}
-    .fchip:hover{border-color:var(--ink);color:var(--ink)}
-    .fchip[aria-pressed="true"]{background:var(--inv-bg);color:var(--inv-ink);border-color:var(--inv-bg)}
-    .skills-list{border-top:1px solid var(--line)}
+      border:0;background:var(--surface);color:var(--ink-2);padding:8px 14px;border-radius:2px;
+      cursor:pointer;transition:background .2s,color .2s}
+    .fchip:hover{color:var(--ink)}
+    .fchip[aria-pressed="true"]{background:var(--inv-bg);color:var(--inv-ink)}
+    .skills-list{}
     .skill{display:grid;grid-template-columns:52px 1.1fr 1.4fr 132px;gap:24px;align-items:center;
-      padding:18px 12px;border-bottom:1px solid var(--line-soft);transition:background .28s var(--ease)}
-    .skill:hover{background:var(--surface)}
+      padding:18px 12px;transition:background .28s var(--ease)}
+    .skill:hover{background:var(--hover)}
     @media(max-width:860px){.skill{grid-template-columns:40px 1fr;gap:6px 14px;padding:16px 4px}
       .skill .s-cat{grid-column:2}.skill .s-meter{grid-column:2}}
     .skill .s-idx{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
@@ -221,70 +224,73 @@
     .skill .s-meter{display:flex;align-items:center;gap:10px;justify-content:flex-end}
     .ticks{display:flex;gap:3px}
     .ticks i{width:16px;height:3px;background:var(--paper-3);display:block}
-    [data-theme="dark"] .ticks i{background:#2A2A2E}
+    [data-theme="dark"] .ticks i{background:#1B1B1E}
     .ticks i.on{background:var(--ink)}
     .skill .s-state{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
       white-space:nowrap}
     .skill.hidden{display:none}
 
     /* ============ PROJETOS (índice editorial) ============ */
-    .proj{border-top:1px solid var(--line)}
+    .proj{}
     .proj-row{display:grid;grid-template-columns:64px 1fr 300px;gap:34px;align-items:start;
-      padding:38px 12px;border-bottom:1px solid var(--line-soft);position:relative;
+      padding:38px 12px;position:relative;
       transition:background .3s var(--ease)}
-    .proj-row:hover{background:var(--surface)}
+    .proj-row:hover{background:var(--hover)}
     @media(max-width:980px){.proj-row{grid-template-columns:48px 1fr;gap:6px 20px;padding:30px 4px}
       .proj-row .p-vis{grid-column:2;margin-top:20px;max-width:420px}}
     .p-idx{font-family:var(--mono);font-size:11px;color:var(--ink-3);padding-top:5px}
     .p-name{font-size:1.45rem;font-weight:600;letter-spacing:-.03em;display:flex;align-items:center;gap:12px}
     .p-name .arrow{opacity:0;transform:translateX(-6px);transition:opacity .25s var(--ease),transform .25s var(--ease)}
     .proj-row:hover .p-name .arrow{opacity:1;transform:none}
+    /* link esticado: a linha inteira do projeto leva à demonstração */
+    .p-title{color:inherit;text-decoration:none;outline-offset:6px;display:inline-flex;align-items:center;gap:12px}
+    .p-title::after{content:"";position:absolute;inset:0;z-index:1;cursor:pointer}
+    .p-link{position:relative;z-index:2}
     .p-desc{margin-top:10px;font-size:14.5px;color:var(--ink-2);line-height:1.65;max-width:56ch}
-    .p-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;align-items:center}
+    .p-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;align-items:center}
     .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
-      border:1px solid var(--line);color:var(--ink-2);padding:5px 10px;border-radius:2px}
-    .tag.concept{border-color:var(--line-hard);color:var(--ink)}
+      color:var(--ink-3);padding:0}
+    .tag.concept{background:var(--badge-bg);color:var(--badge-fg);padding:5px 10px;border-radius:2px}
     .p-link{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:13.5px;font-weight:550;
-      color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line-hard);padding-bottom:3px;
+      color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:3px;
       transition:gap .25s var(--ease),border-color .2s}
     .p-link:hover{gap:12px;border-color:var(--ink)}
-    .p-vis{border:1px solid var(--line);background:var(--surface);overflow:hidden;transition:transform .4s var(--ease)}
+    .p-vis{background:var(--surface);overflow:hidden;transition:transform .4s var(--ease)}
     .proj-row:hover .p-vis{transform:translateY(-3px)}
-    .vis-bar{display:flex;align-items:center;gap:5px;padding:9px 12px;border-bottom:1px solid var(--line-soft)}
+    .vis-bar{display:flex;align-items:center;gap:5px;padding:9px 12px}
     .vis-bar i{width:7px;height:7px;background:var(--line);display:block}
     .vis-bar span{margin-left:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ink-3)}
     .vis-body{padding:16px}
     .v-row{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12.5px;
-      padding:8px 0;border-bottom:1px solid var(--line-soft);color:var(--ink-2)}
-    .v-row:last-child{border-bottom:0}
+      padding:8px 0;color:var(--ink-2)}
     .v-row b{font-weight:550;color:var(--ink)}
     .v-bars{display:flex;align-items:flex-end;gap:5px;height:46px;margin-bottom:12px}
     .v-bars i{flex:1;background:var(--paper-3);min-height:6px}
     .v-bars i.on{background:var(--ink)}
-    [data-theme="dark"] .v-bars i{background:#2A2A2E}
+    [data-theme="dark"] .v-bars i{background:#1B1B1E}
     .v-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .v-col{border:1px solid var(--line-soft);padding:8px;min-height:66px}
+    .v-col{background:var(--paper-2);padding:8px;min-height:66px}
     .v-col h5{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
       margin:0 0 7px;font-weight:400}
     .v-col span{display:block;height:5px;background:var(--paper-3);margin-bottom:5px}
-    [data-theme="dark"] .v-col span{background:#2A2A2E}
+    [data-theme="dark"] .v-col span{background:#1B1B1E}
     .v-col span.on{background:var(--ink)}
     .v-hero{text-align:center;padding:18px 14px 20px}
     .v-hero b{display:block;font-size:14px;letter-spacing:-.02em;margin-bottom:6px}
     .v-hero p{font-size:11.5px;color:var(--ink-3);margin-bottom:12px}
     .v-hero em{display:inline-block;font-style:normal;font-size:11.5px;font-weight:550;
-      border:1px solid var(--line-hard);padding:6px 16px}
+      background:var(--inv-bg);color:var(--inv-ink);padding:6px 16px}
 
     /* ============ CONTATO ============ */
-    .contact-list{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);margin-top:40px}
+    .contact-list{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:40px}
     @media(max-width:720px){.contact-list{grid-template-columns:1fr}}
-    .c-item{padding:26px 22px 26px 0;border-bottom:1px solid var(--line-soft);text-align:left;
+    .c-item{padding:26px 22px 26px 0;text-align:left;
       background:none;border:0;font:inherit;color:inherit;cursor:pointer;width:100%;
       transition:background .28s var(--ease)}
-    .c-item:hover{background:var(--surface)}
-    .c-item .c-ic{width:34px;height:34px;border:1px solid var(--line);display:inline-flex;align-items:center;
-      justify-content:center;margin-bottom:16px;transition:background .25s,color .25s,border-color .25s}
-    .c-item:hover .c-ic{background:var(--inv-bg);color:var(--inv-ink);border-color:var(--inv-bg)}
+    .c-item:hover{background:var(--hover)}
+    .c-item .c-ic{width:34px;height:34px;background:var(--hover);display:inline-flex;align-items:center;
+      justify-content:center;margin-bottom:16px;transition:background .25s,color .25s}
+    .c-item:hover .c-ic{background:var(--inv-bg);color:var(--inv-ink)}
     .c-item .c-ic svg{width:17px;height:17px}
     .c-item b{display:block;font-size:15px;font-weight:550;margin-top:2px}
     .c-item small{display:block;font-size:12.5px;color:var(--ink-3);margin-top:4px;word-break:break-all}
@@ -299,7 +305,7 @@
     @keyframes toastIn{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
 
     /* ============ RODAPÉ ============ */
-    footer{border-top:1px solid var(--line);padding:26px 0;position:relative;z-index:1}
+    footer{padding:26px 0;position:relative;z-index:1}
     .foot{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--ink-3)}
     .foot .grow{flex:1}
     .foot a,.foot button{color:var(--ink-3);text-decoration:none;background:none;border:0;font-size:12.5px;
@@ -344,30 +350,120 @@
 
     /* ================= DADOS ================= */
     const EMAIL = "wesleysantosmelo2022@gmail.com";
-    const TICKER = ["n8n","Automação","HTTP","JavaScript","HTML","CSS","Git","Helpdesk","WhatsApp","Integrações","Dados","Sistemas"];
+    const LANG_KEY = "wsm.lang";
+
+    /* Texto do site em dois idiomas. Uma chave por linha, sem mistura de idiomas. */
+    const COPY = {
+      pt: {
+        lang:"pt-BR", locale:"pt_BR",
+        title:"Wesley Melo - Helpdesk, sistemas e automação",
+        desc:"Portfólio de Wesley Melo: auxiliar de helpdesk e sistemas, aprendendo automação com n8n e programação.",
+        ogDesc:"Helpdesk e sistemas no dia a dia, automação com n8n e programação em estudo.",
+        nav:{sobre:"Sobre",skills:"Habilidades",projetos:"Projetos",contato:"Contato",
+          lang:"Idioma",theme:"Tema",openMenu:"Abrir menu",closeMenu:"Fechar menu",
+          light:"Modo claro",dark:"Modo escuro",skip:"Pular para o conteúdo"},
+        hero:{kicker:"Atuo em helpdesk e sistemas · automação em estudo",
+          role:"Auxiliar de helpdesk e sistemas",
+          lede:"Trabalho com suporte e sistemas e uso automação com n8n para tirar tarefas repetitivas do caminho. Estudo programação para construir soluções cada vez mais completas.",
+          cta1:"Ver projetos",cta2:"Entrar em contato"},
+        panel:{title:"Ficha",foco:"Foco",focoVal:"Automação com n8n",base:"Base",baseVal:"Helpdesk e sistemas",
+          estuda:"Estudando",estudaVal:"Programação",projetos:"Projetos",projetosVal:"no portfólio",
+          interesse:"Interesse",interesseVal:"Automação e dados"},
+        ticker:["n8n","Automação","HTTP","JavaScript","HTML","CSS","Git","Helpdesk","WhatsApp","Integrações","Dados","Sistemas"],
+        about:{title:"Sobre mim",
+          lede:"Sou o Wesley. Gosto de tecnologia, de entender como as coisas funcionam por dentro e de resolver problemas do dia a dia com automação.",
+          p1:"Atuo em helpdesk e sistemas e comecei a automatizar processos repetitivos com n8n: fluxos que consultam dados, aplicam regras e enviam o resultado para quem precisa. Também estudo programação, com HTML, CSS e JavaScript, para entender o que acontece por trás de cada etapa.",
+          p2:"Estou no começo da carreira em tecnologia e prefiro dizer isso com clareza: o que trago é método, curiosidade e vontade de resolver problemas de verdade. Cada automação que construo é também uma chance de aprender algo novo."},
+        principles:[
+          {t:"Conhecer os dados antes de automatizar",d:"Entender o formato real da informação é o que evita fluxos que não encontram nada para processar."},
+          {t:"Regras claras",d:"Definir janela de tempo, fuso horário e exceções antes de disparar qualquer ação."},
+          {t:"Pensar em quem recebe",d:"Um aviso tecnicamente correto ainda pode ser inútil. O texto final precisa ser fácil de agir."},
+          {t:"Erro como pista",d:"Quando a automação falha, olhar o que entra em cada etapa costuma resolver sem refazer tudo."}
+        ],
+        skills:{title:"Habilidades",
+          lede:"O que já uso no dia a dia e o que estou aprofundando. Os níveis são uma autoavaliação honesta, não um número inventado.",
+          all:"Todas",level:"Nível autoavaliado"},
+        projects:{title:"Projetos",
+          lede:"Uma automação que está em uso no dia a dia, criada para resolver um problema real e tirar uma tarefa manual do caminho.",
+          more:"Ver mais detalhes",openDemo:"Ver a demonstração de",demo:"Demonstrativo",
+          foot:"Novos projetos entram por aqui conforme avanço. Mais trabalhos ficam no meu perfil do GitHub."},
+        contact:{title:"Entre em contato",
+          lede:"Se quiser falar sobre automação, sistemas ou um processo que pode ser automatizado, escreva. O clique no ícone do e-mail copia o endereço.",
+          email:"E-mail",copied:"Copiado",github:"GitHub",linkedin:"LinkedIn",soon:"Perfil em breve",
+          copyAria:"Copiar e-mail",selectToast:"Selecione o e-mail e pressione Ctrl+C"},
+        footer:{status:"● helpdesk · automação",top:"Voltar ao topo"}
+      },
+      en: {
+        lang:"en", locale:"en_US",
+        title:"Wesley Melo - Helpdesk, systems and automation",
+        desc:"Wesley Melo's portfolio: helpdesk and systems assistant, learning automation with n8n and programming.",
+        ogDesc:"Helpdesk and systems on a daily basis, automation with n8n, programming under study.",
+        nav:{sobre:"About",skills:"Skills",projetos:"Projects",contato:"Contact",
+          lang:"Language",theme:"Theme",openMenu:"Open menu",closeMenu:"Close menu",
+          light:"Light mode",dark:"Dark mode",skip:"Skip to content"},
+        hero:{kicker:"I work in helpdesk and systems · automation under study",
+          role:"Helpdesk and systems assistant",
+          lede:"I work with support and systems and use n8n automation to take repetitive work off the table. I study programming to build ever more complete solutions.",
+          cta1:"See projects",cta2:"Get in touch"},
+        panel:{title:"Profile",foco:"Focus",focoVal:"Automation with n8n",base:"Base",baseVal:"Helpdesk and systems",
+          estuda:"Studying",estudaVal:"Programming",projetos:"Projects",projetosVal:"in the portfolio",
+          interesse:"Interest",interesseVal:"Automation and data"},
+        ticker:["n8n","Automation","HTTP","JavaScript","HTML","CSS","Git","Helpdesk","WhatsApp","Integrations","Data","Systems"],
+        about:{title:"About me",
+          lede:"I am Wesley. I like technology, understanding how things work on the inside, and solving day to day problems with automation.",
+          p1:"I work in helpdesk and systems and started automating repetitive processes with n8n: flows that query data, apply rules and deliver the result to whoever needs it. I also study programming, with HTML, CSS and JavaScript, to understand what happens behind every step.",
+          p2:"I am early in my career in technology and I prefer to say that plainly: what I bring is method, curiosity and the will to solve real problems. Every automation I build is also a chance to learn something new."},
+        principles:[
+          {t:"Know the data before automating",d:"Understanding the real shape of the information is what keeps flows from finding nothing to process."},
+          {t:"Clear rules",d:"Define the time window, the time zone and the exceptions before triggering any action."},
+          {t:"Think about who receives it",d:"A technically correct alert can still be useless. The final text has to be easy to act on."},
+          {t:"Errors as clues",d:"When the automation fails, looking at what enters each step usually solves it without rebuilding everything."}
+        ],
+        skills:{title:"Skills",
+          lede:"What I use daily and what I am going deeper on. The levels are an honest self assessment, not an invented number.",
+          all:"All",level:"Self assessed level"},
+        projects:{title:"Projects",
+          lede:"One automation that is in daily use, built to solve a real problem and take a manual task off the table.",
+          more:"See the details",openDemo:"Open the demo of",demo:"Demonstrative",
+          foot:"New projects land here as I progress. More work is on my GitHub profile."},
+        contact:{title:"Get in touch",
+          lede:"If you want to talk about automation, systems or a process that could be automated, write to me. Clicking the email icon copies the address.",
+          email:"Email",copied:"Copied",github:"GitHub",linkedin:"LinkedIn",soon:"Profile coming soon",
+          copyAria:"Copy email",selectToast:"Select the email address and press Ctrl+C"},
+        footer:{status:"● helpdesk · automation",top:"Back to top"}
+      }
+    };
+
+    /* Habilidades: nomes técnicos não mudam, rótulos sim */
     const SKILLS = [
-      { n:"n8n", cat:"Automação", state:"Praticando", lvl:3 },
-      { n:"HTTP e APIs", cat:"Automação", state:"Praticando", lvl:3 },
-      { n:"Tratamento de dados", cat:"Automação", state:"Praticando", lvl:3 },
-      { n:"WhatsApp", cat:"Automação", state:"Estudando", lvl:2 },
-      { n:"JavaScript", cat:"Linguagem", state:"Estudando", lvl:2 },
-      { n:"Programação", cat:"Linguagem", state:"Estudando", lvl:2 },
-      { n:"HTML", cat:"Base", state:"Base sólida", lvl:4 },
-      { n:"CSS", cat:"Base", state:"Base sólida", lvl:4 },
-      { n:"Git", cat:"Fluxo", state:"Praticando", lvl:3 },
-      { n:"Helpdesk", cat:"Sistemas", state:"Atuação", lvl:4 }
+      { n:"n8n", cat:"automacao", state:"praticando", lvl:3 },
+      { n:"HTTP e APIs", nEn:"HTTP & APIs", cat:"automacao", state:"praticando", lvl:3 },
+      { n:"Tratamento de dados", nEn:"Data handling", cat:"automacao", state:"praticando", lvl:3 },
+      { n:"WhatsApp", cat:"automacao", state:"estudando", lvl:2 },
+      { n:"JavaScript", cat:"linguagem", state:"estudando", lvl:2 },
+      { n:"Programação", nEn:"Programming", cat:"linguagem", state:"estudando", lvl:2 },
+      { n:"HTML", cat:"base", state:"base", lvl:4 },
+      { n:"CSS", cat:"base", state:"base", lvl:4 },
+      { n:"Git", cat:"fluxo", state:"praticando", lvl:3 },
+      { n:"Helpdesk", cat:"sistemas", state:"atuacao", lvl:4 }
     ];
+    const CATS = {
+      pt:{automacao:"Automação",linguagem:"Linguagem",base:"Base",fluxo:"Fluxo",sistemas:"Sistemas"},
+      en:{automacao:"Automation",linguagem:"Language",base:"Base",fluxo:"Workflow",sistemas:"Systems"}
+    };
+    const STATES = {
+      pt:{praticando:"Praticando",estudando:"Estudando",base:"Base sólida",atuacao:"Atuação"},
+      en:{praticando:"Practicing",estudando:"Studying",base:"Solid base",atuacao:"Working in"}
+    };
     const PROJECTS = [
-      { name:"Alerta de vencimento de certificados", kind:"Automação em uso", demo:"certificados.html", badge:"Em uso",
-        desc:"Fluxo no n8n que roda todo dia, consulta os certificados digitais, encontra os que vencem em até 7 dias, ignora os vencidos e envia o aviso pelo WhatsApp com um nome fácil de reconhecer.",
-        tech:["n8n","HTTP","JavaScript","WhatsApp"], vis:"flow" }
+      { key:"certificados", vis:"flow", demo:"certificados.html", tech:["n8n","HTTP","JavaScript","WhatsApp"] }
     ];
-    const PRINCIPLES = [
-      { t:"Conhecer os dados antes de automatizar", d:"Entender o formato real da informação é o que evita fluxos que não encontram nada para processar." },
-      { t:"Regras claras", d:"Definir janela de tempo, fuso horário e exceções antes de disparar qualquer ação." },
-      { t:"Pensar em quem recebe", d:"Um aviso tecnicamente correto ainda pode ser inútil. O texto final precisa ser fácil de agir." },
-      { t:"Erro como pista", d:"Quando a automação falha, olhar o que entra em cada etapa costuma resolver sem refazer tudo." }
-    ];
+    const PROJECT_COPY = {
+      pt:{certificados:{name:"Alerta de vencimento de certificados",kind:"Automação em uso",badge:"Em uso",
+        desc:"Fluxo no n8n que roda todo dia, consulta os certificados digitais, encontra os que vencem em até 7 dias, ignora os vencidos e envia o aviso pelo WhatsApp com um nome fácil de reconhecer."}},
+      en:{certificados:{name:"Certificate expiry alerts",kind:"Automation in use",badge:"In use",
+        desc:"An n8n flow that runs every day, queries the digital certificates, finds the ones expiring within 7 days, skips the ones already expired and sends the alert over WhatsApp with a name that is easy to recognise."}}
+    };
 
     /* ================= ÍCONES ================= */
     const Icon = ({d,s=18}) => (<svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d}/></svg>);
@@ -480,6 +576,7 @@
     /* ================= APP ================= */
     function App(){
       const [theme,setTheme] = useState(document.documentElement.dataset.theme || "light");
+      const [lang,setLang] = useState(()=>{ try{ return localStorage.getItem(LANG_KEY) || "pt"; }catch(e){ return "pt"; } });
       const [scrolled,setScrolled] = useState(false);
       const [menuOpen,setMenuOpen] = useState(false);
       const [filter,setFilter] = useState("todos");
@@ -488,15 +585,30 @@
       const [now,setNow] = useState(()=>new Date());
       const menuBtnRef = useRef(null);
 
+      const t = COPY[lang] || COPY.pt;
+      const tCats = CATS[lang] || CATS.pt;
+      const tStates = STATES[lang] || STATES.pt;
+
       useEffect(()=>{ document.documentElement.dataset.theme = theme; try{ localStorage.setItem("wsm.theme", theme); }catch(e){} },[theme]);
+      useEffect(()=>{
+        document.documentElement.lang = t.lang;
+        document.title = t.title;
+        const meta = (sel,attr,val)=>{ const m = document.querySelector(sel); if(m) m.setAttribute(attr,val); };
+        meta('meta[name="description"]',"content",t.desc);
+        meta('meta[property="og:title"]',"content",t.title);
+        meta('meta[property="og:description"]',"content",t.ogDesc);
+        meta('meta[property="og:locale"]',"content",t.locale);
+        const skip = document.querySelector(".skip"); if(skip) skip.textContent = t.nav.skip;
+        try{ localStorage.setItem(LANG_KEY, lang); }catch(e){}
+      },[lang, t]);
       useEffect(()=>{
         const onS = ()=>setScrolled(window.scrollY > 8);
         onS(); window.addEventListener("scroll", onS, {passive:true});
         return ()=>window.removeEventListener("scroll", onS);
       },[]);
       useEffect(()=>{
-        const t = setInterval(()=>setNow(new Date()), 1000);
-        return ()=>clearInterval(t);
+        const timer = setInterval(()=>setNow(new Date()), 1000);
+        return ()=>clearInterval(timer);
       },[]);
       useEffect(()=>{
         const onKey = e => { if(e.key === "Escape") setMenuOpen(false); };
@@ -504,14 +616,14 @@
         return ()=>document.removeEventListener("keydown", onKey);
       },[]);
 
-      const clock = useMemo(()=> now.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit",second:"2-digit"}),[now]);
+      const clock = useMemo(()=> now.toLocaleTimeString(lang==="pt"?"pt-BR":"en-GB",{hour:"2-digit",minute:"2-digit",second:"2-digit"}),[now, lang]);
       const cats = useMemo(()=>["todos", ...Array.from(new Set(SKILLS.map(s=>s.cat)))],[]);
       const shown = useMemo(()=> filter==="todos" ? SKILLS : SKILLS.filter(s=>s.cat===filter),[filter]);
 
       const copyEmail = async () => {
         const done = () => {
           setCopied(true);
-          setToast(EMAIL + " copiado");
+          setToast(EMAIL + " " + t.contact.copied.toLowerCase());
           setTimeout(()=>{ setCopied(false); setToast(""); }, 2600);
         };
         try{
@@ -529,7 +641,7 @@
           }catch(e2){
             const f = document.getElementById("email-fallback");
             if(f){ f.hidden = false; f.focus(); f.select(); }
-            setToast("Selecione o e-mail e pressione Ctrl+C");
+            setToast(t.contact.selectToast);
             setTimeout(()=>setToast(""),4000);
           }
         }
@@ -542,24 +654,30 @@
 
           <header className={"nav"+(scrolled?" scrolled":"")}>
             <div className="nav-in">
-              <a className="brand" href="#inicio" aria-label="Wesley Melo, início">
+              <a className="brand" href="#inicio" aria-label="Wesley Melo">
                 <span className="brand-mark" aria-hidden="true">WM</span>Wesley Melo
               </a>
               <nav aria-label="Navegação principal">
                 <ul className="links">
-                  <li><a href="#sobre">Sobre</a></li>
-                  <li><a href="#skills">Habilidades</a></li>
-                  <li><a href="#projetos">Projetos</a></li>
-                  <li><a href="#contato">Contato</a></li>
+                  <li><a href="#sobre">{t.nav.sobre}</a></li>
+                  <li><a href="#skills">{t.nav.skills}</a></li>
+                  <li><a href="#projetos">{t.nav.projetos}</a></li>
+                  <li><a href="#contato">{t.nav.contato}</a></li>
                 </ul>
               </nav>
               <div className="nav-act">
-                <button type="button" className="tgl" onClick={()=>setTheme(t=>t==="light"?"dark":"light")}
-                  aria-label={theme==="light"?"Ativar modo escuro":"Ativar modo claro"} title={theme==="light"?"Modo escuro":"Modo claro"}>
-                  {theme==="light" ? <Icon d={P.moon} s={16}/> : <Icon d={P.sun} s={16}/>}
-                </button>
+                <div className="seg" role="group" aria-label={t.nav.lang}>
+                  <button type="button" onClick={()=>setLang("pt")} aria-pressed={lang==="pt"} title="Português" lang="pt-BR">PT</button>
+                  <button type="button" onClick={()=>setLang("en")} aria-pressed={lang==="en"} title="English" lang="en">EN</button>
+                </div>
+                <div className="seg seg-icon" role="group" aria-label={t.nav.theme}>
+                  <button type="button" onClick={()=>setTheme("light")} aria-pressed={theme==="light"}
+                    aria-label={t.nav.light} title={t.nav.light}><Icon d={P.sun} s={15}/></button>
+                  <button type="button" onClick={()=>setTheme("dark")} aria-pressed={theme==="dark"}
+                    aria-label={t.nav.dark} title={t.nav.dark}><Icon d={P.moon} s={15}/></button>
+                </div>
                 <button ref={menuBtnRef} type="button" className="tgl burger" onClick={()=>setMenuOpen(v=>!v)}
-                  aria-expanded={menuOpen} aria-controls="menu-mobile" aria-label={menuOpen?"Fechar menu":"Abrir menu"}>
+                  aria-expanded={menuOpen} aria-controls="menu-mobile" aria-label={menuOpen?t.nav.closeMenu:t.nav.openMenu}>
                   {menuOpen?"✕":"☰"}
                 </button>
               </div>
@@ -568,7 +686,7 @@
 
           <div id="menu-mobile" className={"m-panel"+(menuOpen?" open":"")} hidden={!menuOpen}>
             <nav aria-label="Navegação móvel">
-              {[["sobre","Sobre","01"],["skills","Habilidades","02"],["projetos","Projetos","03"],["contato","Contato","04"]].map(([id,l,n])=>(
+              {[["sobre",t.nav.sobre,"01"],["skills",t.nav.skills,"02"],["projetos",t.nav.projetos,"03"],["contato",t.nav.contato,"04"]].map(([id,l,n])=>(
                 <a key={id} href={"#"+id} onClick={()=>setMenuOpen(false)}>{l}<span>{n}</span></a>
               ))}
             </nav>
@@ -581,45 +699,40 @@
               <div className="wrap">
                 <div className="hero-grid">
                   <div>
-                    <p className="kicker"><span className="dot" aria-hidden="true"/><span className="mono">Atuo em helpdesk e sistemas · automação em estudo</span></p>
+                    <p className="kicker"><span className="dot" aria-hidden="true"/><span className="mono">{t.hero.kicker}</span></p>
                     <h1 id="hero-title">
                       <MaskTitle as="span" text="Wesley" className="l1"/>
                       <MaskTitle as="span" text="Melo" className="l2"/>
                     </h1>
-                    <p className="role">Auxiliar de helpdesk e sistemas</p>
-                    <p className="lede">Trabalho com suporte e sistemas e uso automação com n8n para tirar tarefas repetitivas do caminho. Estudo programação para construir soluções cada vez mais completas.</p>
+                    <p className="role">{t.hero.role}</p>
+                    <p className="lede">{t.hero.lede}</p>
                     <div className="btn-row">
-                      <a className="btn btn-p" href="#projetos">Ver projetos <span className="arw" aria-hidden="true">↓</span></a>
-                      <a className="btn btn-g" href="#contato">Entrar em contato <span className="arw" aria-hidden="true">→</span></a>
+                      <a className="btn btn-p" href="#projetos">{t.hero.cta1} <span className="arw" aria-hidden="true">↓</span></a>
+                      <a className="btn btn-g" href="#contato">{t.hero.cta2} <span className="arw" aria-hidden="true">→</span></a>
                     </div>
                   </div>
 
-                  <aside className="panel" aria-label="Resumo do perfil">
+                  <aside className="panel" aria-label={t.panel.title}>
                     <div className="panel-h">
-                      <span className="mono">Ficha</span>
+                      <span className="mono">{t.panel.title}</span>
                       <span className="clock">{clock}</span>
                     </div>
                     <dl>
                       <div><dt>Foco</dt><dd>Automação com n8n</dd></div>
-                      <div><dt>Base</dt><dd>Helpdesk e sistemas</dd></div>
-                      <div><dt>Estudando</dt><dd>Programação</dd></div>
-                      <div><dt>Projetos</dt><dd>{PROJECTS.length} no portfólio</dd></div>
-                      <div><dt>Interesse</dt><dd>Automação e dados</dd></div>
+                      <div><dt>{t.panel.base}</dt><dd>{t.panel.baseVal}</dd></div>
+                      <div><dt>{t.panel.estuda}</dt><dd>{t.panel.estudaVal}</dd></div>
+                      <div><dt>{t.panel.projetos}</dt><dd>{PROJECTS.length} {t.panel.projetosVal}</dd></div>
+                      <div><dt>{t.panel.interesse}</dt><dd>{t.panel.interesseVal}</dd></div>
                     </dl>
                   </aside>
                 </div>
 
                 <div className="strip" aria-hidden="true">
                   <div className="strip-track">
-                    {TICKER.concat(TICKER).map((t,i)=>(<span key={i}>{t}</span>))}
+                    {t.ticker.concat(t.ticker).map((w,i)=>(<span key={i}>{w}</span>))}
                   </div>
                 </div>
               </div>
-              <svg className="orbit" viewBox="0 0 200 200" aria-hidden="true">
-                <circle className="ring" cx="100" cy="100" r="96"/>
-                <circle className="ring dash" cx="100" cy="100" r="68"/>
-                <g className="body"><circle cx="196" cy="100" r="2.6"/></g>
-              </svg>
             </section>
 
             {/* ===== SOBRE ===== */}
@@ -629,15 +742,15 @@
                   <div className="sec-num" aria-hidden="true">01</div>
                   <div>
                     <div className="sec-head">
-                      <MaskTitle text="Sobre mim" id="sobre-title"/>
-                      <p className="lede">Sou o Wesley. Gosto de tecnologia, de entender como as coisas funcionam por dentro e de resolver problemas do dia a dia com automação.</p>
+                      <MaskTitle text={t.about.title} id="sobre-title"/>
+                      <p className="lede">{t.about.lede}</p>
                     </div>
                     <div className="about">
                       <div>
-                        <p className="lede">Atuo em helpdesk e sistemas e comecei a automatizar processos repetitivos com n8n: fluxos que consultam dados, aplicam regras e enviam o resultado para quem precisa. Também estudo programação, com HTML, CSS e JavaScript, para entender o que acontece por trás de cada etapa.</p>
-                        <p className="lede" style={{marginTop:"16px"}}>Estou no começo da carreira em tecnologia e prefiro dizer isso com clareza: o que trago é método, curiosidade e vontade de resolver problemas de verdade. Cada automação que construo é também uma chance de aprender algo novo.</p>
+                        <p className="lede">{t.about.p1}</p>
+                        <p className="lede" style={{marginTop:"16px"}}>{t.about.p2}</p>
                         <ol className="principles">
-                          {PRINCIPLES.map((p,i)=>(
+                          {t.principles.map((p,i)=>(
                             <Reveal as="li" key={p.t} delay={i*70}>
                               <b>0{i+1}</b>
                               <div><h3>{p.t}</h3><p>{p.d}</p></div>
@@ -658,14 +771,14 @@
                   <div className="sec-num" aria-hidden="true">02</div>
                   <div>
                     <div className="sec-head">
-                      <MaskTitle text="Habilidades" id="skills-title"/>
-                      <p className="lede">O que já uso no dia a dia e o que estou aprofundando. Os níveis são uma autoavaliação honesta, não um número inventado.</p>
+                      <MaskTitle text={t.skills.title} id="skills-title"/>
+                      <p className="lede">{t.skills.lede}</p>
                     </div>
                     <Rule/>
-                    <div className="filters" role="group" aria-label="Filtrar habilidades por categoria">
+                    <div className="filters" role="group" aria-label={t.skills.title}>
                       {cats.map(c=>(
                         <button key={c} type="button" className="fchip" aria-pressed={filter===c} onClick={()=>setFilter(c)}>
-                          {c==="todos" ? "Todas" : c}
+                          {c==="todos" ? t.skills.all : tCats[c]}
                         </button>
                       ))}
                     </div>
@@ -673,11 +786,11 @@
                       {shown.map((s,i)=>(
                         <Reveal className="skill" key={s.n} delay={Math.min(i*45,320)}>
                           <span className="s-idx">{String(i+1).padStart(2,"0")}</span>
-                          <span className="s-name">{s.n}</span>
-                          <span className="s-cat">{s.cat}</span>
+                          <span className="s-name">{lang==="en" && s.nEn ? s.nEn : s.n}</span>
+                          <span className="s-cat">{tCats[s.cat]}</span>
                           <span className="s-meter">
-                            <span className="s-state">{s.state}</span>
-                            <span className="ticks" role="img" aria-label={"Nível autoavaliado: " + s.lvl + " de 4"}>
+                            <span className="s-state">{tStates[s.state]}</span>
+                            <span className="ticks" role="img" aria-label={t.skills.level+": "+s.lvl+" de 4"}>
                               {[0,1,2,3].map(k=>(<i key={k} className={k<s.lvl?"on":""}/>))}
                             </span>
                           </span>
@@ -696,33 +809,40 @@
                   <div className="sec-num" aria-hidden="true">03</div>
                   <div>
                     <div className="sec-head">
-                      <MaskTitle text="Projetos" id="projetos-title"/>
-                      <p className="lede">Uma automação que está em uso no dia a dia, criada para resolver um problema real e tirar uma tarefa manual do caminho.</p>
+                      <MaskTitle text={t.projects.title} id="projetos-title"/>
+                      <p className="lede">{t.projects.lede}</p>
                     </div>
                     <div className="proj">
-                      {PROJECTS.map((p,i)=>(
-                        <Reveal className="proj-row" key={p.name} delay={i*60}>
+                      {PROJECTS.map((p,i)=>{
+                        const pc = (PROJECT_COPY[lang] || PROJECT_COPY.pt)[p.key];
+                        return (
+                        <Reveal className="proj-row" key={p.key} delay={i*60}>
                           <span className="p-idx">{String(i+1).padStart(2,"0")}</span>
                           <div>
-                            <h3 className="p-name">{p.name}<span className="arrow" aria-hidden="true">→</span></h3>
-                            <p className="p-desc">{p.desc}</p>
+                            <h3 className="p-name">
+                              <a className="p-title" href={p.demo} aria-label={t.projects.openDemo+" "+pc.name}>
+                                {pc.name}<span className="arrow" aria-hidden="true">→</span>
+                              </a>
+                            </h3>
+                            <p className="p-desc">{pc.desc}</p>
                             <div className="p-meta">
-                              <span className="tag concept">{p.badge || "Demonstrativo"}</span>
-                              {p.tech.map(t=>(<span className="tag" key={t}>{t}</span>))}
+                              <span className="tag concept">{pc.badge || t.projects.demo}</span>
+                              {p.tech.map(x=>(<span className="tag" key={x}>{x}</span>))}
                             </div>
                             {p.demo
-                              ? <a className="p-link" href={p.demo} aria-label={"Ver mais detalhes de "+p.name}>
-                                  Ver mais detalhes <span aria-hidden="true">→</span>
+                              ? <a className="p-link" href={p.demo} aria-label={t.projects.openDemo+" "+pc.name}>
+                                  {t.projects.more} <span aria-hidden="true">→</span>
                                 </a>
                               : <p className="p-desc" style={{marginTop:"16px",color:"var(--ink-3)",fontSize:"13.5px"}}>Fluxo de uso interno, sem demonstração pública.</p>}
                           </div>
                           <div className="p-vis"><Preview type={p.vis}/></div>
                         </Reveal>
-                      ))}
+                        );
+                      })}
                     </div>
                     <Reveal delay={80}>
                       <p className="lede" style={{marginTop:"28px",fontSize:"14px"}}>
-                        Novos projetos entram por aqui conforme avanço. Mais trabalhos ficam no meu perfil do GitHub.
+                        {t.projects.foot}
                       </p>
                     </Reveal>
                   </div>
@@ -737,32 +857,32 @@
                   <div className="sec-num" aria-hidden="true">04</div>
                   <div>
                     <div className="sec-head">
-                      <MaskTitle text="Entre em contato" id="contato-title"/>
-                      <p className="lede">Se quiser falar sobre automação, sistemas ou um processo que pode ser automatizado, escreva. O clique no ícone do e-mail copia o endereço.</p>
+                      <MaskTitle text={t.contact.title} id="contato-title"/>
+                      <p className="lede">{t.contact.lede}</p>
                     </div>
                     <div className="contact-list">
-                      <button type="button" className="c-item" onClick={copyEmail} aria-label={"Copiar e-mail: "+EMAIL}>
+                      <button type="button" className="c-item" onClick={copyEmail} aria-label={t.contact.copyAria+": "+EMAIL}>
                         <span className="c-ic" aria-hidden="true">{copied ? <Icon d={P.check} s={16}/> : <Icon d={P.mail} s={16}/>}</span>
-                        <b>E-mail</b>
-                        <small>{copied ? "Copiado ✓" : EMAIL}</small>
+                        <b>{t.contact.email}</b>
+                        <small>{copied ? t.contact.copied+" ✓" : EMAIL}</small>
                       </button>
                       <a className="c-item" href="https://github.com/wsmelo-dev" target="_blank" rel="noopener noreferrer" aria-label="Abrir o GitHub de Wesley Melo">
                         <span className="c-ic" aria-hidden="true">
                           <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
                         </span>
-                        <b>GitHub</b>
+                        <b>{t.contact.github}</b>
                         <small>github.com/wsmelo-dev</small>
                       </a>
-                      <span className="c-item" aria-disabled="true" aria-label="LinkedIn, link em breve">
+                      <span className="c-item" aria-disabled="true" aria-label={t.contact.linkedin+", "+t.contact.soon}>
                         <span className="c-ic" aria-hidden="true">
                           <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
                         </span>
-                        <b>LinkedIn</b>
-                        <small>Perfil em breve</small>
+                        <b>{t.contact.linkedin}</b>
+                        <small>{t.contact.soon}</small>
                       </span>
                     </div>
                     <input id="email-fallback" hidden readOnly value={EMAIL}
-                      onFocus={(e)=>e.target.select()} aria-label="Endereço de e-mail para copiar manualmente"/>
+                      onFocus={(e)=>e.target.select()} aria-label={t.contact.copyAria}/>
                   </div>
                 </div>
               </div>
@@ -772,9 +892,9 @@
           <footer>
             <div className="wrap foot">
               <span>© 2026 Wesley Melo</span>
-              <span className="mono status">● helpdesk · automação</span>
+              <span className="mono status">{t.footer.status}</span>
               <span className="grow"/>
-              <a href="#inicio">Voltar ao topo <span aria-hidden="true">↑</span></a>
+              <a href="#inicio">{t.footer.top} <span aria-hidden="true">↑</span></a>
             </div>
           </footer>
           </div>

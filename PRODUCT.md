@@ -1,16 +1,32 @@
-# PRODUCT.md
+# PRODUCT.md — Portfólio Wesley Melo
 
 ## O que é
-Site one-page de uma agência brasileira de landing pages de alta conversão.
+Site pessoal de uma página que apresenta a trajetória de Wesley Melo na área de helpdesk, sistemas e automação, com um estudo de caso técnico em página separada (`certificados.html`).
 
-## Público
-Dono de negócio / marketing que quer uma landing page "nível top 10 do Brasil".
+## Para quem
+- **Empregadores de suporte/infra**: querem saber o que ele já faz e se resolve problema de verdade.
+- **Pessoas que precisam automatizar um processo**: procuram alguém que entenda dados, regras e integração.
+- **Leitores de portfolio técnico**: avaliam qualidade de raciocínio, não só resultado final.
 
-## Superfície
-Landing page (mode: Persuade). HTML/CSS/JS estático em `index.html`, `style.css`, `script.js`.
+## Superfícies
+| Página | Papel |
+|---|---|
+| `index.html` | Portfólio (Sobre, Habilidades, Projetos, Contato) |
+| `certificados.html` | Estudo de caso do fluxo n8n de certificados Pix |
 
 ## Voz
-Direta, confiante, sem firula. PT-BR.
+Português do Brasil, direto e sem adjectives de sobra. Fala de método antes de falar de resultado. Assume leitor técnico: pode usar nome de ferramenta (n8n, Evolution API) sem explicar o básico.
 
-## Constraints
-Sem em-dashes no copy. Sem paleta beige+brass. Sem cards aninhados. Uma cor de acento só.
+## Idiomas
+Site bilíngue: português (padrão) e inglês. A escolha do visitante fica salva no navegador e vale para as duas páginas. Termos técnicos não são traduzidos.
+
+## Regras de conteúdo
+- Nada de dado real: empresas, sistemas, clientes e credenciais aparecem sempre como fictícios.
+- Nível de habilidade é autoavaliação honesta, com rótulo (`Base sólida`, `Praticando`, `Estudando`) e não número inventado.
+- GitHub e LinkedIn com link real apenas quando o perfil existir; caso contrário, "Perfil em breve" com `aria-disabled`.
+- Sem promessa de resultado e sem métrica sem fonte.
+
+## Restrições técnicas
+- Site estático: sem Node, sem build, sem npm. Um `index.html` por página, CSS inline, React 18 + Babel via CDN onde há interatividade.
+- Sem cor decorativa: preto, branco e um verde de status usado só como sinal.
+- Sem dados reais, sem rastreamento, sem cookies além do tema salvo em `localStorage`.

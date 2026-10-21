@@ -1,18 +1,88 @@
-# DESIGN.md — Wesley Santos de Melo (portfolio)
+# DESIGN.md — Portfólio Wesley Melo
 
-## Identidade
-Preto profundo + vermelho contido. Sem neon exagerado, sem beige, sem cards aninhados, sem gradient text, sem glows coloridos.
+Direção: editorial monocromática, técnica, com respiro. Sem card rounded, sem gradiente, sem brilho, sem cor decorativa.
 
-## Tokens (de `wesleymeloPJ.com-main/index.html`, `:root`)
-- `--bg` #060608 · `--bg-soft` #0B0B0E · `--surface` #101014 · `--surface-2` #17171C
-- `--text` #F5F5F7 · `--text-2` rgba(245,245,247,.72) · `--text-3` rgba(245,245,247,.48)
-- `--accent` #E0242E · `--accent-2` #F0434D · `--accent-deep` #8F0F18 · `--accent-soft` rgba(224,36,46,.12)
-- Radius: `--r-card` 18px · `--r-inner` 12px · `--r-pill` 999px
-- Fonte: system stack (`--font`) + mono para rótulos técnicos/código (`--mono`)
-- Motion: `--ease` cubic-bezier(.16,1,.3,1); reveal por seção com variantes (default/blur/scale); cursor customizado desktop-only; progress bar no topo; parallax sutil na hero; respeito total a `prefers-reduced-motion`.
+## Tokens (implementados em `:root` do `index.html` e do `certificados.html`)
+
+Claro
+- `--paper #F2F2F0` (fundo) · `--paper-2 #E9E9E6` · `--paper-3 #E0E0DC` · `--surface #FAFAF8`
+- `--ink #0C0C0D` · `--ink-2 #43434A` · `--ink-3 #6B6B73` (rótulos mono; mínimo WCAG AA 4.5:1 sobre `--paper` e `--surface`)
+- `--line rgba(12,12,13,.16)` · `--line-soft rgba(12,12,13,.09)` · `--line-hard rgba(12,12,13,.5)`
+- `--inv-bg #0C0C0D` / `--inv-ink #F2F2F0` (superfície invertida, usada nos hovers e no toast)
+- `--status #2E7D5B` (verde, só como sinal)
+
+Escuro (`[data-theme="dark"]`)
+- `--paper #0B0B0D` (página, preta) · `--paper-2 #17171A` · `--paper-3 #212125`
+- `--surface transparent` (no modo escuro **nenhum** cartão tem fundo)
+- `--hover #161618` · `--menu #141416` · `--badge-bg #1F1F22` / `--badge-fg #F1F1EE`
+- `--ink #F1F1EE` · `--ink-2 #B4B4B8` · `--ink-3 #82828A`
+- `--line rgba(241,241,238,.14)` · `--inv-bg #F1F1EE` / `--inv-ink #0C0C0D`
+- `--status #5FBE92`
+
+Outros: `--max 1180px` · `--nav-h 60px` · `--ease cubic-bezier(.16,1,.3,1)` · `--font "Geist"` · `--mono "Geist Mono"`.
+
+## Formato
+- Raio **0** em superfícies, etiquetas e botões. Sem pill, sem card com sombra.
+- **Sem bordas de 1px.** Nenhum contêiner, painel, etiqueta ou item de lista usa borda. A separação vem de espaço, de fundo (`--surface`, `--paper-2`) e de hierarquia tipográfica.
+- Exceções, e só estas: o sublinhado do link de projeto (é afordância de texto, não caixa) e a régua desenhada da seção de habilidades.
+- Estado ativo e destaque usam **superfície invertida** (`--inv-bg` / `--inv-ink`), nunca contorno.
+- Fundo com malha de pontos de 28px, mascarada no topo, atrás de tudo (`pointer-events:none`).
+- Único acento: verde de status, restrito a ponto de status, indicador de disponibilidade e selo de atividade real.
+
+## Tipografia
+- Display: Geist 600, `letter-spacing -.035em` (hero `.94`), `clamp(3.2rem,9vw,6.2rem)` na hero.
+- Corpo: Geist 400, `line-height 1.5`, `.lede` com `clamp(1rem,1.35vw,1.08rem)` e `max-width 64ch`.
+- Rótulos técnicos: Geist Mono, `11px`, `letter-spacing .14em`, `text-transform uppercase`, cor `--ink-3`.
+- Mono para números: `.clock` com `font-variant-numeric: tabular-nums`.
+
+## Botões
+- **Sem caixa.** Nenhum botão tem fundo, borda ou raio. Primário = texto em `--ink`, secundário = texto em `--ink-3`.
+- A hierarquia vem do contraste do texto, não de bloco preenchido. A seta (`↓` ou `→`) desliza 3px no hover.
+- Espaçamento entre os dois botões na hero: 26px, para ler como duas ações e não como um bloco.
 
 ## Estrutura
-Entrada (gate WM vermelho → wipe vermelho → reveal da hero) → Hero (WESLEY em vermelho, MELO vazado com sweep, status, meta, botões) → Sobre/Identidade (foto + texto editorial + 4 valores) → Stack (chips + Agora/A seguir/Sempre) → Projetos (cards grandes com preview reativo) → Trajetória (roadmap) → Contato (mega título VAMOS CONSTRUIR ALGO JUNTOS. + e-mail copiável) → Footer.
+- Nav fixa (60px), marca `WM` em quadrado, links com sublinhado que cresce no hover, alternador de tema e menu hambúrguer no mobile.
+- Hero: kicker com ponto de status, nome em duas linhas (a segunda em `--ink-3`), função, lede, dois botões; à direita a "Ficha" (dados reais) e abaixo a faixa de palavras em movimento.
+- Seções numeradas `01` a `04` com grade `132px 1fr` (coluna do número em `--paper-3`).
+- Projetos: índice editorial em linhas, com prévia real da interface e link para o estudo de caso.
+- Contato: três colunas clicáveis (copiar e-mail, GitHub, LinkedIn), com feedback por toast.
+- Estudo de caso: fluxo de 7 etapas navegável por teclado, demonstração de mensagem, desafios em acordeão, grade de tecnologias, aprendizados.
+
+## Movimento
+- `cubic-bezier(.16,1,.3,1)`, só `transform` e `opacity`.
+- Entrada: revelação por palavra na hero, `Reveal` com `translateY(18px)` nas seções, régua que desenha, barra de progresso no topo via `animation-timeline: scroll()`.
+- Faixa de palavras: rolagem contínua, pausa no hover.
+- `prefers-reduced-motion: reduce` desliga tudo e revela o conteúdo estático.
 
 ## Responsivo
-Grid de hero colapsa para 1 coluna em ≤920px; navbar vira menu hambúrguer em ≤820px; cursor/parallax desligados em touch ou reduced-motion; chips/learn/stacks empilham em ≤760px.
+- ≤940px: hero vira 1 coluna · ≤860px: seção vira 1 coluna, skills em 2 colunas, fluxo do estudo vira lista vertical · ≤720px: nav vira hambúrguer, contato em 1 coluna · ≤980px: prévia dos projetos cai abaixo do texto.
+
+## Fora do sistema (não reintroduzir)
+Vermelho saturado, glow neon, cursor customizado, cards com sombra e raio grande, gradiente em texto, badge redondo colorido como enfeite, parallax decorativo, emoji na interface.
+
+## Controles (tema e idioma)
+- Ambos são **controles segmentados** (`.seg`): dois estados lado a lado, altura 34px, sem raio, **sem borda e sem fundo**.
+- O estado ativo é marcado só por **cor** (`--ink` contra `--ink-3`) e por um **ponto de 3px** embaixo do item. Nunca por bloco invertido, para não sobrar quadrado branco no modo escuro.
+- Ícone de tema: sol = claro, lua = escuro, 15px, traço 1.6. Idioma: `PT` / `EN` em mono 11px.
+- São dois botões de verdade (não um toggle), cada um com `aria-pressed`, então teclado e leitor de tela funcionam sem gambiarra.
+- Ordem na barra: idioma, tema, menu.
+
+## Modo escuro
+- A página é **preta** (`#0B0B0D`) e **nada** tem fundo: `--surface` é `transparent`. Ficha, painel técnico, prévia do projeto, tecnologias, notas e a própria mensagem do WhatsApp ficam sem caixa, flutuando direto no preto.
+- Regra: no escuro, se algo é cartão, ele é **transparente**. A separação vem de tipografia, espaço e os tons internos (`--paper-2`, `--paper-3`).
+- Tons que continuam com fundo no escuro, e por quê: `--hover` (realce de linha ao passar o mouse), `--menu` (painel do menu mobile, precisa de fundo para ser lido), `--badge-bg` (etiqueta "EM USO", precisa contrastar) e `--inv-bg` (toast e inversões de hover).
+- Chat no escuro: `--chat-box`, `--chat-wall` e `--chat-bubble` são `transparent`, então a mensagem não tem caixa nenhuma. No claro, a mensagem é branca sobre a parede cinza.
+- Avatar do WhatsApp usa `--avatar-bg` / `--avatar-fg`: `#0C0C0D` e `#F2F2F0` no claro, `#1A1A1D` e `#F1F1EE` no escuro, para não virar um quadrado branco.
+
+## Idioma
+- Português é o padrão. A escolha fica em `localStorage` (`wsm.lang`) e vale para as duas páginas, que usam a mesma chave.
+- Trocar o idioma troca também `<html lang>`, `<title>` e as meta tags de descrição.
+- Todo texto visível vem de um dicionário por idioma (`COPY` no `index.html`, `COPY` no `certificados.html`). Nada de string solta misturada entre os dois idiomas.
+- Termos técnicos (n8n, HTTP, JavaScript, WhatsApp, Evolution API) não são traduzidos.
+
+## Projetos
+- A linha inteira do projeto é clicável: o título é um link com `::after` esticado (`inset:0`) sobre a linha. Passar o mouse em qualquer ponto (título, descrição ou prévia) leva à demonstração.
+- O CTA "Ver mais detalhes" continua visível e fica acima do overlay (`z-index`), com a mesma URL e o mesmo rótulo de acessibilidade.
+
+## Publicação
+Site estático no branch `main` do repositório `wsmelo-dev/wesleymeloPJ.com`, servido no GitHub Pages. Publicar com `publicar.bat` (Git + gh CLI) ou `publicar-api.bat` (API do GitHub, sem Git instalado).
