@@ -78,7 +78,12 @@ $publish = @(
   "PRODUCT.md",
   "publicar.bat",
   "publicar.ps1",
-  "publicar-api.bat"
+  "publicar-api.bat",
+  "dominio.ps1",
+  "assets/fluxo-n8n.png",
+  "assets/passo-consulta-http.png",
+  "assets/passo-javascript.png",
+  "assets/passo-envio-whatsapp.png"
 )
 $remove = @("foto.jpg", "style.css", "script.js")
 
