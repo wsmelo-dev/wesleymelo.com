@@ -360,7 +360,8 @@
         ogDesc:"Helpdesk e sistemas no dia a dia, automação com n8n e programação em estudo.",
         nav:{sobre:"Sobre",skills:"Habilidades",projetos:"Projetos",contato:"Contato",
           lang:"Idioma",theme:"Tema",openMenu:"Abrir menu",closeMenu:"Fechar menu",
-          light:"Modo claro",dark:"Modo escuro",skip:"Pular para o conteúdo"},
+          light:"Modo claro",dark:"Modo escuro",skip:"Pular para o conteúdo",
+          mainNav:"Navegação principal",mobileNav:"Navegação móvel"},
         hero:{kicker:"Atuo em helpdesk e sistemas · automação em estudo",
           role:"Auxiliar de helpdesk e sistemas",
           lede:"Trabalho com suporte e sistemas e uso automação com n8n para tirar tarefas repetitivas do caminho. Estudo programação para construir soluções cada vez mais completas.",
@@ -381,15 +382,24 @@
         ],
         skills:{title:"Habilidades",
           lede:"O que já uso no dia a dia e o que estou aprofundando. Os níveis são uma autoavaliação honesta, não um número inventado.",
-          all:"Todas",level:"Nível autoavaliado"},
+          all:"Todas",level:"Nível autoavaliado",levelOf:"de 4",
+          filterLabel:"Filtrar habilidades por categoria"},
+        preview:{
+          flow:[["1 · Agendamento","diário"],["2 · HTTP","certificados"],["3 · Function","filtra 7 dias"],["4 · WhatsApp","aviso"]],
+          dash:[["Saldo","R$ 12.480"],["Receitas","R$ 6.140"],["Despesas","R$ 3.290"]],
+          board:["Backlog","A fazer","Em curso"],
+          nexa:{title:"Organize o trabalho",sub:"Projeto, documentos e tarefas em um só lugar",cta:"Começar"}
+        },
         projects:{title:"Projetos",
           lede:"Uma automação que está em uso no dia a dia, criada para resolver um problema real e tirar uma tarefa manual do caminho.",
           more:"Ver mais detalhes",openDemo:"Ver a demonstração de",demo:"Demonstrativo",
+          noDemo:"Fluxo de uso interno, sem demonstração pública.",
           foot:"Novos projetos entram por aqui conforme avanço. Mais trabalhos ficam no meu perfil do GitHub."},
         contact:{title:"Entre em contato",
           lede:"Se quiser falar sobre automação, sistemas ou um processo que pode ser automatizado, escreva. O clique no ícone do e-mail copia o endereço.",
           email:"E-mail",copied:"Copiado",github:"GitHub",linkedin:"LinkedIn",soon:"Perfil em breve",
-          copyAria:"Copiar e-mail",selectToast:"Selecione o e-mail e pressione Ctrl+C"},
+          copyAria:"Copiar e-mail",selectToast:"Selecione o e-mail e pressione Ctrl+C",
+          githubAria:"Abrir o GitHub de Wesley Melo"},
         footer:{status:"● helpdesk · automação",top:"Voltar ao topo"}
       },
       en: {
@@ -399,7 +409,8 @@
         ogDesc:"Helpdesk and systems on a daily basis, automation with n8n, programming under study.",
         nav:{sobre:"About",skills:"Skills",projetos:"Projects",contato:"Contact",
           lang:"Language",theme:"Theme",openMenu:"Open menu",closeMenu:"Close menu",
-          light:"Light mode",dark:"Dark mode",skip:"Skip to content"},
+          light:"Light mode",dark:"Dark mode",skip:"Skip to content",
+          mainNav:"Main navigation",mobileNav:"Mobile navigation"},
         hero:{kicker:"I work in helpdesk and systems · automation under study",
           role:"Helpdesk and systems assistant",
           lede:"I work with support and systems and use n8n automation to take repetitive work off the table. I study programming to build ever more complete solutions.",
@@ -420,15 +431,24 @@
         ],
         skills:{title:"Skills",
           lede:"What I use daily and what I am going deeper on. The levels are an honest self assessment, not an invented number.",
-          all:"All",level:"Self assessed level"},
+          all:"All",level:"Self assessed level",levelOf:"of 4",
+          filterLabel:"Filter skills by category"},
+        preview:{
+          flow:[["1 · Schedule","daily"],["2 · HTTP","certificates"],["3 · Function","filters 7 days"],["4 · WhatsApp","alert"]],
+          dash:[["Balance","R$ 12.480"],["Income","R$ 6.140"],["Expenses","R$ 3.290"]],
+          board:["Backlog","To do","In progress"],
+          nexa:{title:"Organise your work",sub:"Projects, documents and tasks in one place",cta:"Get started"}
+        },
         projects:{title:"Projects",
           lede:"One automation that is in daily use, built to solve a real problem and take a manual task off the table.",
           more:"See the details",openDemo:"Open the demo of",demo:"Demonstrative",
+          noDemo:"Internal workflow, no public demo.",
           foot:"New projects land here as I progress. More work is on my GitHub profile."},
         contact:{title:"Get in touch",
           lede:"If you want to talk about automation, systems or a process that could be automated, write to me. Clicking the email icon copies the address.",
           email:"Email",copied:"Copied",github:"GitHub",linkedin:"LinkedIn",soon:"Profile coming soon",
-          copyAria:"Copy email",selectToast:"Select the email address and press Ctrl+C"},
+          copyAria:"Copy email",selectToast:"Select the email address and press Ctrl+C",
+          githubAria:"Open Wesley Melo's GitHub"},
         footer:{status:"● helpdesk · automation",top:"Back to top"}
       }
     };
@@ -522,15 +542,14 @@
       return <div className="rule" ref={ref}/>;
     }
     /* Prévia real (mini-interface) de cada projeto */
-    function Preview({type}){
+    function Preview({type, t}){
       if(type==="flow") return (
         <div>
           <div className="vis-bar"><i/><i/><i/><span>n8n</span></div>
           <div className="vis-body">
-            <div className="v-row"><span>1 · Agendamento</span><b>diário</b></div>
-            <div className="v-row"><span>2 · HTTP</span><b>certificados</b></div>
-            <div className="v-row"><span>3 · Function</span><b>filtra 7 dias</b></div>
-            <div className="v-row"><span>4 · WhatsApp</span><b>aviso</b></div>
+            {t.preview.flow.map(function(r,i){
+              return <div className="v-row" key={i}><span>{r[0]}</span><b>{r[1]}</b></div>;
+            })}
           </div>
         </div>
       );
@@ -542,9 +561,9 @@
               <i style={{height:"40%"}}/><i className="on" style={{height:"62%"}}/><i style={{height:"48%"}}/>
               <i className="on" style={{height:"84%"}}/><i style={{height:"56%"}}/><i className="on" style={{height:"100%"}}/>
             </div>
-            <div className="v-row"><span>Saldo</span><b>R$ 12.480</b></div>
-            <div className="v-row"><span>Receitas</span><b>R$ 6.140</b></div>
-            <div className="v-row"><span>Despesas</span><b>R$ 3.290</b></div>
+            {t.preview.dash.map(function(r,i){
+              return <div className="v-row" key={i}><span>{r[0]}</span><b>{r[1]}</b></div>;
+            })}
           </div>
         </div>
       );
@@ -553,9 +572,9 @@
           <div className="vis-bar"><i/><i/><i/><span>taskly</span></div>
           <div className="vis-body">
             <div className="v-cols">
-              <div className="v-col"><h5>Backlog</h5><span className="on"/><span/></div>
-              <div className="v-col"><h5>A fazer</h5><span className="on"/><span className="on"/></div>
-              <div className="v-col"><h5>Em curso</h5><span className="on"/></div>
+              {t.preview.board.map(function(c,i){
+                return <div className="v-col" key={i}><h5>{c}</h5><span className="on"/><span/></div>;
+              })}
             </div>
           </div>
         </div>
@@ -564,9 +583,9 @@
         <div>
           <div className="vis-bar"><i/><i/><i/><span>nexa</span></div>
           <div className="vis-body v-hero">
-            <b>Organize o trabalho</b>
-            <p>Projeto, documentos e tarefas em um só lugar</p>
-            <em>Começar</em>
+            <b>{t.preview.nexa.title}</b>
+            <p>{t.preview.nexa.sub}</p>
+            <em>{t.preview.nexa.cta}</em>
           </div>
         </div>
       );
@@ -656,7 +675,7 @@
               <a className="brand" href="#inicio" aria-label="Wesley Melo">
                 <span className="brand-mark" aria-hidden="true">WM</span>Wesley Melo
               </a>
-              <nav aria-label="Navegação principal">
+              <nav aria-label={t.nav.mainNav}>
                 <ul className="links">
                   <li><a href="#sobre">{t.nav.sobre}</a></li>
                   <li><a href="#skills">{t.nav.skills}</a></li>
@@ -684,7 +703,7 @@
           </header>
 
           <div id="menu-mobile" className={"m-panel"+(menuOpen?" open":"")} hidden={!menuOpen}>
-            <nav aria-label="Navegação móvel">
+            <nav aria-label={t.nav.mobileNav}>
               {[["sobre",t.nav.sobre,"01"],["skills",t.nav.skills,"02"],["projetos",t.nav.projetos,"03"],["contato",t.nav.contato,"04"]].map(([id,l,n])=>(
                 <a key={id} href={"#"+id} onClick={()=>setMenuOpen(false)}>{l}<span>{n}</span></a>
               ))}
@@ -717,7 +736,7 @@
                       <span className="clock">{clock}</span>
                     </div>
                     <dl>
-                      <div><dt>Foco</dt><dd>Automação com n8n</dd></div>
+                      <div><dt>{t.panel.foco}</dt><dd>{t.panel.focoVal}</dd></div>
                       <div><dt>{t.panel.base}</dt><dd>{t.panel.baseVal}</dd></div>
                       <div><dt>{t.panel.estuda}</dt><dd>{t.panel.estudaVal}</dd></div>
                       <div><dt>{t.panel.projetos}</dt><dd>{PROJECTS.length} {t.panel.projetosVal}</dd></div>
@@ -774,7 +793,7 @@
                       <p className="lede">{t.skills.lede}</p>
                     </div>
                     <Rule/>
-                    <div className="filters" role="group" aria-label={t.skills.title}>
+                    <div className="filters" role="group" aria-label={t.skills.filterLabel}>
                       {cats.map(c=>(
                         <button key={c} type="button" className="fchip" aria-pressed={filter===c} onClick={()=>setFilter(c)}>
                           {c==="todos" ? t.skills.all : tCats[c]}
@@ -789,7 +808,7 @@
                           <span className="s-cat">{tCats[s.cat]}</span>
                           <span className="s-meter">
                             <span className="s-state">{tStates[s.state]}</span>
-                            <span className="ticks" role="img" aria-label={t.skills.level+": "+s.lvl+" de 4"}>
+                            <span className="ticks" role="img" aria-label={t.skills.level+": "+s.lvl+" "+t.skills.levelOf}>
                               {[0,1,2,3].map(k=>(<i key={k} className={k<s.lvl?"on":""}/>))}
                             </span>
                           </span>
@@ -832,9 +851,9 @@
                               ? <a className="p-link" href={p.demo} aria-label={t.projects.openDemo+" "+pc.name}>
                                   {t.projects.more} <span aria-hidden="true">→</span>
                                 </a>
-                              : <p className="p-desc" style={{marginTop:"16px",color:"var(--ink-3)",fontSize:"13.5px"}}>Fluxo de uso interno, sem demonstração pública.</p>}
+                              : <p className="p-desc" style={{marginTop:"16px",color:"var(--ink-3)",fontSize:"13.5px"}}>{t.projects.noDemo}</p>}
                           </div>
-                          <div className="p-vis"><Preview type={p.vis}/></div>
+                          <div className="p-vis"><Preview type={p.vis} t={t}/></div>
                         </Reveal>
                         );
                       })}
@@ -865,7 +884,7 @@
                         <b>{t.contact.email}</b>
                         <small>{copied ? t.contact.copied+" ✓" : EMAIL}</small>
                       </button>
-                      <a className="c-item" href="https://github.com/wsmelo-dev" target="_blank" rel="noopener noreferrer" aria-label="Abrir o GitHub de Wesley Melo">
+                      <a className="c-item" href="https://github.com/wsmelo-dev" target="_blank" rel="noopener noreferrer" aria-label={t.contact.githubAria}>
                         <span className="c-ic" aria-hidden="true">
                           <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
                         </span>

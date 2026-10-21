@@ -294,7 +294,7 @@
       <a class="brand" href="index.html" aria-label="Wesley Melo">
         <span class="brand-mark" aria-hidden="true">WM</span>Wesley Melo
       </a>
-      <nav aria-label="Navegação do estudo de caso">
+      <nav aria-label="Navegação do estudo de caso" data-i18n-aria="navStudy">
         <ul class="links">
           <li><a href="#visao" data-i18n="navVisao">Visão geral</a></li>
           <li><a href="#funciona" data-i18n="navFunciona">Como funciona</a></li>
@@ -305,13 +305,13 @@
       </nav>
       <div class="nav-act">
         <a class="back-link" href="index.html" data-i18n="backPortfolio">← Portfólio</a>
-        <div class="seg" role="group" aria-label="Idioma" id="langSeg">
+        <div class="seg" role="group" aria-label="Idioma" id="langSeg" data-i18n-aria="nav.lang">
           <button type="button" data-lang="pt" aria-pressed="true" title="Português" lang="pt-BR">PT</button>
           <button type="button" data-lang="en" aria-pressed="false" title="English" lang="en">EN</button>
         </div>
-        <div class="seg seg-icon" role="group" aria-label="Tema" id="themeSeg">
-          <button type="button" data-theme="light" aria-pressed="true" aria-label="Modo claro" title="Modo claro"></button>
-          <button type="button" data-theme="dark" aria-pressed="false" aria-label="Modo escuro" title="Modo escuro"></button>
+        <div class="seg seg-icon" role="group" aria-label="Tema" id="themeSeg" data-i18n-aria="nav.theme">
+          <button type="button" data-theme="light" aria-pressed="true" aria-label="Modo claro" title="Modo claro" data-i18n-title="nav.light"></button>
+          <button type="button" data-theme="dark" aria-pressed="false" aria-label="Modo escuro" title="Modo escuro" data-i18n-title="nav.dark"></button>
         </div>
       </div>
     </div>
@@ -350,7 +350,7 @@
                   <p class="lede" data-i18n="visaoLede1">Acompanhar o vencimento de certificados digitais ligados ao Pix era uma tarefa manual: alguém precisava consultar a lista e lembrar de avisar antes do prazo. Quando o aviso não saía, o risco não era só perder a data, era perder a janela para agir.</p>
                   <p class="lede" style="margin-top:16px" data-i18n="visaoLede2">A proposta foi transformar esse acompanhamento em um fluxo automático que roda todos os dias, consulta a fonte de dados, verifica quais certificados estão próximos do vencimento e envia o aviso pelo WhatsApp com antecedência de até 7 dias.</p>
                 </div>
-                <aside class="case-panel" aria-label="Ficha técnica do projeto">
+                <aside class="case-panel" aria-label="Ficha técnica do projeto" data-i18n-aria="panelAria">
                   <span class="mono" data-i18n="fichaLabel">Ficha técnica</span>
                   <dl id="casePanel"></dl>
                 </aside>
@@ -372,7 +372,7 @@
               </div>
               <div class="flow">
                 <div class="flow-rail" aria-hidden="true"><span class="flow-pulse" id="flowPulse"></span></div>
-                <div class="flow-nodes" role="tablist" aria-label="Etapas da automação" id="flowNodes"></div>
+                <div className="flow-nodes" role="tablist" aria-label="Etapas da automação" id="flowNodes" data-i18n-aria="flowAria"></div>
                 <div class="flow-detail" id="flowDetail" role="tabpanel" aria-live="polite"></div>
               </div>
             </div>
@@ -459,7 +459,7 @@
       </section>
 
       <!-- ===== RODAPÉ DO ESTUDO ===== -->
-      <section aria-label="Navegação final">
+      <section aria-label="Navegação final" data-i18n-aria="navFinal">
         <div class="wrap">
           <div class="case-foot rv">
             <div>
@@ -499,6 +499,9 @@
         skip:"Pular para o conteúdo",
         navVisao:"Visão geral", navFunciona:"Como funciona", navDemo:"Demonstração",
         navDesafios:"Desafios", navTecnologias:"Tecnologias",
+        navStudy:"Navegação do estudo de caso", navFinal:"Navegação final",
+        panelAria:"Ficha técnica do projeto", flowAria:"Etapas da automação",
+        nav:{lang:"Idioma",theme:"Tema",light:"Modo claro",dark:"Modo escuro"},
         backPortfolio:"← Portfólio", backTop:"← Voltar ao portfólio", footBack:"← Voltar ao portfólio",
         heroTitle1:"Automação de", heroTitle2:"Certificados Pix",
         heroLede:"Do primeiro erro de dados até um aviso que chega no celular de quem precisa agir. Tudo descrito sem nomes de empresas, sistemas ou dados reais.",
@@ -583,6 +586,9 @@
         skip:"Skip to content",
         navVisao:"Overview", navFunciona:"How it works", navDemo:"Demo",
         navDesafios:"Challenges", navTecnologias:"Technologies",
+        navStudy:"Case study navigation", navFinal:"Final navigation",
+        panelAria:"Project technical sheet", flowAria:"Automation steps",
+        nav:{lang:"Language",theme:"Theme",light:"Light mode",dark:"Dark mode"},
         backPortfolio:"← Portfolio", backTop:"← Back to the portfolio", footBack:"← Back to the portfolio",
         heroTitle1:"Automation of", heroTitle2:"Pix Certificates",
         heroLede:"From the first data error to an alert that reaches the phone of whoever has to act. Everything described without company, system or real data names.",
@@ -802,6 +808,9 @@
     /* ---------- APLICAÇÃO DE IDIOMA ---------- */
     function applyLang(){
       c = COPY[lang];
+      var pick = function(path){
+        return path.split(".").reduce(function(o,k){ return o ? o[k] : undefined; }, c);
+      };
       document.documentElement.lang = c.lang;
       document.title = c.title;
       var meta = function(sel,attr,val){ var m=document.querySelector(sel); if(m) m.setAttribute(attr,val); };
@@ -811,7 +820,18 @@
       meta('meta[property="og:locale"]',"content",c.locale);
       document.querySelectorAll("[data-i18n]").forEach(function(node){
         var key = node.getAttribute("data-i18n");
-        if(c[key] != null) node.innerHTML = c[key];
+        var val = pick(key);
+        if(val != null) node.innerHTML = val;
+      });
+      document.querySelectorAll("[data-i18n-aria]").forEach(function(node){
+        var key = node.getAttribute("data-i18n-aria");
+        var val = pick(key);
+        if(val != null) node.setAttribute("aria-label", val);
+      });
+      document.querySelectorAll("[data-i18n-title]").forEach(function(node){
+        var key = node.getAttribute("data-i18n-title");
+        var val = pick(key);
+        if(val != null){ node.setAttribute("title", val); node.setAttribute("aria-label", val); }
       });
       document.querySelectorAll("#langSeg button").forEach(function(b){
         b.setAttribute("aria-pressed", b.getAttribute("data-lang")===lang ? "true":"false");

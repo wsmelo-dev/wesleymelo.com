@@ -77,8 +77,11 @@ Vermelho saturado, glow neon, cursor customizado, cards com sombra e raio grande
 ## Idioma
 - Português é o padrão. A escolha fica em `localStorage` (`wsm.lang`) e vale para as duas páginas, que usam a mesma chave.
 - Trocar o idioma troca também `<html lang>`, `<title>` e as meta tags de descrição.
-- Todo texto visível vem de um dicionário por idioma (`COPY` no `index.html`, `COPY` no `certificados.html`). Nada de string solta misturada entre os dois idiomas.
-- Termos técnicos (n8n, HTTP, JavaScript, WhatsApp, Evolution API) não são traduzidos.
+- Todo texto visível vem de um dicionário por idioma (`COPY` no `index.html`, `COPY` no `certificados.html`). Nada de string solta misturada entre os dois idiomas: **toda string da interface tem que passar pelo dicionário**, incluindo as prévias dos projetos, os `aria-label` e os `title`.
+- Atributos traduzidos por marcador: `data-i18n` (texto), `data-i18n-aria` (`aria-label`) e `data-i18n-title` (`title` + `aria-label`). O dicionário aceita chave com ponto (`nav.light`) para entrar em sub-objetos.
+- Termos técnicos (n8n, HTTP, JavaScript, WhatsApp, Evolution API) não são traduzidos. O nome da própria página (Wesley Melo) também não.
+- O bloco `<noscript>` fica em português por definição: sem JavaScript não há como trocar o texto.
+- Como conferir: trocar para EN e varrer o texto da página em busca de palavra em português (e vice-versa). É o jeito mais rápido de achar string fixa.
 
 ## Projetos
 - A linha inteira do projeto é clicável: o título é um link com `::after` esticado (`inset:0`) sobre a linha. Passar o mouse em qualquer ponto (título, descrição ou prévia) leva à demonstração, e o cursor vira pointer.
