@@ -1,4 +1,4 @@
-﻿<#
+<#
   publicar.ps1 Â· Publica o site no GitHub Pages sem precisar de Git instalado.
   Usa a API do GitHub (Contents API) para enviar os arquivos da pasta para o
   repositÃ³rio wsmelo-dev/wesleymelo.com, branch main.
@@ -83,7 +83,7 @@ $publish = @(
   "assets/fluxo-n8n.png",
   "assets/passo-consulta-http.png",
   "assets/passo-javascript.png",
-  "assets/passo-envio-whatsapp.png"
+  "assets/passo-envio-crm.png"
 )
 $remove = @("foto.jpg", "style.css", "script.js")
 
