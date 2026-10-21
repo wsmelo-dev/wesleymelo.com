@@ -259,6 +259,17 @@
       transition:gap .2s var(--ease),border-color .2s}
     .proj-case:hover{gap:12px;border-color:var(--ink)}
 
+    /* animação ao abrir e fechar os detalhes */
+    @keyframes detailsIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+    @keyframes shotIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    .proj-details{animation:detailsIn .42s var(--ease) both}
+    .proj-details-grid figure{animation:shotIn .5s var(--ease) both}
+    .proj-details-grid figure:nth-child(1){animation-delay:.05s}
+    .proj-details-grid figure:nth-child(2){animation-delay:.12s}
+    .proj-details-grid figure:nth-child(3){animation-delay:.19s}
+    .proj-details-grid figure:nth-child(4){animation-delay:.26s}
+    .proj-case{animation:shotIn .5s var(--ease) .32s both}
+
     /* ============ CONTATO (formulário + ícones soltos) ============ */
     .contact-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:start}
     @media(max-width:860px){.contact-grid{grid-template-columns:1fr;gap:34px}}
