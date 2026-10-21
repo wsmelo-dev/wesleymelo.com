@@ -187,13 +187,6 @@
 
     /* ============ SOBRE ============ */
     .about{display:grid;grid-template-columns:1fr;gap:0}
-    .principles{margin-top:34px}
-    .principles li{list-style:none;display:grid;grid-template-columns:56px 1fr;gap:20px;padding:20px 0;
-      transition:background .3s var(--ease)}
-    .principles li:hover{background:var(--surface)}
-    .principles b{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-3);padding-top:4px}
-    .principles h3{font-size:1.02rem;font-weight:550;margin-bottom:5px}
-    .principles p{font-size:14px;color:var(--ink-2);line-height:1.6;max-width:56ch}
 
     /* ============ SKILLS (filtro real + níveis honestos) ============ */
     .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
@@ -366,12 +359,6 @@
           lede:"Sou o Wesley. Gosto de tecnologia, de entender como as coisas funcionam por dentro e de resolver problemas do dia a dia com automação.",
           p1:"Atuo em helpdesk e sistemas e automatizo processos repetitivos com n8n: fluxos que consultam dados, aplicam regras e avisam quem precisa. Também estudo programação, com HTML, CSS e JavaScript, para entender o que acontece por trás de cada etapa.",
           p2:"Estou no começo da carreira e prefiro dizer isso com clareza: o que trago é método, curiosidade e vontade de resolver problemas de verdade."},
-        principles:[
-          {t:"Conhecer os dados antes de automatizar",d:"Entender o formato real da informação é o que evita fluxos que não encontram nada para processar."},
-          {t:"Regras claras",d:"Definir janela de tempo, fuso horário e exceções antes de disparar qualquer ação."},
-          {t:"Pensar em quem recebe",d:"Um aviso tecnicamente correto ainda pode ser inútil. O texto final precisa ser fácil de agir."},
-          {t:"Erro como pista",d:"Quando a automação falha, olhar o que entra em cada etapa costuma resolver sem refazer tudo."}
-        ],
         skills:{title:"Habilidades",
           lede:"O que já uso no dia a dia e o que estou aprofundando. Os níveis são uma autoavaliação honesta, não um número inventado.",
           all:"Todas",level:"Nível autoavaliado",levelOf:"de 4",
@@ -433,12 +420,6 @@
           lede:"I am Wesley. I like technology, understanding how things work on the inside, and solving day to day problems with automation.",
           p1:"I work in helpdesk and systems and automate repetitive processes with n8n: flows that query data, apply rules and warn whoever needs to know. I also study programming, with HTML, CSS and JavaScript, to understand what happens behind every step.",
           p2:"I am early in my career and I prefer to say that plainly: what I bring is method, curiosity and the will to solve real problems."},
-        principles:[
-          {t:"Know the data before automating",d:"Understanding the real shape of the information is what keeps flows from finding nothing to process."},
-          {t:"Clear rules",d:"Define the time window, the time zone and the exceptions before triggering any action."},
-          {t:"Think about who receives it",d:"A technically correct alert can still be useless. The final text has to be easy to act on."},
-          {t:"Errors as clues",d:"When the automation fails, looking at what enters each step usually solves it without rebuilding everything."}
-        ],
         skills:{title:"Skills",
           lede:"What I use daily and what I am going deeper on. The levels are an honest self assessment, not an invented number.",
           all:"All",level:"Self assessed level",levelOf:"of 4",
@@ -825,14 +806,6 @@
                       <div>
                         <p className="lede">{t.about.p1}</p>
                         <p className="lede" style={{marginTop:"14px"}}>{t.about.p2}</p>
-                        <ol className="principles">
-                          {t.principles.map((p,i)=>(
-                            <Reveal as="li" key={p.t} delay={i*70}>
-                              <b>0{i+1}</b>
-                              <div><h3>{p.t}</h3><p>{p.d}</p></div>
-                            </Reveal>
-                          ))}
-                        </ol>
                       </div>
                     </div>
                   </div>
