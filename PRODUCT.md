@@ -20,6 +20,9 @@ Português do Brasil, direto e sem adjectives de sobra. Fala de método antes de
 ## Idiomas
 Site bilíngue: português (padrão) e inglês. A escolha do visitante fica salva no navegador e vale para as duas páginas. Termos técnicos não são traduzidos.
 
+## Tema
+O site abre sempre no modo escuro, nas duas páginas. O visitante pode alternar para claro durante a visita, mas a próxima entrada começa de novo no escuro.
+
 ## Regras de conteúdo
 - Nada de dado real: empresas, sistemas, clientes e credenciais aparecem sempre como fictícios.
 - Nível de habilidade é autoavaliação honesta, com rótulo (`Base sólida`, `Praticando`, `Estudando`) e não número inventado.

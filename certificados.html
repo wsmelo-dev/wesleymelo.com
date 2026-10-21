@@ -6,13 +6,13 @@
   <title>Automação de Certificados Pix · Wesley Melo</title>
   <meta name="description" content="Estudo de caso: automação em n8n que acompanha o vencimento de certificados digitais do Pix e envia alertas automáticos pelo WhatsApp.">
   <meta name="author" content="Wesley Melo">
-  <meta name="theme-color" content="#F2F2F0" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0C0C0D" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#0B0B0D">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:title" content="Automação de Certificados Pix · Wesley Melo">
   <meta property="og:description" content="Do primeiro erro de dados até um aviso que chega no celular. Estudo de caso de automação com n8n.">
-  <script>try{var t=localStorage.getItem("wsm.theme");if(!t){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){}if(!document.documentElement.dataset.theme)document.documentElement.dataset.theme="light";</script>
+  <!-- O site abre sempre no escuro, antes de qualquer pintura da tela -->
+  <script>document.documentElement.dataset.theme="dark";</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -678,7 +678,7 @@
     }
     var themeSeg = document.getElementById("themeSeg");
     function paintTheme(){
-      var dark = document.documentElement.dataset.theme === "dark";
+      var dark = document.documentElement.dataset.theme !== "light";
       var btns = themeSeg.querySelectorAll("button");
       btns[0].innerHTML = icon(SUN);
       btns[1].innerHTML = icon(MOON);

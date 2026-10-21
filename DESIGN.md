@@ -68,6 +68,9 @@ Vermelho saturado, glow neon, cursor customizado, cards com sombra e raio grande
 - Ordem na barra: idioma, tema, menu.
 
 ## Modo escuro
+- **O site abre sempre no escuro.** O script inline do `<head>` define `data-theme="dark"` antes de qualquer pintura da tela, ignorando a preferência do sistema e qualquer valor salvo. Sem flash de tema claro.
+- O botão sol/lua continua funcionando durante a visita: alterna na hora e salva a escolha em `localStorage`, mas a próxima entrada volta ao escuro.
+- `theme-color` do navegador é `#0B0B0D` (a cor da página escura), sem `media` condicional.
 - A página é **preta** (`#0B0B0D`) e **nada** tem fundo: `--surface` é `transparent`. Ficha, painel técnico, prévia do projeto, tecnologias, notas e a própria mensagem do WhatsApp ficam sem caixa, flutuando direto no preto.
 - Regra: no escuro, se algo é cartão, ele é **transparente**. A separação vem de tipografia, espaço e os tons internos (`--paper-2`, `--paper-3`).
 - Tons que continuam com fundo no escuro, e por quê: `--hover` (realce de linha ao passar o mouse), `--menu` (painel do menu mobile, precisa de fundo para ser lido), `--badge-bg` (etiqueta "EM USO", precisa contrastar) e `--inv-bg` (toast e inversões de hover).

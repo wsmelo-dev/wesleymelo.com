@@ -6,13 +6,13 @@
   <title>Wesley Melo - Helpdesk, sistemas e automação</title>
   <meta name="description" content="Portfólio de Wesley Melo: auxiliar de helpdesk e sistemas, aprendendo automação com n8n e programação.">
   <meta name="author" content="Wesley Melo">
-  <meta name="theme-color" content="#F2F2F0" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0C0C0D" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#0B0B0D">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:title" content="Wesley Melo - Helpdesk, sistemas e automação">
   <meta property="og:description" content="Helpdesk e sistemas no dia a dia, automação com n8n e programação em estudo.">
-  <script>try{var t=localStorage.getItem("wsm.theme");if(!t){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){}</script>
+  <!-- O site abre sempre no escuro, antes de qualquer pintura da tela -->
+  <script>document.documentElement.dataset.theme="dark";</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -593,7 +593,7 @@
 
     /* ================= APP ================= */
     function App(){
-      const [theme,setTheme] = useState(document.documentElement.dataset.theme || "light");
+      const [theme,setTheme] = useState(document.documentElement.dataset.theme || "dark");
       const [lang,setLang] = useState(()=>{ try{ return localStorage.getItem(LANG_KEY) || "pt"; }catch(e){ return "pt"; } });
       const [scrolled,setScrolled] = useState(false);
       const [menuOpen,setMenuOpen] = useState(false);
