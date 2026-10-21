@@ -367,10 +367,10 @@
           mainNav:"Navegação principal",mobileNav:"Navegação móvel"},
         hero:{kicker:"Atuo em helpdesk e sistemas · automação em estudo",
           role:"Auxiliar de helpdesk e sistemas",
-          lede:"Trabalho com suporte e sistemas e uso automação com n8n para tirar tarefas repetitivas do caminho. Estudo programação para construir soluções cada vez mais completas.",
+          lede:"Trabalho com suporte e sistemas, uso automação com n8n para tirar tarefas repetitivas do caminho e estudo programação para construir soluções cada vez mais completas.",
           cta1:"Ver projetos",cta2:"Entrar em contato"},
         panel:{title:"Resumo",foco:"Foco",focoVal:"Automação com n8n",base:"Base",baseVal:"Helpdesk e sistemas",
-          estuda:"Estudando",estudaVal:"Programação",projetos:"Projetos",projetosVal:"no portfólio",
+          estuda:"Estudando",estudaVal:"JavaScript",projetos:"Projetos",projetosVal:"no portfólio",
           interesse:"Interesse",interesseVal:"Programação"},
         ticker:["n8n","Automação","HTTP","JavaScript","HTML","CSS","Git","Helpdesk","WhatsApp","Integrações","Dados","Sistemas"],
         about:{title:"Sobre mim",
@@ -399,8 +399,8 @@
           noDemo:"Fluxo de uso interno, sem demonstração pública.",
           foot:"Novos projetos entram por aqui conforme avanço. Mais trabalhos ficam no meu perfil do GitHub."},
         contact:{title:"Entre em contato",
-          lede:"Escreva seu nome e sua mensagem, ou use os atalhos ao lado: o e-mail copia o endereço, o GitHub e o LinkedIn abrem direto.",
-          email:"E-mail",copied:"Copiado",github:"GitHub",linkedin:"LinkedIn",soon:"Perfil em breve",
+          lede:"Escreva seu nome e sua mensagem, ou use os ícones ao lado: o de e-mail copia o endereço, o GitHub e o LinkedIn abrem direto.",
+          copied:"Copiado",
           copyAria:"Copiar e-mail",selectToast:"Selecione o e-mail e pressione Ctrl+C",
           githubAria:"Abrir o GitHub de Wesley Melo",
           linkedinAria:"Abrir o LinkedIn de Wesley Melo",
@@ -423,10 +423,10 @@
           mainNav:"Main navigation",mobileNav:"Mobile navigation"},
         hero:{kicker:"I work in helpdesk and systems · automation under study",
           role:"Helpdesk and systems assistant",
-          lede:"I work with support and systems and use n8n automation to take repetitive work off the table. I study programming to build ever more complete solutions.",
+          lede:"I work with support and systems, use n8n automation to take repetitive work off the table, and study programming to build ever more complete solutions.",
           cta1:"See projects",cta2:"Get in touch"},
         panel:{title:"Summary",foco:"Focus",focoVal:"Automation with n8n",base:"Base",baseVal:"Helpdesk and systems",
-          estuda:"Studying",estudaVal:"Programming",projetos:"Projects",projetosVal:"in the portfolio",
+          estuda:"Studying",estudaVal:"JavaScript",projetos:"Projects",projetosVal:"in the portfolio",
           interesse:"Interest",interesseVal:"Programming"},
         ticker:["n8n","Automation","HTTP","JavaScript","HTML","CSS","Git","Helpdesk","WhatsApp","Integrations","Data","Systems"],
         about:{title:"About me",
@@ -455,8 +455,8 @@
           noDemo:"Internal workflow, no public demo.",
           foot:"New projects land here as I progress. More work is on my GitHub profile."},
         contact:{title:"Get in touch",
-          lede:"Write your name and your message, or use the shortcuts next to it: email copies the address, GitHub and LinkedIn open straight away.",
-          email:"Email",copied:"Copied",github:"GitHub",linkedin:"LinkedIn",soon:"Profile coming soon",
+          lede:"Write your name and your message, or use the icons next to it: the email icon copies the address, GitHub and LinkedIn open straight away.",
+          copied:"Copied",
           copyAria:"Copy email",selectToast:"Select the email address and press Ctrl+C",
           githubAria:"Open Wesley Melo's GitHub",
           linkedinAria:"Open Wesley Melo's LinkedIn",
@@ -484,20 +484,20 @@
       { n:"Helpdesk", cat:"sistemas", state:"atuacao", lvl:4 }
     ];
     const CATS = {
-      pt:{automacao:"Automação",linguagem:"Linguagem",base:"Base",fluxo:"Fluxo",sistemas:"Sistemas"},
+      pt:{automacao:"Automação",linguagem:"Linguagem",base:"Base",fluxo:"Fluxo de trabalho",sistemas:"Sistemas"},
       en:{automacao:"Automation",linguagem:"Language",base:"Base",fluxo:"Workflow",sistemas:"Systems"}
     };
     const STATES = {
-      pt:{praticando:"Praticando",estudando:"Estudando",base:"Base sólida",atuacao:"Atuação"},
-      en:{praticando:"Practicing",estudando:"Studying",base:"Solid base",atuacao:"Working in"}
+      pt:{praticando:"Praticando",estudando:"Estudando",base:"Base sólida",atuacao:"Uso diário"},
+      en:{praticando:"Practicing",estudando:"Studying",base:"Solid base",atuacao:"Daily use"}
     };
     const PROJECTS = [
       { key:"certificados", vis:"flow", demo:"certificados.html", tech:["n8n","HTTP","JavaScript","WhatsApp"] }
     ];
     const PROJECT_COPY = {
-      pt:{certificados:{name:"Alerta de vencimento de certificados",kind:"Automação em uso",badge:"Em uso",
+      pt:{certificados:{name:"Alerta de vencimento de certificados",badge:"Em uso",
         desc:"Fluxo no n8n que roda todo dia, consulta os certificados digitais, encontra os que vencem em até 7 dias, ignora os vencidos e envia o aviso pelo WhatsApp com um nome fácil de reconhecer."}},
-      en:{certificados:{name:"Certificate expiry alerts",kind:"Automation in use",badge:"In use",
+      en:{certificados:{name:"Certificate expiry alerts",badge:"In use",
         desc:"An n8n flow that runs every day, queries the digital certificates, finds the ones expiring within 7 days, skips the ones already expired and sends the alert over WhatsApp with a name that is easy to recognise."}}
     };
 
@@ -506,10 +506,8 @@
     const P = {
       sun:"M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4",
       moon:"M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z",
-      arrow:"M5 12h14M13 6l6 6-6 6",
       check:"M20 6 9 17l-5-5",
-      mail:"M3.5 5.5A1.5 1.5 0 0 1 5 4h14a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 19 20H5a1.5 1.5 0 0 1-1.5-1.5v-13ZM3.8 6.6 12 12.8l8.2-6.2",
-      up:"M12 19V5M6 11l6-6 6 6"
+      mail:"M3.5 5.5A1.5 1.5 0 0 1 5 4h14a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 19 20H5a1.5 1.5 0 0 1-1.5-1.5v-13ZM3.8 6.6 12 12.8l8.2-6.2"
     };
 
     /* ================= COMPONENTES ================= */
@@ -618,7 +616,6 @@
       const [copied,setCopied] = useState(false);
       const [toast,setToast] = useState("");
       const [now,setNow] = useState(()=>new Date());
-      const menuBtnRef = useRef(null);
 
       const t = COPY[lang] || COPY.pt;
       const tCats = CATS[lang] || CATS.pt;
@@ -724,7 +721,7 @@
                   <button type="button" onClick={()=>setTheme("dark")} aria-pressed={theme==="dark"}
                     aria-label={t.nav.dark} title={t.nav.dark}><Icon d={P.moon} s={15}/></button>
                 </div>
-                <button ref={menuBtnRef} type="button" className="tgl burger" onClick={()=>setMenuOpen(v=>!v)}
+                <button type="button" className="tgl burger" onClick={()=>setMenuOpen(v=>!v)}
                   aria-expanded={menuOpen} aria-controls="menu-mobile" aria-label={menuOpen?t.nav.closeMenu:t.nav.openMenu}>
                   {menuOpen?"✕":"☰"}
                 </button>
