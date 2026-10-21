@@ -76,18 +76,18 @@ Vermelho saturado, glow neon, cursor customizado, cards com sombra e raio grande
 - **O site abre sempre no escuro.** O script inline do `<head>` define `data-theme="dark"` antes de qualquer pintura da tela, ignorando a preferência do sistema e qualquer valor salvo. Sem flash de tema claro.
 - O botão sol/lua continua funcionando durante a visita: alterna na hora e salva a escolha em `localStorage`, mas a próxima entrada volta ao escuro.
 - `theme-color` do navegador é `#0B0B0D` (a cor da página escura), sem `media` condicional.
-- A página é **preta** (`#0B0B0D`) e **nada** tem fundo: `--surface` é `transparent`. Ficha, painel técnico, prévia do projeto, tecnologias, notas e a própria mensagem do WhatsApp ficam sem caixa, flutuando direto no preto.
+- A página é **preta** (`#0B0B0D`) e **nada** tem fundo: `--surface` é `transparent`. Ficha, painel técnico, prévia do projeto, tecnologias, notas e a própria mensagem do CRM ficam sem caixa, flutuando direto no preto.
 - Regra: no escuro, se algo é cartão, ele é **transparente**. A separação vem de tipografia, espaço e os tons internos (`--paper-2`, `--paper-3`).
 - Tons que continuam com fundo no escuro, e por quê: `--hover` (realce de linha ao passar o mouse), `--menu` (painel do menu mobile, precisa de fundo para ser lido), `--badge-bg` (etiqueta "EM USO", precisa contrastar) e `--inv-bg` (toast e inversões de hover).
 - Chat no escuro: `--chat-box`, `--chat-wall` e `--chat-bubble` são `transparent`, então a mensagem não tem caixa nenhuma. No claro, a mensagem é branca sobre a parede cinza.
-- Avatar do WhatsApp usa `--avatar-bg` / `--avatar-fg`: `#0C0C0D` e `#F2F2F0` no claro, `#1A1A1D` e `#F1F1EE` no escuro, para não virar um quadrado branco.
+- Avatar do CRM usa `--avatar-bg` / `--avatar-fg`: `#0C0C0D` e `#F2F2F0` no claro, `#1A1A1D` e `#F1F1EE` no escuro, para não virar um quadrado branco.
 
 ## Idioma
 - Português é o padrão. A escolha fica em `localStorage` (`wsm.lang`) e vale para as duas páginas, que usam a mesma chave.
 - Trocar o idioma troca também `<html lang>`, `<title>` e as meta tags de descrição.
 - Todo texto visível vem de um dicionário por idioma (`COPY` no `index.html`, `COPY` no `certificados.html`). Nada de string solta misturada entre os dois idiomas: **toda string da interface tem que passar pelo dicionário**, incluindo as prévias dos projetos, os `aria-label` e os `title`.
 - Atributos traduzidos por marcador: `data-i18n` (texto), `data-i18n-aria` (`aria-label`) e `data-i18n-title` (`title` + `aria-label`). O dicionário aceita chave com ponto (`nav.light`) para entrar em sub-objetos.
-- Termos técnicos (n8n, HTTP, JavaScript, WhatsApp, Evolution API) não são traduzidos. O nome da própria página (Wesley Melo) também não.
+- Termos técnicos (n8n, HTTP, JavaScript, API do CRM) não são traduzidos. O nome da própria página (Wesley Melo) também não.
 - O bloco `<noscript>` fica em português por definição: sem JavaScript não há como trocar o texto.
 - Como conferir: trocar para EN e varrer o texto da página em busca de palavra em português (e vice-versa). É o jeito mais rápido de achar string fixa.
 
