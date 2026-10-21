@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 chcp 65001 >nul
 title Publicar site no GitHub Pages (sem Git)
 cd /d "%~dp0"
