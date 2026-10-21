@@ -59,7 +59,7 @@
       margin:0;font-family:var(--font);background:var(--paper);color:var(--ink);
       -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.5;
       transition:background-color .4s var(--ease),color .4s var(--ease);
-      animation:fade .35s var(--ease) both;overflow-x:clip;
+      animation:fade .35s var(--ease) both;
     }
     @keyframes fade{from{opacity:0}to{opacity:1}}
     ::selection{background:var(--ink);color:var(--paper)}
@@ -128,8 +128,8 @@
     @media(max-width:768px){section{padding:64px 0}}
     .sec{display:grid;grid-template-columns:132px 1fr;gap:40px;align-items:start}
     @media(max-width:860px){.sec{grid-template-columns:1fr;gap:22px}}
-    .sec-num{font-family:var(--mono);font-size:44px;line-height:1;color:var(--paper-3);letter-spacing:-.04em;user-select:none}
-    [data-theme="dark"] .sec-num{color:#070709}
+    .sec-num{font-family:var(--mono);font-size:44px;line-height:1;color:var(--ink-3);letter-spacing:-.04em;user-select:none}
+    [data-theme="dark"] .sec-num{color:var(--ink-3)}
     .sec h2{font-size:clamp(1.9rem,4vw,3rem);font-weight:600;letter-spacing:-.04em}
     .sec-head{margin-bottom:44px}
     .sec-head .lede{margin-top:16px}
@@ -152,6 +152,25 @@
     .hero-strip{margin-top:64px;padding:16px 0;
       display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center}
     .hero-strip .mono{font-size:12px;color:var(--ink-2)}
+
+    /* ============ RESUMO (fatos) ============ */
+    .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+    @media(max-width:1000px){.facts{grid-template-columns:repeat(2,1fr);gap:22px}}
+    @media(max-width:560px){.facts{grid-template-columns:1fr}}
+    .fact b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+    .fact h3{font-size:1.02rem;font-weight:600;letter-spacing:-.02em;margin-bottom:6px}
+    .fact p{font-size:14px;color:var(--ink-2);line-height:1.6}
+
+    /* ============ CAPTURAS ============ */
+    .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:start}
+    @media(max-width:900px){.shots{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.shots{grid-template-columns:1fr}}
+    .shot{margin:0;background:#0d0d0d;padding:12px;overflow:hidden}
+    .shot-wide{grid-column:1/-1}
+    .shot img{display:block;width:100%;height:auto}
+    .shot figcaption{margin-top:12px;font-size:13.5px;color:var(--ink-2);line-height:1.55}
+    .shot-note{margin-top:22px;font-size:12.5px;color:var(--ink-3);max-width:64ch}
 
     /* ============ VISÃO GERAL ============ */
     .case-lead{display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:start;margin-top:8px}
@@ -291,12 +310,13 @@
 
   <header class="nav" id="topnav">
     <div class="nav-in">
-      <a class="brand" href="index.html" aria-label="Wesley Melo">
+      <a class="brand" href="index.html">
         <span class="brand-mark" aria-hidden="true">WM</span>Wesley Melo
       </a>
       <nav aria-label="Navegação do estudo de caso" data-i18n-aria="navStudy">
         <ul class="links">
-          <li><a href="#visao" data-i18n="navVisao">Visão geral</a></li>
+          <li><a href="#visao" data-i18n="navVisao">Resumo</a></li>
+          <li><a href="#capturas" data-i18n="navCapturas">O fluxo</a></li>
           <li><a href="#funciona" data-i18n="navFunciona">Como funciona</a></li>
           <li><a href="#demo" data-i18n="navDemo">Demonstração</a></li>
           <li><a href="#desafios" data-i18n="navDesafios">Desafios</a></li>
@@ -326,29 +346,22 @@
           <h1 id="case-title"><span data-i18n="heroTitle1">Automação de</span><br/><span class="l2" data-i18n="heroTitle2">Certificados Pix</span></h1>
           <p class="lede" data-i18n="heroLede">Do primeiro erro de dados até um aviso que chega no celular de quem precisa agir. Tudo descrito sem nomes de empresas, sistemas ou dados reais.</p>
           <div class="case-tags" id="caseTags"></div>
-          <div class="hero-meta" id="heroMeta"></div>
-        </div>
-        <div class="wrap">
-          <div class="hero-strip">
-            <span class="mono" data-i18n="stripLabel">Fluxo</span>
-            <span class="mono" id="stripSteps" style="color:var(--ink-2)"></span>
-          </div>
         </div>
       </section>
 
-      <!-- ===== VISÃO GERAL ===== -->
+      <!-- ===== RESUMO (fatos) ===== -->
       <section id="visao" aria-labelledby="visao-title">
         <div class="wrap">
           <div class="sec">
             <div class="sec-num" aria-hidden="true">01</div>
             <div>
               <div class="sec-head">
-                <h2 id="visao-title" data-i18n="visaoTitle">Visão geral</h2>
+                <h2 id="visao-title" data-i18n="visaoTitle">Em resumo</h2>
               </div>
-              <div class="case-lead">
+              <div class="facts" id="facts"></div>
+              <div class="case-lead" style="margin-top:44px">
                 <div>
-                  <p class="lede" data-i18n="visaoLede1">Acompanhar o vencimento de certificados digitais ligados ao Pix era uma tarefa manual: alguém precisava consultar a lista e lembrar de avisar antes do prazo. Quando o aviso não saía, o risco não era só perder a data, era perder a janela para agir.</p>
-                  <p class="lede" style="margin-top:16px" data-i18n="visaoLede2">A proposta foi transformar esse acompanhamento em um fluxo automático que roda todos os dias, consulta a fonte de dados, verifica quais certificados estão próximos do vencimento e envia o aviso pelo WhatsApp com antecedência de até 7 dias.</p>
+                  <p class="lede" data-i18n="visaoLede2">A proposta foi transformar esse acompanhamento em um fluxo automático que roda todos os dias, consulta a fonte de dados, verifica quais certificados estão próximos do vencimento e envia o aviso pelo WhatsApp com antecedência de até 7 dias.</p>
                 </div>
                 <aside class="case-panel" aria-label="Ficha técnica do projeto" data-i18n-aria="panelAria">
                   <span class="mono" data-i18n="fichaLabel">Ficha técnica</span>
@@ -360,11 +373,28 @@
         </div>
       </section>
 
+      <!-- ===== CAPTURAS ===== -->
+      <section id="capturas" aria-labelledby="capturas-title">
+        <div class="wrap">
+          <div class="sec">
+            <div class="sec-num" aria-hidden="true">02</div>
+            <div>
+              <div class="sec-head">
+                <h2 id="capturas-title" data-i18n="shotsTitle">O fluxo na prática</h2>
+                <p class="lede" data-i18n="shotsLede">As quatro etapas do fluxo, como estão configuradas no n8n.</p>
+              </div>
+              <div class="shots" id="shots"></div>
+              <p class="shot-note" data-i18n="shotNote">Capturas editadas antes de publicar: endpoints internos, chaves de acesso e dados de exemplo foram removidos.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ===== COMO FUNCIONA ===== -->
       <section id="funciona" aria-labelledby="funciona-title">
         <div class="wrap">
           <div class="sec">
-            <div class="sec-num" aria-hidden="true">02</div>
+            <div class="sec-num" aria-hidden="true">03</div>
             <div>
               <div class="sec-head">
                 <h2 id="funciona-title" data-i18n="funcionaTitle">Como funciona</h2>
@@ -384,7 +414,7 @@
       <section id="demo" aria-labelledby="demo-title">
         <div class="wrap">
           <div class="sec">
-            <div class="sec-num" aria-hidden="true">03</div>
+            <div class="sec-num" aria-hidden="true">04</div>
             <div>
               <div class="sec-head">
                 <h2 id="demo-title" data-i18n="demoTitle">Demonstração</h2>
@@ -424,7 +454,7 @@
       <section id="desafios" aria-labelledby="desafios-title">
         <div class="wrap">
           <div class="sec">
-            <div class="sec-num" aria-hidden="true">04</div>
+            <div class="sec-num" aria-hidden="true">05</div>
             <div>
               <div class="sec-head">
                 <h2 id="desafios-title" data-i18n="desafiosTitle">Desafios técnicos</h2>
@@ -440,7 +470,7 @@
       <section id="tecnologias" aria-labelledby="tec-title">
         <div class="wrap">
           <div class="sec">
-            <div class="sec-num" aria-hidden="true">05</div>
+            <div class="sec-num" aria-hidden="true">06</div>
             <div>
               <div class="sec-head">
                 <h2 id="tec-title" data-i18n="tecTitle">Tecnologias utilizadas</h2>
@@ -497,17 +527,42 @@
         desc:"Estudo de caso: automação em n8n que acompanha o vencimento de certificados digitais do Pix e envia alertas automáticos pelo WhatsApp.",
         ogDesc:"Do primeiro erro de dados até um aviso que chega no celular. Estudo de caso de automação com n8n.",
         skip:"Pular para o conteúdo",
-        navVisao:"Visão geral", navFunciona:"Como funciona", navDemo:"Demonstração",
+        navVisao:"Resumo", navCapturas:"O fluxo", navFunciona:"Como funciona", navDemo:"Demonstração",
         navDesafios:"Desafios", navTecnologias:"Tecnologias",
         navStudy:"Navegação do estudo de caso", navFinal:"Navegação final",
         panelAria:"Ficha técnica do projeto", flowAria:"Etapas da automação",
         nav:{lang:"Idioma",theme:"Tema",light:"Modo claro",dark:"Modo escuro"},
+        visaoTitle:"Em resumo",
+        facts:[
+          {k:"Objetivo", t:"Avisar todo dia o que vence em até 7 dias",
+           d:"Um aviso que chega no WhatsApp com o nome legível do certificado, a data e quantos dias faltam."},
+          {k:"Problema", t:"A checagem era manual",
+           d:"Alguém consultava a lista de certificados e precisava lembrar de avisar antes do prazo. Quando o aviso não saía, perdia-se a janela para renovar."},
+          {k:"Solução", t:"Um fluxo no n8n, todo dia",
+           d:"Agendamento diário, consulta por HTTP, filtro por JavaScript e envio por WhatsApp. O aviso sai pronto, sem depender de alguém lembrar."},
+          {k:"Resultado", t:"O aviso passou a sair sozinho",
+           d:"Todo dia, no mesmo horário, com o nome de quem precisa agir. Quanto tempo isso economiza só dá para medir no uso real, então não invento número."}
+        ],
+        shotsTitle:"O fluxo na prática",
+        shotsLede:"As quatro etapas do fluxo, como estão configuradas no n8n.",
+        shotNote:"Capturas editadas antes de publicar: endpoints internos, chaves de acesso e dados de exemplo foram removidos.",
+        shots:[
+          {src:"assets/fluxo-n8n.png", wide:true,
+           cap:"O fluxo inteiro em quatro etapas: agendamento, consulta HTTP, tratamento em JavaScript e envio.",
+           alt:"Fluxo de automação no n8n com quatro etapas: agendamento, requisição HTTP, código em JavaScript e envio por WhatsApp"},
+          {src:"assets/passo-consulta-http.png",
+           cap:"A consulta da lista de certificados por requisição HTTP, com autenticação.",
+           alt:"Nó de requisição HTTP do n8n com método GET e autenticação configurada"},
+          {src:"assets/passo-javascript.png",
+           cap:"O código que separa o que vence em 7 dias e monta a mensagem.",
+           alt:"Código JavaScript no n8n filtrando certificados e montando a mensagem de alerta"},
+          {src:"assets/passo-envio-whatsapp.png",
+           cap:"O envio pelo WhatsApp, com o cabeçalho de autenticação da API.",
+           alt:"Nó de requisição HTTP do n8n com método POST e cabeçalho de API para envio de mensagem"}
+        ],
         backPortfolio:"← Portfólio", backTop:"← Voltar ao portfólio", footBack:"← Voltar ao portfólio",
         heroTitle1:"Automação de", heroTitle2:"Certificados Pix",
         heroLede:"Do primeiro erro de dados até um aviso que chega no celular de quem precisa agir. Tudo descrito sem nomes de empresas, sistemas ou dados reais.",
-        stripLabel:"Fluxo",
-        visaoTitle:"Visão geral",
-        visaoLede1:"Acompanhar o vencimento de certificados digitais ligados ao Pix era uma tarefa manual: alguém precisava consultar a lista e lembrar de avisar antes do prazo. Quando o aviso não saía, o risco não era só perder a data, era perder a janela para agir.",
         visaoLede2:"A proposta foi transformar esse acompanhamento em um fluxo automático que roda todos os dias, consulta a fonte de dados, verifica quais certificados estão próximos do vencimento e envia o aviso pelo WhatsApp com antecedência de até 7 dias.",
         fichaLabel:"Ficha técnica",
         funcionaTitle:"Como funciona",
@@ -584,17 +639,42 @@
         desc:"Case study: an n8n automation that tracks the expiry of Pix digital certificates and sends automatic alerts over WhatsApp.",
         ogDesc:"From the first data error to an alert that reaches the phone. An n8n automation case study.",
         skip:"Skip to content",
-        navVisao:"Overview", navFunciona:"How it works", navDemo:"Demo",
+        navVisao:"In short", navCapturas:"The flow", navFunciona:"How it works", navDemo:"Demo",
         navDesafios:"Challenges", navTecnologias:"Technologies",
         navStudy:"Case study navigation", navFinal:"Final navigation",
         panelAria:"Project technical sheet", flowAria:"Automation steps",
         nav:{lang:"Language",theme:"Theme",light:"Light mode",dark:"Dark mode"},
+        visaoTitle:"In short",
+        facts:[
+          {k:"Objective", t:"Flag every day what expires within 7 days",
+           d:"An alert that lands on WhatsApp with the readable certificate name, the date and the days left."},
+          {k:"Problem", t:"The check was manual",
+           d:"Someone had to look up the certificate list and remember to warn before the deadline. When the alert did not go out, the window to renew was lost."},
+          {k:"Solution", t:"An n8n flow, every day",
+           d:"Daily schedule, HTTP query, JavaScript filter and WhatsApp delivery. The alert goes out ready, with nobody having to remember."},
+          {k:"Result", t:"The alert now goes out on its own",
+           d:"Every day, at the same time, naming whoever has to act. How much time that saves can only be measured in real use, so I am not inventing a number."}
+        ],
+        shotsTitle:"The flow in practice",
+        shotsLede:"The four steps of the flow, as they are configured in n8n.",
+        shotNote:"Screenshots were edited before publishing: internal endpoints, access keys and sample data were removed.",
+        shots:[
+          {src:"assets/fluxo-n8n.png", wide:true,
+           cap:"The whole flow in four steps: schedule, HTTP query, JavaScript processing and delivery.",
+           alt:"Automation flow in n8n with four steps: schedule, HTTP request, JavaScript code and WhatsApp delivery"},
+          {src:"assets/passo-consulta-http.png",
+           cap:"The certificate list is queried over HTTP, with authentication.",
+           alt:"n8n HTTP request node with GET method and authentication configured"},
+          {src:"assets/passo-javascript.png",
+           cap:"The code that separates what expires within 7 days and builds the message.",
+           alt:"JavaScript code in n8n filtering certificates and building the alert message"},
+          {src:"assets/passo-envio-whatsapp.png",
+           cap:"Delivery through WhatsApp, with the API authentication header.",
+           alt:"n8n HTTP request node with POST method and API header for message delivery"}
+        ],
         backPortfolio:"← Portfolio", backTop:"← Back to the portfolio", footBack:"← Back to the portfolio",
         heroTitle1:"Automation of", heroTitle2:"Pix Certificates",
         heroLede:"From the first data error to an alert that reaches the phone of whoever has to act. Everything described without company, system or real data names.",
-        stripLabel:"Flow",
-        visaoTitle:"Overview",
-        visaoLede1:"Tracking the expiry of Pix digital certificates was a manual task: someone had to check the list and remember to warn before the deadline. When the alert did not go out, the risk was not only losing the date, it was losing the window to act.",
         visaoLede2:"The proposal was to turn that tracking into an automatic flow that runs every day, queries the data source, checks which certificates are close to expiring and sends the alert over WhatsApp up to 7 days in advance.",
         fichaLabel:"Technical sheet",
         funcionaTitle:"How it works",
@@ -722,7 +802,6 @@
 
     /* ---------- RENDER ---------- */
     var tags = document.getElementById("caseTags");
-    var heroMeta = document.getElementById("heroMeta");
     var panel = document.getElementById("casePanel");
     var flowNodes = document.getElementById("flowNodes");
     var flowDetail = document.getElementById("flowDetail");
@@ -731,16 +810,37 @@
     var challenges = document.getElementById("challenges");
     var techGrid = document.getElementById("techGrid");
     var learnings = document.getElementById("learnings");
+    var factsBox = document.getElementById("facts");
+    var shotsBox = document.getElementById("shots");
     var current = 0;
     var openCh = 0;
+
+    function renderFacts(){
+      factsBox.innerHTML = "";
+      c.facts.forEach(function(f){
+        var box = el("div","fact");
+        box.appendChild(el("b",null,f.k));
+        box.appendChild(el("h3",null,f.t));
+        box.appendChild(el("p",null,f.d));
+        factsBox.appendChild(box);
+      });
+    }
+
+    function renderShots(){
+      shotsBox.innerHTML = "";
+      c.shots.forEach(function(s){
+        var fig = el("figure", s.wide ? "shot shot-wide" : "shot");
+        var img = document.createElement("img");
+        img.src = s.src; img.alt = s.alt; img.loading = "lazy"; img.decoding = "async";
+        fig.appendChild(img);
+        fig.appendChild(el("figcaption",null,s.cap));
+        shotsBox.appendChild(fig);
+      });
+    }
 
     function renderStatic(){
       tags.innerHTML = "";
       CASE_TAGS.forEach(function(t){ tags.appendChild(el("span","tag",t)); });
-
-      heroMeta.innerHTML = "";
-      c.meta.forEach(function(m){ var d=el("div"); d.appendChild(el("span","mono",m[0])); d.appendChild(el("b",null,m[1])); heroMeta.appendChild(d); });
-      document.getElementById("stripSteps").textContent = c.flow.map(function(f){ return f.s; }).join("  ·  ");
 
       panel.innerHTML = "";
       c.panel.forEach(function(r){ var d=el("div"); d.appendChild(el("dt",null,r.k)); d.appendChild(el("dd",null,r.v)); panel.appendChild(d); });
@@ -841,6 +941,8 @@
         b.setAttribute("aria-pressed", document.documentElement.dataset.theme===want ? "true":"false");
       });
       renderStatic();
+      renderFacts();
+      renderShots();
       renderFlow();
       renderChallenges();
       paintLang();
