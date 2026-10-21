@@ -292,7 +292,7 @@
     .c-item:hover .c-ic{background:var(--inv-bg);color:var(--inv-ink)}
     .c-item .c-ic svg{width:17px;height:17px}
     .c-item b{display:block;font-size:15px;font-weight:550;margin-top:2px}
-    .c-item small{display:block;font-size:12.5px;color:var(--ink-3);margin-top:4px;word-break:break-all}
+    .c-item small{display:block;font-size:12.5px;color:var(--ink-3);margin-top:4px;overflow-wrap:break-word;word-break:normal}
     .c-item[aria-disabled="true"]{cursor:default;color:var(--ink-3)}
     .c-item[aria-disabled="true"]:hover{background:none}
     .c-item[aria-disabled="true"] .c-ic{opacity:.4}
@@ -399,7 +399,8 @@
           lede:"Se quiser falar sobre automação, sistemas ou um processo que pode ser automatizado, escreva. O clique no ícone do e-mail copia o endereço.",
           email:"E-mail",copied:"Copiado",github:"GitHub",linkedin:"LinkedIn",soon:"Perfil em breve",
           copyAria:"Copiar e-mail",selectToast:"Selecione o e-mail e pressione Ctrl+C",
-          githubAria:"Abrir o GitHub de Wesley Melo"},
+          githubAria:"Abrir o GitHub de Wesley Melo",
+          linkedinAria:"Abrir o LinkedIn de Wesley Melo"},
         footer:{status:"● helpdesk · automação",top:"Voltar ao topo"}
       },
       en: {
@@ -448,7 +449,8 @@
           lede:"If you want to talk about automation, systems or a process that could be automated, write to me. Clicking the email icon copies the address.",
           email:"Email",copied:"Copied",github:"GitHub",linkedin:"LinkedIn",soon:"Profile coming soon",
           copyAria:"Copy email",selectToast:"Select the email address and press Ctrl+C",
-          githubAria:"Open Wesley Melo's GitHub"},
+          githubAria:"Open Wesley Melo's GitHub",
+          linkedinAria:"Open Wesley Melo's LinkedIn"},
         footer:{status:"● helpdesk · automation",top:"Back to top"}
       }
     };
@@ -891,13 +893,13 @@
                         <b>{t.contact.github}</b>
                         <small>github.com/wsmelo-dev</small>
                       </a>
-                      <span className="c-item" aria-disabled="true" aria-label={t.contact.linkedin+", "+t.contact.soon}>
+                      <a className="c-item" href="https://www.linkedin.com/in/wesley-santos-de-melo-b10681445" target="_blank" rel="noopener noreferrer" aria-label={t.contact.linkedinAria}>
                         <span className="c-ic" aria-hidden="true">
                           <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
                         </span>
                         <b>{t.contact.linkedin}</b>
-                        <small>{t.contact.soon}</small>
-                      </span>
+                        <small>linkedin.com/in/wesley-santos-de-melo-b10681445</small>
+                      </a>
                     </div>
                     <input id="email-fallback" hidden readOnly value={EMAIL}
                       onFocus={(e)=>e.target.select()} aria-label={t.contact.copyAria}/>

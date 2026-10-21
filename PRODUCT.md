@@ -26,7 +26,7 @@ O site abre sempre no modo escuro, nas duas páginas. O visitante pode alternar 
 ## Regras de conteúdo
 - Nada de dado real: empresas, sistemas, clientes e credenciais aparecem sempre como fictícios.
 - Nível de habilidade é autoavaliação honesta, com rótulo (`Base sólida`, `Praticando`, `Estudando`) e não número inventado.
-- GitHub e LinkedIn com link real apenas quando o perfil existir; caso contrário, "Perfil em breve" com `aria-disabled`.
+- E-mail, GitHub e LinkedIn com link real. Se algum perfil ainda não existir, marcar como "Perfil em breve" com `aria-disabled`, sem link quebrado.
 - Sem promessa de resultado e sem métrica sem fonte.
 
 ## Restrições técnicas
