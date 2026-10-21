@@ -165,7 +165,7 @@
 
     /* painel de leitura (dado real, não enfeite) */
     .panel{background:var(--surface);padding:22px 22px 18px}
-    .panel-h{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:10px}
+    .panel-h{display:flex;justify-content:flex-end;align-items:baseline;padding-bottom:10px}
     .panel dl{margin:0;display:grid;gap:0}
     .panel dl > div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
       padding:11px 0}
@@ -369,9 +369,9 @@
           role:"Auxiliar de helpdesk e sistemas",
           lede:"Trabalho com suporte e sistemas e uso automação com n8n para tirar tarefas repetitivas do caminho. Estudo programação para construir soluções cada vez mais completas.",
           cta1:"Ver projetos",cta2:"Entrar em contato"},
-        panel:{title:"Ficha",foco:"Foco",focoVal:"Automação com n8n",base:"Base",baseVal:"Helpdesk e sistemas",
+        panel:{title:"Resumo",foco:"Foco",focoVal:"Automação com n8n",base:"Base",baseVal:"Helpdesk e sistemas",
           estuda:"Estudando",estudaVal:"Programação",projetos:"Projetos",projetosVal:"no portfólio",
-          interesse:"Interesse",interesseVal:"Automação e dados"},
+          interesse:"Interesse",interesseVal:"Programação"},
         ticker:["n8n","Automação","HTTP","JavaScript","HTML","CSS","Git","Helpdesk","WhatsApp","Integrações","Dados","Sistemas"],
         about:{title:"Sobre mim",
           lede:"Sou o Wesley. Gosto de tecnologia, de entender como as coisas funcionam por dentro e de resolver problemas do dia a dia com automação.",
@@ -425,9 +425,9 @@
           role:"Helpdesk and systems assistant",
           lede:"I work with support and systems and use n8n automation to take repetitive work off the table. I study programming to build ever more complete solutions.",
           cta1:"See projects",cta2:"Get in touch"},
-        panel:{title:"Profile",foco:"Focus",focoVal:"Automation with n8n",base:"Base",baseVal:"Helpdesk and systems",
+        panel:{title:"Summary",foco:"Focus",focoVal:"Automation with n8n",base:"Base",baseVal:"Helpdesk and systems",
           estuda:"Studying",estudaVal:"Programming",projetos:"Projects",projetosVal:"in the portfolio",
-          interesse:"Interest",interesseVal:"Automation and data"},
+          interesse:"Interest",interesseVal:"Programming"},
         ticker:["n8n","Automation","HTTP","JavaScript","HTML","CSS","Git","Helpdesk","WhatsApp","Integrations","Data","Systems"],
         about:{title:"About me",
           lede:"I am Wesley. I like technology, understanding how things work on the inside, and solving day to day problems with automation.",
@@ -762,7 +762,6 @@
 
                   <aside className="panel" aria-label={t.panel.title}>
                     <div className="panel-h">
-                      <span className="mono">{t.panel.title}</span>
                       <span className="clock">{clock}</span>
                     </div>
                     <dl>
