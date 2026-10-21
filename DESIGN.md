@@ -24,6 +24,7 @@ Outros: `--max 1180px` · `--nav-h 60px` · `--ease cubic-bezier(.16,1,.3,1)` ·
 ## Formato
 - Raio **0** em superfícies, etiquetas e botões. Sem pill, sem card com sombra.
 - **Sem bordas de 1px.** Nenhum contêiner, painel, etiqueta ou item de lista usa borda. A separação vem de espaço, de fundo (`--surface`, `--paper-2`) e de hierarquia tipográfica.
+- **Sem fundo no hover.** Nenhuma linha de lista ganha bloco ao passar o mouse: no tema claro o realce é o branco quase imperceptível do `--surface`, no tema escuro o `--surface` é transparente e não aparece nada. Nada de "barra" atrás do texto.
 - Exceções, e só estas: o sublinhado do link de projeto (é afordância de texto, não caixa) e a régua desenhada da seção de habilidades.
 - Estado ativo e destaque usam **superfície invertida** (`--inv-bg` / `--inv-ink`), nunca contorno.
 - Fundo com malha de pontos de 28px, mascarada no topo, atrás de tudo (`pointer-events:none`).
