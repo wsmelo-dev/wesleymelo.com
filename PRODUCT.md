@@ -191,7 +191,7 @@ Figura com régua superior, número, imagem e legenda. Clique abre `<dialog>` co
 Uma captura por vez, **sem moldura**: imagem em tamanho natural (nítida), fundo do papel, sem plate, sem regras/bordas ao redor ou embaixo. Estrutura: `viewport` (overflow oculto, altura animada pelo JS para a altura do slide ativo) → `track` (grid de colunas 100%, transform) → slides `.shot`. Barra: setas do sistema `←` `→` em mono à esquerda, contador `01 / 04` (`aria-live`) à direita; slides inativos com `aria-hidden` + `inert`; wrap-around; teclas `←`/`→` no viewport; arraste de 40px+. Reduced motion zera transições. Sem JS: slides empilhados, barra oculta. Usado na home (dossiê) e no estudo de caso.
 
 ### 5.10 Painel de detalhes (`.details`)
-Página-dentro-da-página do dossiê na home, substitui o link que abria outra aba. Botão `.js-details` (batata `+` gira 45° quando aberto, rótulo troca entre "Mostrar detalhes"/"Esconder detalhes" — a chave `data-i18n` do rótulo é atualizada para o troca-idioma manter o estado). Painel com `grid-template-rows: 0fr → 1fr` animado, `inert` quando fechado; contém resumo (`.summary`), acordeões de etapas e desafios, ferramentas (`.tech`) e aprendizados (`.learn`). Sem JS: painel aberto e botão oculto.
+Página-dentro-da-página do dossiê na home, substitui o link que abria outra aba. Botão `.js-details` (glifo `+` gira 45° quando aberto, rótulo troca entre "Mostrar detalhes"/"Esconder detalhes" — a chave `data-i18n` do rótulo é atualizada para o troca-idioma manter o estado). Painel com `grid-template-rows: 0fr → 1fr` animado, `inert` quando fechado. Conteúdo **resumido**: os quatro fatos do resumo (`.summary`), as ferramentas (`.tech`) e o link para o estudo de caso — as etapas, os desafios e os aprendizados ficam apenas na página do estudo. Estado inicial (`inert`/`aria-hidden`) aplicado pelo JS; sem JS o painel fica aberto e acessível.
 
 ### 5.11 Formulário
 `label` visível acima, `gap 8px`, input com régua inferior (sem caixa), foco em `--accent`, erro inline em `--accent` com `aria-describedby`. Envio abre o cliente de e-mail com nome e mensagem preenchidos. Toast confirma.
@@ -208,7 +208,7 @@ Idioma: dois botões `PT` / `EN` em mono, ativo em `--ink` + ponto de 3px embaix
 
 ### Home
 1. **Abertura (cascata `data-rise`)** — nome, função, uma frase, duas ações, ficha (foco/base/estudo) e relógio local. Régua com "Portfólio · 2026".
-2. **Projetos** — dossiê do projeto em uso: título, resumo, ficha curta, esquema do fluxo em CSS, **carrossel com as capturas reais (01–04, limpo, sem moldura)**, etiquetas, **botão "Mostrar detalhes"** que abre o painel completo na própria página (resumo, sete etapas, desafios, ferramentas e aprendizados) + link secundário para a página do estudo de caso. Nota sobre próximos projetos.
+2. **Projetos** — dossiê do projeto em uso: título, resumo, ficha curta, esquema do fluxo em CSS, **carrossel com as capturas reais (01–04, limpo, sem moldura)**, etiquetas, **botão "Mostrar detalhes"** que abre um painel resumido na própria página (resumo em quatro fatos + ferramentas + link para o estudo completo). O conteúdo extenso (etapas, desafios, aprendizados) fica só no estudo de caso. Nota sobre próximos projetos.
 3. **Sobre** — três parágrafos + lista de trajetória (sem datas inventadas).
 4. **Habilidades** — três grupos honestos (uso diário, praticando, estudando) em lista com régua.
 5. **Contato** — formulário + canais diretos (e-mail, GitHub, LinkedIn), e-mail visível por extenso com botão "copiar".

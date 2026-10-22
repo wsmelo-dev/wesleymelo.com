@@ -306,8 +306,6 @@ html:not(.js) .js-details{display:none}
 .js-details.is-open .btn__icon{transform:rotate(45deg)}
 .details__body{padding:40px 0 8px}
 .details__body > .label{margin-bottom:0}
-.details__body .acc{margin-top:24px}
-.details__body .learn-head{margin-top:36px}
 .details__link{margin-top:32px}
 
 /* ---------- responsivo ---------- */
