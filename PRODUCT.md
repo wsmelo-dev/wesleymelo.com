@@ -187,10 +187,13 @@ Lista vertical. Cada etapa é um botão; a ativa mostra o detalhe logo abaixo. U
 ### 5.8 Captura (`.shot`)
 Figura com régua superior, número, imagem e legenda. Clique abre `<dialog>` com a imagem ampliada (Esc fecha, foco volta). `loading="lazy"` fora do carrossel, `width`/`height` declarados.
 
-### 5.9 Carrossel de capturas (`.crs`)
-Uma captura por vez, dentro da captura 00 (visão geral). Estrutura: `viewport` (overflow oculto, régua, altura animada pelo JS para a altura do slide ativo) → `track` (grid de colunas 100%, transform) → slides `.shot`. Barra inferior: setas do sistema `←` `→` em mono à esquerda, contador `01 / 03` (`aria-live`) à direita. Estados: slides inativos com `aria-hidden` + `inert`. Interação: clique, teclas `←`/`→` no viewport (tabbable), arraste de 40px+. Reduced motion: transições zeradas globalmente. Sem JS: slides empilhados, barra oculta.
+### 5.9 Carrossel de capturas (`.crs`, compartilhado)
+Uma captura por vez, **sem moldura**: imagem em tamanho natural (nítida), fundo do papel, sem plate, sem regras/bordas ao redor ou embaixo. Estrutura: `viewport` (overflow oculto, altura animada pelo JS para a altura do slide ativo) → `track` (grid de colunas 100%, transform) → slides `.shot`. Barra: setas do sistema `←` `→` em mono à esquerda, contador `01 / 04` (`aria-live`) à direita; slides inativos com `aria-hidden` + `inert`; wrap-around; teclas `←`/`→` no viewport; arraste de 40px+. Reduced motion zera transições. Sem JS: slides empilhados, barra oculta. Usado na home (dossiê) e no estudo de caso.
 
-### 5.10 Formulário
+### 5.10 Painel de detalhes (`.details`)
+Página-dentro-da-página do dossiê na home, substitui o link que abria outra aba. Botão `.js-details` (batata `+` gira 45° quando aberto, rótulo troca entre "Mostrar detalhes"/"Esconder detalhes" — a chave `data-i18n` do rótulo é atualizada para o troca-idioma manter o estado). Painel com `grid-template-rows: 0fr → 1fr` animado, `inert` quando fechado; contém resumo (`.summary`), acordeões de etapas e desafios, ferramentas (`.tech`) e aprendizados (`.learn`). Sem JS: painel aberto e botão oculto.
+
+### 5.11 Formulário
 `label` visível acima, `gap 8px`, input com régua inferior (sem caixa), foco em `--accent`, erro inline em `--accent` com `aria-describedby`. Envio abre o cliente de e-mail com nome e mensagem preenchidos. Toast confirma.
 
 ### 5.11 Toast
@@ -204,18 +207,20 @@ Idioma: dois botões `PT` / `EN` em mono, ativo em `--ink` + ponto de 3px embaix
 ## 6. Composição
 
 ### Home
-1. **Abertura** — nome, função, uma frase, duas ações, ficha (foco/base/estudo) e relógio local. Régua com "Portfólio · 2026".
-2. **Projetos** — dossiê do projeto em uso: título, resumo, ficha curta, captura grande, etiquetas, link para o estudo de caso. Nota sobre próximos projetos.
+1. **Abertura (cascata `data-rise`)** — nome, função, uma frase, duas ações, ficha (foco/base/estudo) e relógio local. Régua com "Portfólio · 2026".
+2. **Projetos** — dossiê do projeto em uso: título, resumo, ficha curta, esquema do fluxo em CSS, **carrossel com as capturas reais (01–04, limpo, sem moldura)**, etiquetas, **botão "Mostrar detalhes"** que abre o painel completo na própria página (resumo, sete etapas, desafios, ferramentas e aprendizados) + link secundário para a página do estudo de caso. Nota sobre próximos projetos.
 3. **Sobre** — três parágrafos + lista de trajetória (sem datas inventadas).
 4. **Habilidades** — três grupos honestos (uso diário, praticando, estudando) em lista com régua.
-5. **Contato** — formulário + canais diretos (e-mail, GitHub, LinkedIn), e-mail visível por extenso.
+5. **Contato** — formulário + canais diretos (e-mail, GitHub, LinkedIn), e-mail visível por extenso com botão "copiar".
 6. **Rodapé** — ©, status, voltar ao topo.
 
+A home **não abre outra página** para apresentar o projeto: o carrossel e o botão de detalhes contêm tudo na própria rolagem.
+
 ### Estudo de caso
-1. **Abertura** — voltar, título, uma frase, etiquetas.
+1. **Abertura (cascata `data-rise`)** — voltar, título, uma frase, etiquetas.
 2. **Ficha** — faixa com ambiente, gatilho, fonte, janela, saída.
 3. **01 Em resumo** — quatro fatos (objetivo, problema, solução, resultado).
-4. **02 O fluxo na prática** — captura 00 (visão geral, largura total) + carrossel das capturas 01–03 com setas, contador e aviso de higienização.
+4. **02 O fluxo na prática** — carrossel com as quatro capturas (01–04) + aviso de higienização.
 5. **03 Como funciona** — sete etapas em acordeão.
 6. **04 Demonstração** — mensagem fictícia em formato de registro + o que ela faz.
 7. **05 Desafios técnicos** — cinco acordeões.
@@ -228,8 +233,10 @@ Idioma: dois botões `PT` / `EN` em mono, ativo em `--ink` + ponto de 3px embaix
 
 - Durações: `160ms` (hover), `320ms` (estado), `600ms` (entrada).
 - Curva: `cubic-bezier(.22,1,.36,1)`.
-- Só `transform` e `opacity`; altura animada apenas em acordeão (`grid-template-rows`).
-- Entrada: linhas sobem 10px e aparecem, uma vez, via `IntersectionObserver`.
+- Só `transform` e `opacity`; altura animada apenas em acordeão/carrossel/detalhes (`grid-template-rows` + height).
+- Entrada em duas camadas: hero entra em cascata no 1º paint (`data-rise` 1–5, atraso de 60ms por nível); o resto da página sobe via `IntersectionObserver` com escalonado de 70ms entre irmãos no mesmo lote.
+- Seção ativa no menu: sublinha de 1px `--accent` cresce à esquerda→direita (`.topnav a.is-active`).
+- Entrada do site: `scrollRestoration: manual` + volta ao topo quando não há `#hash` (refresh nunca joga o visitante em outra seção).
 - Nada de loop, parallax, marquee ou digitação.
 - `prefers-reduced-motion: reduce`: tudo estático, conteúdo visível.
 
@@ -308,7 +315,9 @@ Nenhuma seção depende de hover para ser entendida.
 - **Sem cards:** toda separação usa régua e espaço, o que reduz ruído e mantém a página leve.
 - **Etapas em acordeão vertical:** no mobile o padrão anterior (rail horizontal de sete itens) ficava apertado; a lista vertical funciona igual nos dois tamanhos.
 - **Capturas ampliáveis em `<dialog>`:** evita dependência de lightbox e mantém teclado/Esc nativos.
-- **Carrossel nas capturas 01–03 (pedido do autor, 2026-10-22):** substitui a grade de capturas; a captura 00 permanece em largura total como visão geral. Vanilla JS (~80 linhas), sem controle de biblioteca; `inert` nos slides inativos mantém o foco no slide corrente.
+- **Carrossel nas capturas (pedido do autor, 2026-10-22):** substitui a grade de capturas; as quatro capturas (01–04) ficam no carrossel, com a visão geral como slide de abertura. Vanilla JS, sem controle de biblioteca; `inert` nos slides inativos mantém o foco no slide corrente.
+- **Detalhes do projeto na própria home (pedido do autor, 2026-10-22):** o clique no projeto não abre mais outra aba; o botão "Mostrar detalhes" expande o estudo completo na própria rolagem e a página do estudo de caso segue como referência (link secundário). Estado inicial (`inert`/`aria-hidden`) é aplicado pelo JS; sem JavaScript o painel fica aberto e acessível.
+- **Entrada sempre no topo (pedido do autor, 2026-10-22):** o refresh restaurava a rolagem e o visitante aterrissava no Contato; `scrollRestoration: manual` corrige e `#hash` continua respeitado.
 - **i18n por atributo (`data-i18n`):** mantém o HTML legível e o dicionário em um arquivo só.
 - **Fontes via Google Fonts:** sem build para self-host; fallback de sistema garante leitura se o CDN falhar.
 - **`PLAN.md`:** documenta o processo desta reconstrução; não é fonte de verdade do produto.
