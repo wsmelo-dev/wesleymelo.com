@@ -1,5 +1,5 @@
 /* ============================================================
-   home.js — formulário de contato (mailto, com validação)
+   home.js — formulário de contato, copiar e-mail, detalhes
    ============================================================ */
 (function () {
   "use strict";
@@ -95,4 +95,37 @@
       fallback();
     }
   });
+})();
+
+/* ---------- painel de detalhes do dossiê ---------- */
+(function () {
+  var btn = document.getElementById("dossier-btn");
+  var panel = document.getElementById("dossier-details");
+  if (!btn || !panel || typeof window.WSM === "undefined") return;
+
+  var label = btn.querySelector("[data-i18n]");
+
+  function set(open) {
+    btn.classList.toggle("is-open", open);
+    panel.classList.toggle("is-open", open);
+    btn.setAttribute("aria-expanded", String(open));
+    var key = open ? "home.projects.detailsOff" : "home.projects.details";
+    /* guarda a chave atual para o troca-idioma escrever o rótulo certo */
+    label.setAttribute("data-i18n", key);
+    label.textContent = window.WSM.t(key);
+    if (open) {
+      panel.removeAttribute("inert");
+      panel.removeAttribute("aria-hidden");
+    } else {
+      panel.setAttribute("inert", "");
+      panel.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  btn.addEventListener("click", function () {
+    set(btn.getAttribute("aria-expanded") !== "true");
+  });
+
+  /* estado inicial: fechado e fora da navegação por teclado */
+  set(false);
 })();

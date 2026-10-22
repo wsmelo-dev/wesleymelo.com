@@ -116,12 +116,7 @@ html:not(.js) .acc__x{display:none}
 }
 
 /* ---------- capturas ---------- */
-.shots{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:clamp(28px,4vw,44px);margin-top:36px;
-}
 .shot{margin:0;border-top:var(--rule-2);padding-top:12px;min-width:0}
-.shot--wide{grid-column:1/-1}
 .shot__btn{
   display:block;position:relative;width:100%;
   padding:clamp(12px,2vw,22px);
@@ -219,6 +214,102 @@ dialog.lightbox img{
 .regmark::before{left:0;right:0;top:8.5px;height:1px}
 .regmark::after{top:0;bottom:0;left:8.5px;width:1px}
 
+/* ---------- carrossel de capturas (compartilhado) ----------
+   limpo: sem moldura ao redor e sem règuas internas;
+   imagem em tamanho natural para nitidez */
+html.js .crs{margin-top:36px}
+html.js .crs__viewport{
+  overflow:hidden;
+  transition:height var(--slow) var(--ease);
+}
+html.js .crs__track{
+  display:grid;grid-auto-flow:column;grid-auto-columns:100%;align-items:start;
+  transition:transform var(--slow) var(--ease);
+}
+html.js .crs__slide{border-top:0;padding-top:6px}
+html.js .crs__slide .shot__btn{width:fit-content;max-width:100%;background:none;padding:0}
+html.js .crs__slide .shot__btn img{width:auto;height:auto;max-width:100%}
+html.js .crs__slide .shot__btn:hover img{transform:none}
+html:not(.js) .crs__bar{display:none}
+
+.crs__bar{
+  display:flex;align-items:center;gap:10px;
+  margin-top:10px;
+}
+.crs__btn{
+  font-family:var(--mono);font-size:15px;line-height:1;
+  padding:8px 10px;cursor:pointer;
+  color:var(--ink-3);background:none;border:0;
+  transition:color var(--fast) var(--ease);
+}
+.crs__btn:hover{color:var(--ink)}
+.crs__count{
+  margin-left:auto;
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink-3);
+}
+
+/* ---------- resumo do projeto (compartilhado) ---------- */
+.summary{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  border-top:var(--rule-2);margin-top:32px;
+}
+.summary__item{padding:24px 32px 24px 0;border-bottom:var(--rule);min-width:0}
+.summary__item:nth-child(even){border-left:1px solid var(--line);padding-left:32px;padding-right:0}
+.summary__item h3{
+  margin-top:10px;font-size:1.05rem;line-height:1.4;
+  letter-spacing:-.01em;font-weight:600;
+}
+.summary__item p:last-child{
+  margin-top:8px;max-width:46ch;
+  font-size:.9375rem;line-height:1.7;color:var(--ink-2);
+}
+
+/* ---------- stack e aprendizados (compartilhado) ---------- */
+.tech{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0 48px;margin-top:28px;border-top:var(--rule-2);
+}
+.tech__row{
+  display:grid;grid-template-columns:32px minmax(0,1fr);
+  gap:14px;padding:14px 0;border-bottom:var(--rule);
+}
+.tech__n{font-family:var(--mono);font-size:12px;line-height:1.7;color:var(--accent)}
+.tech__name{font-size:.9375rem;font-weight:500;line-height:1.45}
+.tech__use{display:block;margin-top:2px;font-size:.875rem;line-height:1.55;color:var(--ink-3)}
+
+.learn-head{
+  margin-top:48px;font-size:var(--t-h3);font-weight:600;
+  letter-spacing:-.02em;line-height:1.2;
+}
+.learn{list-style:none;border-top:var(--rule-2);margin-top:20px}
+.learn li{
+  display:grid;grid-template-columns:40px minmax(0,1fr);
+  gap:16px;padding:14px 0;border-bottom:var(--rule);
+}
+.learn__n{font-family:var(--mono);font-size:12px;line-height:1.7;color:var(--ink-3)}
+.learn p{font-size:.9375rem;line-height:1.65;color:var(--ink-2);max-width:62ch}
+
+/* ---------- painel de detalhes (dossier da home) ---------- */
+.details{
+  display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows var(--base) var(--ease);
+}
+html.js .details>.details__inner{overflow:hidden;min-height:0}
+html.js .details.is-open{grid-template-rows:1fr}
+html:not(.js) .details{grid-template-rows:1fr}
+html:not(.js) .js-details{display:none}
+
+.btn__icon{
+  font-family:var(--mono);font-size:15px;line-height:1;
+  transition:transform var(--base) var(--ease);
+}
+.js-details.is-open .btn__icon{transform:rotate(45deg)}
+.details__body{padding:40px 0 8px}
+.details__body > .label{margin-bottom:0}
+.details__body .acc{margin-top:24px}
+.details__body .learn-head{margin-top:36px}
+.details__link{margin-top:32px}
+
 /* ---------- responsivo ---------- */
 @media (max-width:860px){
   .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -226,11 +317,13 @@ dialog.lightbox img{
   .fact + .fact{padding-left:14px}
   .fact:nth-child(odd){border-left:0;padding-left:0}
   .fact:nth-child(-n+2){border-bottom:1px solid var(--line)}
-  .shots{grid-template-columns:1fr}
-  .shot--wide{grid-column:auto}
   .acc__btn{grid-template-columns:32px minmax(0,1fr) 18px;gap:12px}
   .acc__panel p{padding-left:44px;padding-right:8px}
   .acc__meta{padding-left:44px;padding-right:8px}
+  .summary{grid-template-columns:1fr}
+  .summary__item{padding-right:0}
+  .summary__item:nth-child(even){border-left:0;padding-left:0}
+  .tech{grid-template-columns:1fr}
 }
 
 @media (max-width:640px){
