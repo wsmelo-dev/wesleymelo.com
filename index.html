@@ -162,6 +162,15 @@
     .mask.in .wi{transform:none;opacity:1}
     .hero .mask .wi{transition-delay:calc(var(--i) * 55ms + 60ms)}
     .hero h1 .mask + .mask{margin-top:-.06em}
+    /* nome digitado no carregamento: cursor piscando, glifos reservados invisíveis */
+    .hero h1 .ghost{visibility:hidden}
+    .hero .caret{display:inline-block;width:.075em;height:.78em;background:var(--ink);
+      margin-left:.05em;transform:translateY(.04em);
+      animation:caretBlink .9s steps(1) infinite}
+    .hero h1 .l2 .caret{background:var(--ink-3)}
+    .hero .caret.done{animation:caretBlink .9s steps(1) infinite, caretOut .5s var(--ease) 1.9s both}
+    @keyframes caretBlink{0%,55%{opacity:1}56%,100%{opacity:0}}
+    @keyframes caretOut{from{opacity:1}to{opacity:0}}
 
     /* painel de leitura (dado real, não enfeite) */
     .panel{background:var(--surface);padding:22px 22px 18px}
@@ -326,6 +335,7 @@
       .rv,.mask .wi{opacity:1!important;transform:none!important}
       .rule{transform:scaleX(1)}
       .progress{display:none}
+      .hero .caret{display:none}
     }
   </style>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -532,6 +542,39 @@
         </Tag>
       );
     }
+    /* Nome da hero digitado sozinho ao abrir (sem deslocar o layout) */
+    function TypeTitle({a="Wesley", b="Melo", id}){
+      const total = a.length + b.length;
+      const [n,setN] = useState(0);
+      useEffect(()=>{
+        if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){ setN(total); return; }
+        let iv;
+        const t = setTimeout(()=>{
+          iv = setInterval(()=> setN(x=>{
+            if(x>=total){ clearInterval(iv); return total; }
+            return x+1;
+          }), 68);
+        }, 420);
+        return ()=>{ clearTimeout(t); if(iv) clearInterval(iv); };
+      },[]);
+      const na = Math.min(n, a.length);
+      const nb = Math.max(0, Math.min(n - a.length, b.length));
+      const done = n >= total;
+      return (
+        <h1 id={id} aria-label={a+" "+b}>
+          <span className="l1" aria-hidden="true">
+            {a.slice(0,na)}
+            {na < a.length ? <span className="caret"></span> : null}
+            <span className="ghost">{a.slice(na)}</span>
+          </span>
+          <span className="l2" aria-hidden="true">
+            {b.slice(0,nb)}
+            {na === a.length ? <span className={"caret"+(done?" done":"")}></span> : null}
+            <span className="ghost">{b.slice(nb)}</span>
+          </span>
+        </h1>
+      );
+    }
     /* Revelação genérica por entrada na viewport */
     function Reveal({children, as:Tag="div", className="", delay=0, id}){
       const ref = useRef(null);
@@ -729,10 +772,7 @@
                 <div className="hero-grid">
                   <div>
                     <p className="kicker"><span className="dot" aria-hidden="true"/><span className="mono">{t.hero.kicker}</span></p>
-                    <h1 id="hero-title">
-                      <MaskTitle as="span" text="Wesley" className="l1"/>
-                      <MaskTitle as="span" text="Melo" className="l2"/>
-                    </h1>
+                    <TypeTitle/>
                     <p className="role">{t.hero.role}</p>
                     <p className="lede">{t.hero.lede}</p>
                     <div className="btn-row">
