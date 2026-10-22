@@ -46,6 +46,8 @@
 }
 .topnav a:hover{color:var(--ink)}
 .topnav a:hover::after{transform:scaleX(1)}
+.topnav a.is-active{color:var(--ink)}
+.topnav a.is-active::after{transform:scaleX(1)}
 
 .controls{display:flex;align-items:center;gap:16px;flex:none;margin-left:20px}
 

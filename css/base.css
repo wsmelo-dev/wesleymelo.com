@@ -99,10 +99,19 @@ hr{border:0;border-top:var(--rule);margin:0}
    Sem JS, tudo visível. Com JS, o observador aplica .in. */
 html.js .rv{
   opacity:0;
-  transform:translateY(10px);
-  transition:opacity var(--slow) var(--ease), transform var(--slow) var(--ease);
+  transform:translateY(16px);
+  transition:opacity .65s var(--ease),transform .65s var(--ease);
 }
 html.js .rv.in{opacity:1;transform:none}
+
+/* entrada em cascata do hero (1º paint) */
+@keyframes wsm-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+html.js [data-rise]{animation:wsm-rise .8s var(--ease) both}
+html.js [data-rise="1"]{animation-delay:60ms}
+html.js [data-rise="2"]{animation-delay:140ms}
+html.js [data-rise="3"]{animation-delay:220ms}
+html.js [data-rise="4"]{animation-delay:300ms}
+html.js [data-rise="5"]{animation-delay:380ms}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
