@@ -187,6 +187,7 @@
 
     /* ============ SOBRE ============ */
     .about{display:grid;grid-template-columns:1fr;gap:0}
+    .about .body{margin-top:20px;font-size:15.5px;color:var(--ink-2);line-height:1.7;max-width:62ch}
 
     /* ============ SKILLS (filtro real + níveis honestos) ============ */
     .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
@@ -205,9 +206,9 @@
     .skill .s-name{font-size:15.5px;font-weight:550}
     .skill .s-cat{font-size:13.5px;color:var(--ink-2)}
     .skill .s-meter{display:flex;align-items:center;gap:10px;justify-content:flex-end}
-    .ticks{display:flex;gap:3px}
-    .ticks i{width:16px;height:3px;background:var(--paper-3);display:block}
-    [data-theme="dark"] .ticks i{background:#1B1B1E}
+    .ticks{display:flex;gap:4px;align-items:center}
+    .ticks i{width:18px;height:4px;background:var(--paper-3);display:block}
+    [data-theme="dark"] .ticks i{background:#26262B}
     .ticks i.on{background:var(--ink)}
     .skill.hidden{display:none}
 
@@ -242,18 +243,18 @@
     /* carrossel das capturas (uma foto grande por vez, legenda em destaque) */
     .car{margin-top:6px}
     .car-frame{display:flex;justify-content:center;align-items:center}
-    .car-img{display:block;width:min(620px,100%);height:auto;animation:carIn .45s var(--ease) both}
+    .car-img{display:block;width:min(560px,100%);height:auto;animation:carIn .45s var(--ease) both}
     .car-img.car-wide{width:100%}
     .car-foot{display:flex;justify-content:space-between;align-items:flex-start;gap:26px;margin-top:20px}
     .car-cap{display:grid;gap:9px;min-width:0}
     .car-num{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-3)}
     .car-title{font-size:clamp(18px,2.4vw,21px);font-weight:560;letter-spacing:-.015em;line-height:1.4;max-width:44ch;
       animation:carIn .45s var(--ease) .06s both}
-    .car-nav{display:flex;gap:8px;flex-shrink:0;padding-top:4px}
-    .car-nav button{width:44px;height:44px;background:var(--badge-bg);color:var(--badge-fg);border:0;cursor:pointer;
-      font-family:var(--mono);font-size:15px;display:grid;place-items:center;
-      transition:background .2s var(--ease),transform .2s var(--ease)}
-    .car-nav button:hover{transform:translateY(-2px)}
+    .car-nav{display:flex;gap:10px;flex-shrink:0;padding-top:8px}
+    .car-nav button{width:50px;height:50px;background:transparent;color:var(--ink-2);border:0;cursor:pointer;
+      font-family:var(--mono);font-size:18px;display:grid;place-items:center;
+      transition:background .22s var(--ease),color .22s var(--ease),transform .22s var(--ease)}
+    .car-nav button:hover{background:var(--inv-bg);color:var(--inv-ink);transform:translateY(-2px)}
     .car-nav button:active{transform:none}
     .car-dots{display:flex;gap:8px;margin-top:22px}
     .car-dots button{width:22px;height:14px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center}
@@ -285,12 +286,12 @@
     .field input:focus,.field textarea:focus{outline:none;border-bottom-color:var(--ink)}
     .field input::placeholder,.field textarea::placeholder{color:var(--ink-3);opacity:.75}
     .form-note{margin-top:16px;font-size:12.5px;color:var(--ink-3);max-width:48ch;line-height:1.6}
-    .contact-links{display:flex;gap:8px;align-items:center}
+    .contact-links{display:flex;gap:10px;align-items:center;margin-top:2px}
     .icon-btn{width:46px;height:46px;border:0;background:transparent;color:var(--ink-2);
       display:inline-flex;align-items:center;justify-content:center;cursor:pointer;
       transition:color .22s var(--ease),transform .22s var(--ease)}
     .icon-btn:hover{color:var(--ink);transform:translateY(-2px)}
-    .icon-btn svg{width:20px;height:20px;display:block}
+    .icon-btn svg{width:22px;height:22px;display:block}
     .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:300;
       background:var(--inv-bg);color:var(--inv-ink);font-size:13.5px;font-weight:500;
       padding:12px 22px;border-radius:2px;box-shadow:0 8px 30px rgba(12,12,13,.2);
@@ -687,9 +688,9 @@
               </a>
               <nav aria-label={t.nav.mainNav}>
                 <ul className="links">
+                  <li><a href="#projetos">{t.nav.projetos}</a></li>
                   <li><a href="#sobre">{t.nav.sobre}</a></li>
                   <li><a href="#skills">{t.nav.skills}</a></li>
-                  <li><a href="#projetos">{t.nav.projetos}</a></li>
                   <li><a href="#contato">{t.nav.contato}</a></li>
                 </ul>
               </nav>
@@ -834,7 +835,7 @@
                     <div className="about">
                       <div>
                         <p className="lede">{t.about.p1}</p>
-                        <p className="lede" style={{marginTop:"14px"}}>{t.about.p2}</p>
+                        <p className="body">{t.about.p2}</p>
                       </div>
                     </div>
                   </div>
