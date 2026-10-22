@@ -104,6 +104,10 @@ window.COPY = {
     "home.contact.github": "GitHub",
     "home.contact.linkedin": "LinkedIn",
     "home.contact.ariaEmail": "Enviar e-mail para Wesley Melo",
+    "home.contact.copy": "copiar",
+    "home.contact.copyAria": "Copiar o e-mail para a área de transferência",
+    "home.contact.copied": "E-mail copiado para a área de transferência.",
+    "home.contact.copyFail": "Não consegui copiar — segure e selecione o endereço.",
     "home.contact.mailSubject": "Contato pelo portfólio — {name}",
     "home.contact.mailBody": "Olá, Wesley.\n\nMeu nome é {name}.\n\n{message}\n\n— Enviado pelo portfólio",
 
@@ -317,6 +321,10 @@ window.COPY = {
     "home.contact.github": "GitHub",
     "home.contact.linkedin": "LinkedIn",
     "home.contact.ariaEmail": "Send an email to Wesley Melo",
+    "home.contact.copy": "copy",
+    "home.contact.copyAria": "Copy the e-mail address to the clipboard",
+    "home.contact.copied": "E-mail address copied to the clipboard.",
+    "home.contact.copyFail": "Could not copy — select the address manually.",
     "home.contact.mailSubject": "Contact from the portfolio — {name}",
     "home.contact.mailBody": "Hi Wesley.\n\nMy name is {name}.\n\n{message}\n\n— Sent from the portfolio",
 

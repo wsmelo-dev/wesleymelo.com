@@ -108,6 +108,14 @@
   overflow-wrap:anywhere;
 }
 .direct__mail:hover{color:var(--accent);border-color:var(--accent)}
+.direct__mailrow{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px}
+.copybtn{
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;
+  color:var(--ink-3);background:none;border:0;border-bottom:1px solid var(--line-2);
+  padding-bottom:2px;cursor:pointer;
+  transition:color var(--fast) var(--ease),border-color var(--fast) var(--ease);
+}
+.copybtn:hover{color:var(--accent);border-color:var(--accent)}
 
 .direct__list{list-style:none;margin-top:28px}
 .direct__list li{
