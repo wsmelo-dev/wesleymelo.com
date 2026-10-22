@@ -185,15 +185,18 @@ Cabeçalho é `button` de largura total com número, título e sinal `+`. Aberto
 Lista vertical. Cada etapa é um botão; a ativa mostra o detalhe logo abaixo. Uma só aberta por vez. Teclado: Tab + Enter/Espaço. `aria-expanded`. No desktop, o detalhe também aparece ao lado? Não: a lista já é a leitura principal.
 
 ### 5.8 Captura (`.shot`)
-Figura com régua superior, número, imagem e legenda. Clique abre `<dialog>` com a imagem ampliada (Esc fecha, foco volta). `loading="lazy"`, `width`/`height` declarados.
+Figura com régua superior, número, imagem e legenda. Clique abre `<dialog>` com a imagem ampliada (Esc fecha, foco volta). `loading="lazy"` fora do carrossel, `width`/`height` declarados.
 
-### 5.9 Formulário
+### 5.9 Carrossel de capturas (`.crs`)
+Uma captura por vez, dentro da captura 00 (visão geral). Estrutura: `viewport` (overflow oculto, régua, altura animada pelo JS para a altura do slide ativo) → `track` (grid de colunas 100%, transform) → slides `.shot`. Barra inferior: setas do sistema `←` `→` em mono à esquerda, contador `01 / 03` (`aria-live`) à direita. Estados: slides inativos com `aria-hidden` + `inert`. Interação: clique, teclas `←`/`→` no viewport (tabbable), arraste de 40px+. Reduced motion: transições zeradas globalmente. Sem JS: slides empilhados, barra oculta.
+
+### 5.10 Formulário
 `label` visível acima, `gap 8px`, input com régua inferior (sem caixa), foco em `--accent`, erro inline em `--accent` com `aria-describedby`. Envio abre o cliente de e-mail com nome e mensagem preenchidos. Toast confirma.
 
-### 5.10 Toast
+### 5.11 Toast
 Faixa invertida no canto inferior, `aria-live="polite"`, 4s, sem ícone animado.
 
-### 5.11 Controles segmentados
+### 5.12 Controles segmentados
 Idioma: dois botões `PT` / `EN` em mono, ativo em `--ink` + ponto de 3px embaixo. Tema: botão único com sol/lua e `aria-pressed`.
 
 ---
@@ -212,7 +215,7 @@ Idioma: dois botões `PT` / `EN` em mono, ativo em `--ink` + ponto de 3px embaix
 1. **Abertura** — voltar, título, uma frase, etiquetas.
 2. **Ficha** — faixa com ambiente, gatilho, fonte, janela, saída.
 3. **01 Em resumo** — quatro fatos (objetivo, problema, solução, resultado).
-4. **02 O fluxo na prática** — quatro capturas numeradas com legenda e aviso de higienização.
+4. **02 O fluxo na prática** — captura 00 (visão geral, largura total) + carrossel das capturas 01–03 com setas, contador e aviso de higienização.
 5. **03 Como funciona** — sete etapas em acordeão.
 6. **04 Demonstração** — mensagem fictícia em formato de registro + o que ela faz.
 7. **05 Desafios técnicos** — cinco acordeões.
@@ -305,6 +308,7 @@ Nenhuma seção depende de hover para ser entendida.
 - **Sem cards:** toda separação usa régua e espaço, o que reduz ruído e mantém a página leve.
 - **Etapas em acordeão vertical:** no mobile o padrão anterior (rail horizontal de sete itens) ficava apertado; a lista vertical funciona igual nos dois tamanhos.
 - **Capturas ampliáveis em `<dialog>`:** evita dependência de lightbox e mantém teclado/Esc nativos.
+- **Carrossel nas capturas 01–03 (pedido do autor, 2026-10-22):** substitui a grade de capturas; a captura 00 permanece em largura total como visão geral. Vanilla JS (~80 linhas), sem controle de biblioteca; `inert` nos slides inativos mantém o foco no slide corrente.
 - **i18n por atributo (`data-i18n`):** mantém o HTML legível e o dicionário em um arquivo só.
 - **Fontes via Google Fonts:** sem build para self-host; fallback de sistema garante leitura se o CDN falhar.
 - **`PLAN.md`:** documenta o processo desta reconstrução; não é fonte de verdade do produto.

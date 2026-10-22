@@ -146,6 +146,9 @@ window.COPY = {
     "case.shot4cap": "O envio pelo CRM, com o cabeçalho de autenticação da API.",
     "case.shot4alt": "Nó de requisição HTTP do n8n com método POST e cabeçalho de API para envio de mensagem",
     "case.zoom": "Ampliar",
+    "case.crs.label": "Capturas da configuração do fluxo, navegáveis com as setas ou com as teclas",
+    "case.crs.prev": "Captura anterior",
+    "case.crs.next": "Próxima captura",
     "case.lightbox": "Captura ampliada",
     "case.close": "Fechar",
 
@@ -355,6 +358,9 @@ window.COPY = {
     "case.shot4cap": "Delivery through CRM, with the API authentication header.",
     "case.shot4alt": "n8n HTTP request node with POST method and API header for message delivery",
     "case.zoom": "Enlarge",
+    "case.crs.label": "Flow configuration screenshots, navigable with the arrows or with the keys",
+    "case.crs.prev": "Previous screenshot",
+    "case.crs.next": "Next screenshot",
     "case.lightbox": "Enlarged screenshot",
     "case.close": "Close",
 

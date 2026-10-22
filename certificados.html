@@ -162,32 +162,44 @@
                 <img src="assets/fluxo-n8n.png" alt="Fluxo de automação no n8n com quatro etapas: agendamento, requisição HTTP, código em JavaScript e envio pelo CRM" data-i18n-alt="case.shot1alt" width="940" height="161" loading="lazy">
                 <span class="shot__zoom" data-i18n="case.zoom">Ampliar</span>
               </button>
-              <figcaption><b>01</b><span data-i18n="case.shot1cap">O fluxo inteiro em quatro etapas: agendamento, consulta HTTP, tratamento em JavaScript e envio.</span></figcaption>
+              <figcaption><b>00</b><span data-i18n="case.shot1cap">O fluxo inteiro em quatro etapas: agendamento, consulta HTTP, tratamento em JavaScript e envio.</span></figcaption>
             </figure>
+          </div>
 
-            <figure class="shot shot--http">
-              <button class="shot__btn" type="button" data-full="assets/passo-consulta-http.png">
-                <img src="assets/passo-consulta-http.png" alt="Nó de requisição HTTP do n8n com método GET e autenticação configurada" data-i18n-alt="case.shot2alt" width="440" height="318" loading="lazy">
-                <span class="shot__zoom" data-i18n="case.zoom">Ampliar</span>
-              </button>
-              <figcaption><b>02</b><span data-i18n="case.shot2cap">A consulta da lista de certificados por requisição HTTP, com autenticação.</span></figcaption>
-            </figure>
+          <div class="crs" id="fluxo-crs">
+            <div class="crs__viewport" id="crs-view" tabindex="0" role="group" aria-roledescription="carrossel" aria-label="Capturas da configuração do fluxo, navegáveis com as setas" data-i18n-aria="case.crs.label">
+              <div class="crs__track">
+                <figure class="shot crs__slide">
+                  <button class="shot__btn" type="button" data-full="assets/passo-consulta-http.png">
+                    <img src="assets/passo-consulta-http.png" alt="Nó de requisição HTTP do n8n com método GET e autenticação configurada" data-i18n-alt="case.shot2alt" width="440" height="318">
+                    <span class="shot__zoom" data-i18n="case.zoom">Ampliar</span>
+                  </button>
+                  <figcaption><b>01</b><span data-i18n="case.shot2cap">A consulta da lista de certificados por requisição HTTP, com autenticação.</span></figcaption>
+                </figure>
 
-            <figure class="shot shot--js">
-              <button class="shot__btn" type="button" data-full="assets/passo-javascript.png">
-                <img src="assets/passo-javascript.png" alt="Código JavaScript no n8n filtrando certificados e montando a mensagem de alerta" data-i18n-alt="case.shot3alt" width="578" height="530" loading="lazy">
-                <span class="shot__zoom" data-i18n="case.zoom">Ampliar</span>
-              </button>
-              <figcaption><b>03</b><span data-i18n="case.shot3cap">O código que separa o que vence em 7 dias e monta a mensagem.</span></figcaption>
-            </figure>
+                <figure class="shot crs__slide">
+                  <button class="shot__btn" type="button" data-full="assets/passo-javascript.png">
+                    <img src="assets/passo-javascript.png" alt="Código JavaScript no n8n filtrando certificados e montando a mensagem de alerta" data-i18n-alt="case.shot3alt" width="578" height="530">
+                    <span class="shot__zoom" data-i18n="case.zoom">Ampliar</span>
+                  </button>
+                  <figcaption><b>02</b><span data-i18n="case.shot3cap">O código que separa o que vence em 7 dias e monta a mensagem.</span></figcaption>
+                </figure>
 
-            <figure class="shot shot--crm">
-              <button class="shot__btn" type="button" data-full="assets/passo-envio-crm.png">
-                <img src="assets/passo-envio-crm.png" alt="Nó de requisição HTTP do n8n com método POST e cabeçalho de API para envio de mensagem" data-i18n-alt="case.shot4alt" width="400" height="780" loading="lazy">
-                <span class="shot__zoom" data-i18n="case.zoom">Ampliar</span>
-              </button>
-              <figcaption><b>04</b><span data-i18n="case.shot4cap">O envio pelo CRM, com o cabeçalho de autenticação da API.</span></figcaption>
-            </figure>
+                <figure class="shot crs__slide">
+                  <button class="shot__btn" type="button" data-full="assets/passo-envio-crm.png">
+                    <img src="assets/passo-envio-crm.png" alt="Nó de requisição HTTP do n8n com método POST e cabeçalho de API para envio de mensagem" data-i18n-alt="case.shot4alt" width="400" height="780">
+                    <span class="shot__zoom" data-i18n="case.zoom">Ampliar</span>
+                  </button>
+                  <figcaption><b>03</b><span data-i18n="case.shot4cap">O envio pelo CRM, com o cabeçalho de autenticação da API.</span></figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="crs__bar">
+              <button class="crs__btn" type="button" data-dir="-1" aria-label="Captura anterior" data-i18n-aria="case.crs.prev">←</button>
+              <button class="crs__btn" type="button" data-dir="1" aria-label="Próxima captura" data-i18n-aria="case.crs.next">→</button>
+              <p class="crs__count" id="crs-count" aria-live="polite">01 / 03</p>
+            </div>
           </div>
 
           <p class="note case-note rv" data-i18n="case.s2.note">Capturas editadas antes de publicar: endpoints internos, chaves de acesso e dados de exemplo foram removidos.</p>

@@ -54,10 +54,37 @@
 .case-context{margin-top:32px;max-width:66ch;color:var(--ink-2);line-height:1.75}
 .case-note{margin-top:24px}
 
-/* composição das capturas: fluxo largo em cima, HTTP + JS à esquerda, CRM à direita */
-.shots--case .shot--http{grid-column:1;grid-row:2}
-.shots--case .shot--js{grid-column:1;grid-row:3}
-.shots--case .shot--crm{grid-column:2;grid-row:2 / span 2;align-self:start}
+/* carrossel das capturas: uma captura por vez, setas do sistema */
+html.js .crs{margin-top:28px}
+html.js .crs__viewport{
+  overflow:hidden;border-top:var(--rule-2);
+  transition:height var(--slow) var(--ease);
+}
+html.js .crs__track{
+  display:grid;grid-auto-flow:column;grid-auto-columns:100%;align-items:start;
+  transition:transform var(--slow) var(--ease);
+}
+html.js .crs__slide{border-top:0;padding-top:12px}
+/* imagem em tamanho natural: capturas de tela não devem ser ampliadas */
+html.js .crs__slide .shot__btn{width:fit-content;max-width:100%}
+html.js .crs__slide .shot__btn img{width:auto;height:auto;max-width:100%}
+html:not(.js) .crs__bar{display:none}
+
+.crs__bar{
+  display:flex;align-items:center;gap:10px;
+  margin-top:12px;padding-top:10px;
+}
+.crs__btn{
+  font-family:var(--mono);font-size:15px;line-height:1;
+  padding:8px 10px;cursor:pointer;
+  color:var(--ink-3);background:none;border:0;
+  transition:color var(--fast) var(--ease);
+}
+.crs__btn:hover{color:var(--ink)}
+.crs__count{
+  margin-left:auto;
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink-3);
+}
 
 /* ---------- demonstração ---------- */
 .demo{
@@ -161,10 +188,6 @@
   .summary__item:nth-child(even){border-left:0;padding-left:0}
   .demo{grid-template-columns:1fr;gap:36px}
   .tech{grid-template-columns:1fr}
-
-  .shots--case .shot--http,
-  .shots--case .shot--js,
-  .shots--case .shot--crm{grid-column:1;grid-row:auto}
 }
 
 @media (max-width:640px){
