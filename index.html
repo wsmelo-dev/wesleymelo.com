@@ -219,7 +219,7 @@
     .proj-shot{margin:0;overflow:hidden}
     .proj-shot img{display:block;width:100%;height:auto}
     [data-theme="light"] .proj-shot img,
-    [data-theme="light"] .proj-details-grid img{filter:invert(1) hue-rotate(180deg)}
+    [data-theme="light"] .proj-details img{filter:invert(1) hue-rotate(180deg)}
     .proj-name{font-size:clamp(1.35rem,2.4vw,1.75rem);font-weight:600;letter-spacing:-.03em;line-height:1.15}
     .proj-desc{margin-top:12px;font-size:15px;color:var(--ink-2);line-height:1.65;max-width:46ch}
     .proj-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;align-items:center}
@@ -239,13 +239,29 @@
     .proj-details{margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
     .proj-details h4{font-size:1.05rem;font-weight:600;letter-spacing:-.02em;margin-bottom:6px}
     .proj-details .lede{font-size:14px;color:var(--ink-2)}
-    .proj-details-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px;align-items:start}
-    @media(max-width:900px){.proj-details-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:620px){.proj-details-grid{grid-template-columns:1fr}}
-    .proj-details-grid figure{margin:0}
-    .proj-details-grid img{display:block;width:100%;height:auto}
-    .proj-details-grid .wide{grid-column:1/-1}
-    .proj-details-grid figcaption{margin-top:10px;font-size:12.5px;color:var(--ink-2);line-height:1.5}
+    /* carrossel das capturas (uma foto grande por vez, legenda em destaque) */
+    .car{margin-top:6px}
+    .car-frame{display:flex;justify-content:center;align-items:center}
+    .car-img{display:block;width:min(620px,100%);height:auto;animation:carIn .45s var(--ease) both}
+    .car-img.car-wide{width:100%}
+    .car-foot{display:flex;justify-content:space-between;align-items:flex-start;gap:26px;margin-top:20px}
+    .car-cap{display:grid;gap:9px;min-width:0}
+    .car-num{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-3)}
+    .car-title{font-size:clamp(18px,2.4vw,21px);font-weight:560;letter-spacing:-.015em;line-height:1.4;max-width:44ch;
+      animation:carIn .45s var(--ease) .06s both}
+    .car-nav{display:flex;gap:8px;flex-shrink:0;padding-top:4px}
+    .car-nav button{width:44px;height:44px;background:var(--badge-bg);color:var(--badge-fg);border:0;cursor:pointer;
+      font-family:var(--mono);font-size:15px;display:grid;place-items:center;
+      transition:background .2s var(--ease),transform .2s var(--ease)}
+    .car-nav button:hover{transform:translateY(-2px)}
+    .car-nav button:active{transform:none}
+    .car-dots{display:flex;gap:8px;margin-top:22px}
+    .car-dots button{width:22px;height:14px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center}
+    .car-dots i{width:14px;height:3px;background:var(--paper-3);display:block;transition:background .2s var(--ease),width .2s var(--ease)}
+    [data-theme="dark"] .car-dots i{background:#1B1B1E}
+    .car-dots button[aria-current="true"] i{background:var(--ink);width:20px}
+    @media(max-width:620px){.car-foot{flex-direction:column;gap:16px}.car-nav{order:-1}}
+    .proj-case{animation:carIn .45s var(--ease) .1s both}
     .proj-case{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:13.5px;font-weight:550;
       color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:3px;
       transition:gap .2s var(--ease),border-color .2s}
@@ -253,14 +269,8 @@
 
     /* animação ao abrir e fechar os detalhes */
     @keyframes detailsIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
-    @keyframes shotIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    @keyframes carIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
     .proj-details{animation:detailsIn .42s var(--ease) both}
-    .proj-details-grid figure{animation:shotIn .5s var(--ease) both}
-    .proj-details-grid figure:nth-child(1){animation-delay:.05s}
-    .proj-details-grid figure:nth-child(2){animation-delay:.12s}
-    .proj-details-grid figure:nth-child(3){animation-delay:.19s}
-    .proj-details-grid figure:nth-child(4){animation-delay:.26s}
-    .proj-case{animation:shotIn .5s var(--ease) .32s both}
 
     /* ============ CONTATO (formulário + ícones soltos) ============ */
     .contact-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:start}
@@ -366,6 +376,7 @@
           more:"Ver mais detalhes",openDemo:"Ver mais detalhes de",demo:"Demonstrativo",
           noDemo:"Fluxo de uso interno, sem demonstração pública.",
           details:"Ver detalhes", hideDetails:"Ocultar detalhes",
+          prevShot:"Captura anterior", nextShot:"Próxima captura",
           caseLink:"Ver o estudo de caso completo",
           shotsTitle:"O fluxo na prática",
           shotsLede:"As quatro etapas do fluxo, como estão configuradas no n8n.",
@@ -427,6 +438,7 @@
           more:"See the details",openDemo:"See the details of",demo:"Demonstrative",
           noDemo:"Internal workflow, no public demo.",
           details:"See the details", hideDetails:"Hide the details",
+          prevShot:"Previous shot", nextShot:"Next shot",
           caseLink:"See the full case study",
           shotsTitle:"The flow in practice",
           shotsLede:"The four steps of the flow, as they are configured in n8n.",
@@ -544,6 +556,37 @@
         io.observe(el); return ()=>io.disconnect();
       },[]);
       return <div className="rule" ref={ref}/>;
+    }
+    /* Carrossel das capturas do projeto: uma foto grande por vez */
+    function ShotCarousel({items, labels}){
+      const n = items.length;
+      const [i, setI] = useState(0);
+      const s = items[i];
+      return (
+        <div className="car" role="group" aria-roledescription="carousel" aria-label={labels.title}>
+          <div className="car-frame" key={i}>
+            <img className={s.wide ? "car-img car-wide" : "car-img"} src={s.src} alt={s.alt} loading="lazy" decoding="async"/>
+          </div>
+          <div className="car-foot">
+            <div className="car-cap" aria-live="polite">
+              <span className="car-num">{String(i+1).padStart(2,"0")} / {String(n).padStart(2,"0")}</span>
+              <p className="car-title" key={"c"+i}>{s.cap}</p>
+            </div>
+            <div className="car-nav">
+              <button type="button" onClick={()=>setI((i-1+n)%n)} aria-label={labels.prev}>←</button>
+              <button type="button" onClick={()=>setI((i+1)%n)} aria-label={labels.next}>→</button>
+            </div>
+          </div>
+          <div className="car-dots">
+            {items.map((it,k)=>(
+              <button key={it.src} type="button" onClick={()=>setI(k)}
+                aria-label={k+1+" / "+n} aria-current={k===i ? "true" : undefined}>
+                <i aria-hidden="true"></i>
+              </button>
+            ))}
+          </div>
+        </div>
+      );
     }
 
     /* ================= APP ================= */
@@ -757,14 +800,8 @@
                             <div className="proj-details" id={"proj-detalhes-"+p.key}>
                               <h4>{t.projects.shotsTitle}</h4>
                               <p className="lede">{t.projects.shotsLede}</p>
-                              <div className="proj-details-grid">
-                                {t.projects.shots.map(s=>(
-                                  <figure key={s.src} className={s.wide ? "wide" : ""}>
-                                    <img src={s.src} alt={s.alt} loading="lazy" decoding="async"/>
-                                    <figcaption>{s.cap}</figcaption>
-                                  </figure>
-                                ))}
-                              </div>
+                              <ShotCarousel items={t.projects.shots}
+                                labels={{title:t.projects.shotsTitle, prev:t.projects.prevShot, next:t.projects.nextShot}}/>
                               <a className="proj-case" href={p.demo}>
                                 {t.projects.caseLink} <span aria-hidden="true">→</span>
                               </a>
