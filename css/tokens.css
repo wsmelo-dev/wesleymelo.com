@@ -1,0 +1,75 @@
+/* ============================================================
+   tokens.css — variáveis do sistema
+   Claro é o padrão; escuro troca valores, não estrutura.
+   ============================================================ */
+:root{
+  color-scheme: light;
+
+  /* cor */
+  --paper:#E9E8E3;
+  --paper-2:#E0DFD9;
+  --paper-3:#D4D3CC;
+  --ink:#131411;
+  --ink-2:#43443D;
+  --ink-3:#5F6058;
+  --line:rgba(19,20,17,.16);
+  --line-2:rgba(19,20,17,.34);
+  --plate:#F1F0EA;
+  --accent:#A83A1C;
+  --accent-soft:rgba(168,58,28,.12);
+  --accent-ink:#F6F2EC;
+  --inv-bg:#131411;
+  --inv-ink:#EFEEE8;
+
+  /* tipografia */
+  --font:"Archivo","Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --t-display:clamp(2.9rem,8vw,6.4rem);
+  --t-h2:clamp(1.9rem,3.6vw,2.9rem);
+  --t-h3:clamp(1.15rem,1.6vw,1.4rem);
+  --t-lede:clamp(1.02rem,1.2vw,1.15rem);
+  --t-body:1rem;
+  --t-small:.875rem;
+  --t-label:.75rem;
+  --t-micro:.75rem;
+
+  /* espaço */
+  --s1:.25rem; --s2:.5rem; --s3:.75rem; --s4:1rem;
+  --s5:1.5rem; --s6:2rem; --s7:3rem; --s8:4rem; --s9:6rem; --s10:8rem;
+  --section:clamp(72px,10vw,136px);
+  --gutter:clamp(20px,4vw,40px);
+
+  /* grade */
+  --max:1240px;
+  --rail:148px;
+  --nav-h:64px;
+
+  /* forma */
+  --radius:0;
+  --rule:1px solid var(--line);
+  --rule-2:1px solid var(--line-2);
+
+  /* movimento */
+  --ease:cubic-bezier(.22,1,.36,1);
+  --fast:160ms;
+  --base:320ms;
+  --slow:600ms;
+}
+
+[data-theme="dark"]{
+  color-scheme: dark;
+  --paper:#101110;
+  --paper-2:#171816;
+  --paper-3:#20211E;
+  --ink:#ECEBE4;
+  --ink-2:#B4B5AC;
+  --ink-3:#8B8C83;
+  --line:rgba(236,235,228,.16);
+  --line-2:rgba(236,235,228,.36);
+  --plate:#DCDBD4;
+  --accent:#E27A57;
+  --accent-soft:rgba(226,122,87,.14);
+  --accent-ink:#101110;
+  --inv-bg:#ECEBE4;
+  --inv-ink:#101110;
+}
